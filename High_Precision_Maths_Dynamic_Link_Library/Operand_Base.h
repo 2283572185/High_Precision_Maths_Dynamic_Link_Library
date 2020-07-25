@@ -17,13 +17,21 @@ using Discontinuity_Dynamic_Memory::Illegal_Data;
 using Discontinuity_Dynamic_Memory::Over_Flow;
 using Discontinuity_Dynamic_Memory::Under_Flow;
 
-namespace High_Precision_Maths_Library {
+/*这是一些运算的精度预设
+ *请务必保留这些宏的定义
+ *下面，用name来代替宏的名称，用precision来代替你想要的精度
+ *如果你想修改下面预设的运算符的精度，请使用以下语句
+ *	#undef name
+ *	#define name precision
+*/
 //除法精度预设
 #define Division_Precision 30
 //开方精度预设
 #define Extraction_Of_Root_Precision 30
 //取余数精度
 #define Remainder_Precision 30
+
+namespace High_Precision_Maths_Library {
 
 	/// <summary>
 	/// 高精度数学库的基类，支持非负有理数的加、减、乘、除、乘方、开方、阶乘、取余数，抛出的所以异常都是Error的基类
@@ -56,5 +64,14 @@ namespace High_Precision_Maths_Library {
 		/// </summary>
 		/// <param name="n">要获取字符的序号</param>
 		char& at(unsigned long long n);
+		/// <summary>
+		/// 获取对象中第n个字符（n是自然数）
+		/// </summary>
+		/// <param name="n">要获取字符的序号</param>
+		char& operator[](unsigned long long n);
+		/// <summary>
+		/// 将对象内所以的字符转化成一个字符串并返回
+		/// </summary>
+		std::string& to_string();
 	};
 }

@@ -396,3 +396,18 @@ inline char& High_Precision_Maths_Library::Operand_Base::at(unsigned long long n
 {
 	return this->data[n];
 }
+
+inline char& High_Precision_Maths_Library::Operand_Base::operator[](unsigned long long n)
+{
+	return this->data[n];
+}
+
+inline std::string& High_Precision_Maths_Library::Operand_Base::to_string()
+{
+	std::string s;
+	unsigned long long max = this->data.size();
+	for (unsigned long long i = 0; i < max; i++) {
+		s += this->data[i];
+	}
+	return s;
+}

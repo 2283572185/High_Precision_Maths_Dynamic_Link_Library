@@ -4,6 +4,6 @@
 using namespace std;
 int main() {
 	DDM<int> ddm1;
-	
+
 	return 0;
 }
