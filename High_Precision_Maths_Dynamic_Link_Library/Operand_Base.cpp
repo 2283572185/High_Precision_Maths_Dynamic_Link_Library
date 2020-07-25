@@ -1,8 +1,5 @@
 ﻿#include "Operand_Base.h"
 
-#define _local
-#define _base
-
 char _0 = '0';
 
 inline High_Precision_Maths_Library::Operand_Base::Operand_Base()
@@ -392,17 +389,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(char* value)
 	return;
 }
 
-inline char& High_Precision_Maths_Library::Operand_Base::at(unsigned long long n)
-{
-	return this->data[n];
-}
-
-inline char& High_Precision_Maths_Library::Operand_Base::operator[](unsigned long long n)
-{
-	return this->data[n];
-}
-
-inline std::string& High_Precision_Maths_Library::Operand_Base::to_string()
+inline std::string High_Precision_Maths_Library::Operand_Base::to_string()
 {
 	std::string s;
 	unsigned long long max = this->data.size();
@@ -410,4 +397,9 @@ inline std::string& High_Precision_Maths_Library::Operand_Base::to_string()
 		s += this->data[i];
 	}
 	return s;
+}
+
+bool High_Precision_Maths_Library::Operand_Base::operator==(Operand_Base& base)
+{
+	return false;
 }

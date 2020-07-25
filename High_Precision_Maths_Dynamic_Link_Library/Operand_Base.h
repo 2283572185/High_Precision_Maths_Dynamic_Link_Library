@@ -8,6 +8,7 @@
 #include <string>
 #include <sstream>
 #include "Discontinuity_Dynamic_Memory.h"
+//#include "Operation_Base.h"
 template<class T>
 using DDM = Discontinuity_Dynamic_Memory::DiscontinuityDynamicMemory<T>;
 template<class T>
@@ -32,12 +33,24 @@ using Discontinuity_Dynamic_Memory::Under_Flow;
 #define Remainder_Precision 30
 
 namespace High_Precision_Maths_Library {
+class DLL_API Result;
+class DLL_API Operand_Base;
+#include "Operation_Base.h"
+
+	/// <summary>
+	/// 用于储存单位运算后的结果
+	/// </summary>
+	class DLL_API Result {
+	public:
+		char result;
+		char change;
+	};
 
 	/// <summary>
 	/// 高精度数学库的基类，支持非负有理数的加、减、乘、除、乘方、开方、阶乘、取余数，抛出的所以异常都是Error的基类
 	/// </summary>
 	class DLL_API Operand_Base {
-	protected:
+	public:
 		/// <summary>
 		/// 这个对象的数据
 		/// </summary>
@@ -46,7 +59,6 @@ namespace High_Precision_Maths_Library {
 		/// 表示小时点的位置，从左往右数，从零开始
 		/// </summary>
 		unsigned long long point = 0;
-	public:
 		Operand_Base();
 		Operand_Base(int value);
 		Operand_Base(short value);
@@ -60,18 +72,9 @@ namespace High_Precision_Maths_Library {
 		Operand_Base(std::string value);
 		Operand_Base(char* value);
 		/// <summary>
-		/// 获取对象中第n个字符（n是自然数）
-		/// </summary>
-		/// <param name="n">要获取字符的序号</param>
-		char& at(unsigned long long n);
-		/// <summary>
-		/// 获取对象中第n个字符（n是自然数）
-		/// </summary>
-		/// <param name="n">要获取字符的序号</param>
-		char& operator[](unsigned long long n);
-		/// <summary>
 		/// 将对象内所以的字符转化成一个字符串并返回
 		/// </summary>
-		std::string& to_string();
+		virtual std::string to_string();
+		bool operator==(Operand_Base& base);
 	};
 }
