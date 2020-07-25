@@ -94,6 +94,7 @@ namespace Discontinuity_Dynamic_Memory {
 		/// </summary>
 		bool limited;
 	public:
+		DiscontinuityDynamicMemory(DiscontinuityDynamicMemory<T>& value);
 		/// <summary>
 		/// 初始化一个可以容纳无限个元素的对象
 		/// </summary>
@@ -725,6 +726,16 @@ namespace Discontinuity_Dynamic_Memory {
 	inline Illegal_Data::Illegal_Data(std::string description)
 	{
 		this->_description = description;
+	}
+
+	template<class T>
+	inline DiscontinuityDynamicMemory<T>::DiscontinuityDynamicMemory(DiscontinuityDynamicMemory<T>& value)
+	{
+		this->limited = value.limited;
+		this->max_size = value.max_size;
+		for (unsigned long long i = 0; i < value._size; i++) {
+			this->push(value[i]);
+		}
 	}
 }
 #endif // !Discontinuity_Dynamic_Memory_H
