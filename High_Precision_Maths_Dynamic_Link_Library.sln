@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "High_Precision_Maths_Dynamic_Link_Library", "High_Precision_Maths_Dynamic_Link_Library\High_Precision_Maths_Dynamic_Link_Library.vcxproj", "{51E8DAE8-5884-4889-BF89-B6EEC905C6E2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{6620D86B-F2BC-41BD-A24A-550F6DEA6D06}"
+	ProjectSection(ProjectDependencies) = postProject
+		{51E8DAE8-5884-4889-BF89-B6EEC905C6E2} = {51E8DAE8-5884-4889-BF89-B6EEC905C6E2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

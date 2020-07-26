@@ -36,6 +36,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(int value)
 		else if (this->point == max - 1 && this->data[point] != '.') {
 			this->data.push(_point);
 			this->data.push(_0);
+			this->point++;
 			break;
 		}
 		//若碰到小数点，返回
@@ -77,6 +78,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(short value)
 		else if (this->point == max - 1 && this->data[point] != '.') {
 			this->data.push(_point);
 			this->data.push(_0);
+			this->point++;
 			break;
 		}
 		//若碰到小数点，返回
@@ -118,6 +120,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(long value)
 		else if (this->point == max - 1 && this->data[point] != '.') {
 			this->data.push(_point);
 			this->data.push(_0);
+			this->point++;
 			break;
 		}
 		//若碰到小数点，返回
@@ -159,6 +162,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(long long value)
 		else if (this->point == max - 1 && this->data[point] != '.') {
 			this->data.push(_point);
 			this->data.push(_0);
+			this->point++;
 			break;
 		}
 		//若碰到小数点，返回
@@ -200,6 +204,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned int val
 		else if (this->point == max - 1 && this->data[point] != '.') {
 			this->data.push(_point);
 			this->data.push(_0);
+			this->point++;
 			break;
 		}
 		//若碰到小数点，返回
@@ -241,6 +246,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned short v
 		else if (this->point == max - 1 && this->data[point] != '.') {
 			this->data.push(_point);
 			this->data.push(_0);
+			this->point++;
 			break;
 		}
 		//若碰到小数点，返回
@@ -282,6 +288,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned long va
 		else if (this->point == max - 1 && this->data[point] != '.') {
 			this->data.push(_point);
 			this->data.push(_0);
+			this->point++;
 			break;
 		}
 		//若碰到小数点，返回
@@ -323,6 +330,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned long lo
 		else if (this->point == max - 1 && this->data[point] != '.') {
 			this->data.push(_point);
 			this->data.push(_0);
+			this->point++;
 			break;
 		}
 		//若碰到小数点，返回
@@ -363,7 +371,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(char value)
 		//若没有小数点，则补充小数点和0
 		else if (this->point == max - 1 && this->data[point] != '.') {
 			this->data.push(_point);
-			this->data.push(_0);
+			this->data.push(_0); this->point++;
 			break;
 		}
 		//若碰到小数点，返回
@@ -401,6 +409,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(std::string valu
 		else if (this->point == max - 1 && this->data[point] != '.') {
 			this->data.push(_point);
 			this->data.push(_0);
+			this->point++;
 			break;
 		}
 		//若碰到小数点，返回
@@ -442,6 +451,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(char* value)
 		else if (this->point == max - 1 && this->data[point] != '.') {
 			this->data.push(_point);
 			this->data.push(_0);
+			this->point++;
 			break;
 		}
 		//若碰到小数点，返回

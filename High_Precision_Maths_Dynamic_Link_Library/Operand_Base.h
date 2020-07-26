@@ -5,6 +5,7 @@
 #define DLL_API __declspec(dllimport)
 #endif
 
+#include <iostream>
 #include <string>
 #include <sstream>
 #include "Discontinuity_Dynamic_Memory.h"

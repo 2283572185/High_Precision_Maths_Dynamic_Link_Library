@@ -1,5 +1,5 @@
 #include "Operation_Base.h"
-#define _10 ':'
+constexpr auto _10 = ':';
 
 void position_point(Operand_Base& value)
 {
@@ -22,6 +22,7 @@ void position_point(Operand_Base& value)
 		else if (value.point == max - 1 && value.data[value.point] != '.') {
 			value.data.push(_point);
 			value.data.push(_0);
+			value.point++;
 			break;
 		}
 		//若碰到小数点，返回
@@ -67,6 +68,7 @@ void decimal_point(Operand_Base& left, Operand_Base& right)
 		for (i = 0; i < need; i++) {
 			right.data.insert(begin, _0);
 		}
+		right.point += need;
 	}
 	else
 	{
@@ -75,6 +77,7 @@ void decimal_point(Operand_Base& left, Operand_Base& right)
 		for (i = 0; i < need; i++) {
 			left.data.insert(begin, _0);
 		}
+		left.point += need;
 	}
 	//补充后补零
 	if (left.data.size() > right.data.size()) {

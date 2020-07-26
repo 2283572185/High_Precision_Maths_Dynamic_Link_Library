@@ -432,62 +432,21 @@ namespace Discontinuity_Dynamic_Memory {
 		T t;
 		//向尾部插入一个元素
 		push(t);
-		//指针存根
-		Value<T>* pp = point;
-		//在指针pp所指向的元素之前的元素的个数
-		unsigned long long size_before = 0;
-		//从point开始向底部偏移指针，当point与底部指针_bottom重合时则遍历了所以point之前的元素
+		Value<T>* pp = this->_top;
 		while (true)
 		{
-			if (point == _bottom){
+			if (pp == point) {
 				break;
 			}
 			else
 			{
-				point = last(point);
-				size_before++;
+				//将上一个元素赋值到这一个元素
+				*pp->value = *pp->last->value;
+				//将指针向前移动
+				pp = pp->last;
 			}
 		}
-		//point之后的元素=元素总个数-point之前的元素个数-point本身
-		unsigned long long size_after = _size - size_before - 1;
-		//创建拷贝数据用的动态数组，大小比原对象中总元素个数多一
-		T* v = new T[_size];
-		//计数器
-		unsigned long long number = 0;
-		//将point之前的元素拷贝到v中
-		for (number = 0; number < size_before; number++) {
-			v[number] = at(number);
-		}
-		//将要插入的value拷贝到v中
-		v[number] = value;
-		number++;
-		//将point自己拷贝到v中
-		//上述实现将value插入到point所指元素之前
-		v[number] = at(pp);
-		//将point之后的元素拷贝到v中
-		for (number++; number < _size; number++) {
-			v[number] = at(number - 1);
-		}
-		//point回底部
-		point = _bottom;
-		number = 0;
-		//将v中完成删除的数据拷贝到缩减后的对象中
-		while (true)
-		{
-			if (point == _top) {
-				break;
-			}
-			else
-			{
-				*(point->value) = v[number];
-				number++;
-				point = next(point);
-			}
-		}
-		//释放内存
-		delete[] v;
-		//归位
-		point = pp;
+		*point->value = value;
 		return;
 	}
 
@@ -527,58 +486,19 @@ namespace Discontinuity_Dynamic_Memory {
 			Over_Flow e("该对象是空的，不能删除元素。");
 			throw(e);
 		}
-		//指针存根
 		Value<T>* pp = point;
-		//位于point指向的元素前元素的个数
-		unsigned long long size_before = 0;
-		//从point开始向底部偏移指针，当point与底部指针_bottom重合时则遍历了所以point之前的元素
 		while (true)
 		{
-			if (point == _bottom) {
+			if (pp == this->_top) {
 				break;
 			}
 			else
 			{
-				point = last(point);
-				size_before++;
+				*pp->value = *pp->next->value;
+				pp = pp->next;
 			}
 		}
-		//point之后的元素=原元素总个数-point之前的元素个数-point本身
-		unsigned long long size_after = _size - size_before - 1;
-		//创建拷贝数据用的动态数组，大小比原对象中总元素个数少一
-		T* v = new T[_size - 1];
-		//计数器
-		unsigned long long number = 0;
-		//将point之前的元素拷贝到v中
-		for (number = 0; number < size_before; number++) {
-			v[number] = at(number);
-		}
-		//将point之后的元素拷贝到v中
-		for (; number < size_after; number++) {
-			//一开始number是point的前一个元素，number+1是point，number+2是point的下一个元素
-			v[number] = at(number + 2);
-		}
-		pop();
-		//point回底部
-		point = _bottom;
-		number = 0;
-		//将v中完成删除的数据拷贝到缩减后的对象中
-		while (true)
-		{
-			if (point == _top) {
-				break;
-			}
-			else
-			{
-				*(point->value) = v[number];
-				number++;
-				point = next(point);
-			}
-		}
-		//释放内存
-		delete[] v;
-		//归位
-		point = pp;
+		this->pop();
 		return;
 	}
 
