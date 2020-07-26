@@ -33,8 +33,8 @@ using Discontinuity_Dynamic_Memory::Under_Flow;
 #define Remainder_Precision 30
 
 namespace High_Precision_Maths_Library {
-class DLL_API Result;
-class DLL_API Operand_Base;
+class Result;
+class Operand_Base;
 #include "Operation_Base.h"
 
 	/// <summary>
@@ -75,6 +75,8 @@ class DLL_API Operand_Base;
 		/// 将对象内所以的字符转化成一个字符串并返回
 		/// </summary>
 		virtual std::string to_string();
-		bool operator==(Operand_Base& base);
+		virtual bool operator==(Operand_Base& right);
+		virtual bool operator!=(Operand_Base& right);
+		virtual bool operator>(Operand_Base& right);
 	};
 }
