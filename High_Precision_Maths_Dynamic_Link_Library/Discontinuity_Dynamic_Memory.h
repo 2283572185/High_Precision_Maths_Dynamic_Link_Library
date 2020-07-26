@@ -120,7 +120,7 @@ namespace Discontinuity_Dynamic_Memory {
 		/// </summary>
 		/// <param name="value">要添加的元素的值</param>
 		/// <returns>若剩余的可用内存不足或超过最大元素数量，抛出Over_Flow异常</returns>
-		void push(T& value);
+		void push_back(T& value);
 		/// <summary>
 		/// 获取对象中最后一个被压入的元素
 		/// </summary>
@@ -231,6 +231,11 @@ namespace Discontinuity_Dynamic_Memory {
 		/// <returns>若对象为空或finish大于size - 1，抛出Over_Flow异常；若start大于finish，抛出Illegal_Data异常</returns>
 		void remove(unsigned long long start, unsigned long long finish);
 
+		/// <summary>
+		/// 清空当前对象并复制value到当前对象
+		/// </summary>
+		void copy(DiscontinuityDynamicMemory<T>& value);
+
 		T& operator[](unsigned long long n);
 
 		T& operator[](Value<T>* point);
@@ -298,7 +303,7 @@ namespace Discontinuity_Dynamic_Memory {
 	}
 
 	template<class T>
-	inline void DiscontinuityDynamicMemory<T>::push(T& value)
+	inline void DiscontinuityDynamicMemory<T>::push_back(T& value)
 	{
 		if (_size + 1 > max_size && limited) {
 			Over_Flow e("该对象所能容纳的元素个数已达到上限，不能再压入元素。");
@@ -431,7 +436,7 @@ namespace Discontinuity_Dynamic_Memory {
 		}
 		T t;
 		//向尾部插入一个元素
-		push(t);
+		push_back(t);
 		Value<T>* pp = this->_top;
 		while (true)
 		{
@@ -545,6 +550,32 @@ namespace Discontinuity_Dynamic_Memory {
 	}
 
 	template<class T>
+	inline void DiscontinuityDynamicMemory<T>::copy(DiscontinuityDynamicMemory<T>& value)
+	{
+		this->clear();
+		this->limited = value.limited;
+		this->max_size = value.max_size;
+		this->_size = 0;
+		T a;
+		for (unsigned long long i = 0; i < value._size; i++) {
+			this->push_back(a);
+		}
+		Value<T>* v = this->_bottom;
+		Value<T>* vv = value._bottom;
+		while (true)
+		{
+			if (v == this->_top) {
+				*v->value = *vv->value;
+				break;
+			}
+			*v->value = *vv->value;
+			v = v->next;
+			vv = vv->next;
+		}
+		return;
+	}
+
+	template<class T>
 	inline T& DiscontinuityDynamicMemory<T>::operator[](unsigned long long n)
 	{
 		return *(address(n)->value);
@@ -653,9 +684,24 @@ namespace Discontinuity_Dynamic_Memory {
 	{
 		this->limited = value.limited;
 		this->max_size = value.max_size;
+		this->_size = 0;
+		T a;
 		for (unsigned long long i = 0; i < value._size; i++) {
-			this->push(value[i]);
+			this->push_back(a);
 		}
+		Value<T>* v = this->_bottom;
+		Value<T>* vv = value._bottom;
+		while (true)
+		{
+			if (v == this->_top) {
+				*v->value = *vv->value;
+				break;
+			}
+			*v->value = *vv->value;
+			v = v->next;
+			vv = vv->next;
+		}
+		return;
 	}
 }
 #endif // !Discontinuity_Dynamic_Memory_H

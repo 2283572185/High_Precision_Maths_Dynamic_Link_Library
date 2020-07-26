@@ -3,13 +3,13 @@
 char _0 = '0';
 char _point = '.';
 
-inline High_Precision_Maths_Library::Operand_Base::Operand_Base()
+Operand_Base::Operand_Base()
 {
 	this->point = 0;
 	return;
 }
 
-inline High_Precision_Maths_Library::Operand_Base::Operand_Base(int value)
+Operand_Base::Operand_Base(int value)
 {
 	std::stringstream ss;
 	std::string s;
@@ -18,7 +18,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(int value)
 	unsigned long long i, max;
 	max = s.length();
 	for (i = 0; i < max; i++) {
-		this->data.push(s[i]);
+		this->data.push_back(s[i]);
 	}
 	while (true)
 	{
@@ -29,13 +29,13 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(int value)
 		}
 		//若以小数点结尾，在最后补充一个0
 		else if (this->point == max - 1 && this->data[point] == '.') {
-			this->data.push(_0);
+			this->data.push_back(_0);
 			break;
 		}
 		//若没有小数点，则补充小数点和0
 		else if (this->point == max - 1 && this->data[point] != '.') {
-			this->data.push(_point);
-			this->data.push(_0);
+			this->data.push_back(_point);
+			this->data.push_back(_0);
 			this->point++;
 			break;
 		}
@@ -51,7 +51,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(int value)
 	return;
 }
 
-inline High_Precision_Maths_Library::Operand_Base::Operand_Base(short value)
+Operand_Base::Operand_Base(short value)
 {
 	std::stringstream ss;
 	std::string s;
@@ -60,7 +60,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(short value)
 	unsigned long long i, max;
 	max = s.length();
 	for (i = 0; i < max; i++) {
-		this->data.push(s[i]);
+		this->data.push_back(s[i]);
 	}
 	while (true)
 	{
@@ -71,13 +71,13 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(short value)
 		}
 		//若以小数点结尾，在最后补充一个0
 		else if (this->point == max - 1 && this->data[point] == '.') {
-			this->data.push(_0);
+			this->data.push_back(_0);
 			break;
 		}
 		//若没有小数点，则补充小数点和0
 		else if (this->point == max - 1 && this->data[point] != '.') {
-			this->data.push(_point);
-			this->data.push(_0);
+			this->data.push_back(_point);
+			this->data.push_back(_0);
 			this->point++;
 			break;
 		}
@@ -93,7 +93,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(short value)
 	return;
 }
 
-inline High_Precision_Maths_Library::Operand_Base::Operand_Base(long value)
+Operand_Base::Operand_Base(long value)
 {
 	std::stringstream ss;
 	std::string s;
@@ -102,7 +102,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(long value)
 	unsigned long long i, max;
 	max = s.length();
 	for (i = 0; i < max; i++) {
-		this->data.push(s[i]);
+		this->data.push_back(s[i]);
 	}
 	while (true)
 	{
@@ -113,13 +113,13 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(long value)
 		}
 		//若以小数点结尾，在最后补充一个0
 		else if (this->point == max - 1 && this->data[point] == '.') {
-			this->data.push(_0);
+			this->data.push_back(_0);
 			break;
 		}
 		//若没有小数点，则补充小数点和0
 		else if (this->point == max - 1 && this->data[point] != '.') {
-			this->data.push(_point);
-			this->data.push(_0);
+			this->data.push_back(_point);
+			this->data.push_back(_0);
 			this->point++;
 			break;
 		}
@@ -135,7 +135,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(long value)
 	return;
 }
 
-inline High_Precision_Maths_Library::Operand_Base::Operand_Base(long long value)
+Operand_Base::Operand_Base(long long value)
 {
 	std::stringstream ss;
 	std::string s;
@@ -144,7 +144,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(long long value)
 	unsigned long long i, max;
 	max = s.length();
 	for (i = 0; i < max; i++) {
-		this->data.push(s[i]);
+		this->data.push_back(s[i]);
 	}
 	while (true)
 	{
@@ -155,13 +155,13 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(long long value)
 		}
 		//若以小数点结尾，在最后补充一个0
 		else if (this->point == max - 1 && this->data[point] == '.') {
-			this->data.push(_0);
+			this->data.push_back(_0);
 			break;
 		}
 		//若没有小数点，则补充小数点和0
 		else if (this->point == max - 1 && this->data[point] != '.') {
-			this->data.push(_point);
-			this->data.push(_0);
+			this->data.push_back(_point);
+			this->data.push_back(_0);
 			this->point++;
 			break;
 		}
@@ -177,7 +177,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(long long value)
 	return;
 }
 
-inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned int value)
+Operand_Base::Operand_Base(unsigned int value)
 {
 	std::stringstream ss;
 	std::string s;
@@ -186,7 +186,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned int val
 	unsigned long long i, max;
 	max = s.length();
 	for (i = 0; i < max; i++) {
-		this->data.push(s[i]);
+		this->data.push_back(s[i]);
 	}
 	while (true)
 	{
@@ -197,13 +197,13 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned int val
 		}
 		//若以小数点结尾，在最后补充一个0
 		else if (this->point == max - 1 && this->data[point] == '.') {
-			this->data.push(_0);
+			this->data.push_back(_0);
 			break;
 		}
 		//若没有小数点，则补充小数点和0
 		else if (this->point == max - 1 && this->data[point] != '.') {
-			this->data.push(_point);
-			this->data.push(_0);
+			this->data.push_back(_point);
+			this->data.push_back(_0);
 			this->point++;
 			break;
 		}
@@ -219,7 +219,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned int val
 	return;
 }
 
-inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned short value)
+Operand_Base::Operand_Base(unsigned short value)
 {
 	std::stringstream ss;
 	std::string s;
@@ -228,7 +228,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned short v
 	unsigned long long i, max;
 	max = s.length();
 	for (i = 0; i < max; i++) {
-		this->data.push(s[i]);
+		this->data.push_back(s[i]);
 	}
 	while (true)
 	{
@@ -239,13 +239,13 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned short v
 		}
 		//若以小数点结尾，在最后补充一个0
 		else if (this->point == max - 1 && this->data[point] == '.') {
-			this->data.push(_0);
+			this->data.push_back(_0);
 			break;
 		}
 		//若没有小数点，则补充小数点和0
 		else if (this->point == max - 1 && this->data[point] != '.') {
-			this->data.push(_point);
-			this->data.push(_0);
+			this->data.push_back(_point);
+			this->data.push_back(_0);
 			this->point++;
 			break;
 		}
@@ -261,7 +261,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned short v
 	return;
 }
 
-inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned long value)
+Operand_Base::Operand_Base(unsigned long value)
 {
 	std::stringstream ss;
 	std::string s;
@@ -270,7 +270,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned long va
 	unsigned long long i, max;
 	max = s.length();
 	for (i = 0; i < max; i++) {
-		this->data.push(s[i]);
+		this->data.push_back(s[i]);
 	}
 	while (true)
 	{
@@ -281,13 +281,13 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned long va
 		}
 		//若以小数点结尾，在最后补充一个0
 		else if (this->point == max - 1 && this->data[point] == '.') {
-			this->data.push(_0);
+			this->data.push_back(_0);
 			break;
 		}
 		//若没有小数点，则补充小数点和0
 		else if (this->point == max - 1 && this->data[point] != '.') {
-			this->data.push(_point);
-			this->data.push(_0);
+			this->data.push_back(_point);
+			this->data.push_back(_0);
 			this->point++;
 			break;
 		}
@@ -303,7 +303,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned long va
 	return;
 }
 
-inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned long long value)
+Operand_Base::Operand_Base(unsigned long long value)
 {
 	std::stringstream ss;
 	std::string s;
@@ -312,7 +312,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned long lo
 	unsigned long long i, max;
 	max = s.length();
 	for (i = 0; i < max; i++) {
-		this->data.push(s[i]);
+		this->data.push_back(s[i]);
 	}
 	while (true)
 	{
@@ -323,13 +323,13 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned long lo
 		}
 		//若以小数点结尾，在最后补充一个0
 		else if (this->point == max - 1 && this->data[point] == '.') {
-			this->data.push(_0);
+			this->data.push_back(_0);
 			break;
 		}
 		//若没有小数点，则补充小数点和0
 		else if (this->point == max - 1 && this->data[point] != '.') {
-			this->data.push(_point);
-			this->data.push(_0);
+			this->data.push_back(_point);
+			this->data.push_back(_0);
 			this->point++;
 			break;
 		}
@@ -345,53 +345,33 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(unsigned long lo
 	return;
 }
 
-inline High_Precision_Maths_Library::Operand_Base::Operand_Base(char value)
+Operand_Base::Operand_Base(char value)
 {
-	std::stringstream ss;
-	std::string s;
-	ss << value;
-	ss >> s;
-	unsigned long long i, max;
-	max = s.length();
-	for (i = 0; i < max; i++) {
-		this->data.push(s[i]);
+	if ((value < '0' || value > '9') && value != '.') {
+		Illegal_Data e("value不是一个数字或小数点，不能用于初始化对象");
+		throw(e);
 	}
-	while (true)
+	this->data.push_back(value);
+	if (value != '.') {
+		this->data.push_back(_point);
+		this->data.push_back(_0);
+		this->point = 1;
+	}
+	else
 	{
-		//若以小数点开头，在前面补充一个0
-		if (this->point == 0 && this->data[point] == '.') {
-			this->data.insert(this->data.begin(), _0);
-			break;
-		}
-		//若以小数点结尾，在最后补充一个0
-		else if (this->point == max - 1 && this->data[point] == '.') {
-			this->data.push(_0);
-			break;
-		}
-		//若没有小数点，则补充小数点和0
-		else if (this->point == max - 1 && this->data[point] != '.') {
-			this->data.push(_point);
-			this->data.push(_0); this->point++;
-			break;
-		}
-		//若碰到小数点，返回
-		else if (this->data[point] == '.') {
-			break;
-		}
-		else
-		{
-			this->point++;
-		}
+		this->data.insert(this->data.begin(), _0);
+		this->data.push_back(_0);
+		this->point = 1;
 	}
 	return;
 }
 
-inline High_Precision_Maths_Library::Operand_Base::Operand_Base(std::string value)
+Operand_Base::Operand_Base(std::string value)
 {
 	unsigned long long i, max;
 	max = value.length();
 	for (i = 0; i < max; i++) {
-		this->data.push(value[i]);
+		this->data.push_back(value[i]);
 	}
 	while (true)
 	{
@@ -402,13 +382,13 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(std::string valu
 		}
 		//若以小数点结尾，在最后补充一个0
 		else if (this->point == max - 1 && this->data[point] == '.') {
-			this->data.push(_0);
+			this->data.push_back(_0);
 			break;
 		}
 		//若没有小数点，则补充小数点和0
 		else if (this->point == max - 1 && this->data[point] != '.') {
-			this->data.push(_point);
-			this->data.push(_0);
+			this->data.push_back(_point);
+			this->data.push_back(_0);
 			this->point++;
 			break;
 		}
@@ -424,7 +404,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(std::string valu
 	return;
 }
 
-inline High_Precision_Maths_Library::Operand_Base::Operand_Base(char* value)
+Operand_Base::Operand_Base(char* value)
 {
 	std::stringstream ss;
 	std::string s;
@@ -433,7 +413,7 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(char* value)
 	unsigned long long i, max;
 	max = s.length();
 	for (i = 0; i < max; i++) {
-		this->data.push(s[i]);
+		this->data.push_back(s[i]);
 	}
 	while (true)
 	{
@@ -444,13 +424,13 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(char* value)
 		}
 		//若以小数点结尾，在最后补充一个0
 		else if (this->point == max - 1 && this->data[point] == '.') {
-			this->data.push(_0);
+			this->data.push_back(_0);
 			break;
 		}
 		//若没有小数点，则补充小数点和0
 		else if (this->point == max - 1 && this->data[point] != '.') {
-			this->data.push(_point);
-			this->data.push(_0);
+			this->data.push_back(_point);
+			this->data.push_back(_0);
 			this->point++;
 			break;
 		}
@@ -466,7 +446,13 @@ inline High_Precision_Maths_Library::Operand_Base::Operand_Base(char* value)
 	return;
 }
 
-inline std::string High_Precision_Maths_Library::Operand_Base::to_string()
+Operand_Base::Operand_Base(const Operand_Base& value)
+{
+    this->point = value.point;
+	this->data.copy((DDM<char>&)value.data);
+}
+
+std::string Operand_Base::to_string()
 {
 	std::string s;
 	unsigned long long max = this->data.size();
@@ -476,7 +462,7 @@ inline std::string High_Precision_Maths_Library::Operand_Base::to_string()
 	return s;
 }
 
-inline bool High_Precision_Maths_Library::Operand_Base::operator==(Operand_Base& right)
+bool Operand_Base::operator==(Operand_Base& right)
 {
 	if (this->data.size() != right.data.size()) {
 		return false;
@@ -493,12 +479,85 @@ inline bool High_Precision_Maths_Library::Operand_Base::operator==(Operand_Base&
 	}
 }
 
-inline bool High_Precision_Maths_Library::Operand_Base::operator!=(Operand_Base& right)
+bool Operand_Base::operator!=(Operand_Base& right)
 {
 	return !(*this == right);
 }
 
-inline bool High_Precision_Maths_Library::Operand_Base::operator>(Operand_Base& right)
+bool Operand_Base::operator>(Operand_Base& right)
 {
-	return false;
+	position_point(*this);
+	position_point(right);
+	decimal_point(*this, right);
+	unsigned long long max = this->data.size();
+	unsigned long long i = 0;
+	if (*this == right) {
+		return false;
+	}
+	else
+	{
+		while (true)
+		{
+			if (this->data[i] == right.data[i]) {
+				i++;
+			}
+			else if (this->data[i] > right.data[i]) {
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
+}
+
+bool Operand_Base::operator<=(Operand_Base& right)
+{
+	return !(*this > right);
+}
+
+bool Operand_Base::operator<(Operand_Base& right)
+{
+	position_point(*this);
+	position_point(right);
+	decimal_point(*this, right);
+	unsigned long long max = this->data.size();
+	unsigned long long i = 0;
+	if (*this == right) {
+		return false;
+	}
+	else
+	{
+		while (true)
+		{
+			if (this->data[i] == right.data[i]) {
+				i++;
+			}
+			else if (this->data[i] < right.data[i]) {
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+bool Operand_Base::operator>=(Operand_Base& right)
+{
+	return !(*this < right);
+}
+
+Operand_Base& Operand_Base::operator=(const Operand_Base right) {
+	this->point = right.point;
+	this->data.copy((DDM<char>&)right.data);
+	return *this;
+}
+
+Operand_Base operator+(Operand_Base left, Operand_Base right)
+{
+	return (Operand_Base&)Addition(left, right);
 }
