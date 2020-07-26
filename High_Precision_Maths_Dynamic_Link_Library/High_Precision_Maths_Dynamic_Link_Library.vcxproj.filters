@@ -24,12 +24,18 @@
     <ClInclude Include="Operation_Base.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Operand_Stream_Base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Operand_Base.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Operation_Base.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Operand_Stream_Base.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

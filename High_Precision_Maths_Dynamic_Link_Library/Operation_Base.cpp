@@ -1,7 +1,7 @@
 #include "Operation_Base.h"
 constexpr auto _10 = ':';
-
-void position_point(Operand_Base& value)
+using namespace High_Precision_Maths_Library;
+void High_Precision_Maths_Library::position_point(Operand_Base& value)
 {
 	char _point = '.';
 	char _0 = '0';
@@ -37,7 +37,7 @@ void position_point(Operand_Base& value)
 	return;
 }
 
-void high_precision_add(char& left, char& right, Result& _result)
+void High_Precision_Maths_Library::high_precision_add(char& left, char& right, Result& _result)
 {
 	//如果是小数点，直接返回
 	if (left == '.') {
@@ -62,7 +62,7 @@ void high_precision_add(char& left, char& right, Result& _result)
 	return;
 }
 
-void decimal_point(Operand_Base& left, Operand_Base& right)
+void High_Precision_Maths_Library::decimal_point(Operand_Base& left, Operand_Base& right)
 {
 	//补充前导零
 	char _0 = '0';
@@ -98,7 +98,7 @@ void decimal_point(Operand_Base& left, Operand_Base& right)
 	}
 }
 
-Operand_Base Addition(Operand_Base& left, Operand_Base& right)
+Operand_Base High_Precision_Maths_Library::Addition(Operand_Base& left, Operand_Base& right)
 {
 	position_point(left);
 	position_point(right);
