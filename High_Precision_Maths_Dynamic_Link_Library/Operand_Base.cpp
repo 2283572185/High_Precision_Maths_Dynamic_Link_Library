@@ -706,4 +706,3 @@ Operand_Base High_Precision_Maths_Library::Operand_Base::operator++(int)
 	++(*this);
 	return *this;
 }
-

@@ -40,7 +40,7 @@ void High_Precision_Maths_Library::position_point(Operand_Base& value)
 void High_Precision_Maths_Library::high_precision_add(char& left, char& right, Result& _result)
 {
 	//如果是小数点，直接返回
-	if (left == '.') {
+	if (left == '.' || right == '.') {
 		_result.result = '.';
 		return;
 	}

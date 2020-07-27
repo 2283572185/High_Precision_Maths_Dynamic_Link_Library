@@ -39,6 +39,7 @@ namespace High_Precision_Maths_Library {
 
 	/// <summary>
 	/// 高精度数学库的基类，支持非负有理数的加、减、乘、除、乘方、开方、阶乘、取余数，抛出的所以异常都是Error的基类
+	/// 不支持以科学计数法的方式输入数据
 	/// </summary>
 	class Operand_Base {
 	public:
