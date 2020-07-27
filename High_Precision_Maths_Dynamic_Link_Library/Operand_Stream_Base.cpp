@@ -246,6 +246,7 @@ void High_Precision_Maths_Library::OperandStream_Base::operator<<(long double va
 int High_Precision_Maths_Library::OperandStream_Base::operator>>(int value)
 {
 	if (this->state == fill) {
+		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
 		stringstream ss;
 		ss << this->data.top().to_string();
 		ss >> value;
@@ -262,6 +263,7 @@ int High_Precision_Maths_Library::OperandStream_Base::operator>>(int value)
 short High_Precision_Maths_Library::OperandStream_Base::operator>>(short value)
 {
 	if (this->state == fill) {
+		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
 		stringstream ss;
 		ss << this->data.top().to_string();
 		ss >> value;
@@ -278,6 +280,7 @@ short High_Precision_Maths_Library::OperandStream_Base::operator>>(short value)
 long High_Precision_Maths_Library::OperandStream_Base::operator>>(long value)
 {
 	if (this->state == fill) {
+		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
 		stringstream ss;
 		ss << this->data.top().to_string();
 		ss >> value;
@@ -294,6 +297,7 @@ long High_Precision_Maths_Library::OperandStream_Base::operator>>(long value)
 long long High_Precision_Maths_Library::OperandStream_Base::operator>>(long long value)
 {
 	if (this->state == fill) {
+		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
 		stringstream ss;
 		ss << this->data.top().to_string();
 		ss >> value;
@@ -310,6 +314,7 @@ long long High_Precision_Maths_Library::OperandStream_Base::operator>>(long long
 unsigned int High_Precision_Maths_Library::OperandStream_Base::operator>>(unsigned int value)
 {
 	if (this->state == fill) {
+		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
 		stringstream ss;
 		ss << this->data.top().to_string();
 		ss >> value;
@@ -326,6 +331,7 @@ unsigned int High_Precision_Maths_Library::OperandStream_Base::operator>>(unsign
 unsigned short High_Precision_Maths_Library::OperandStream_Base::operator>>(unsigned short value)
 {
 	if (this->state == fill) {
+		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
 		stringstream ss;
 		ss << this->data.top().to_string();
 		ss >> value;
@@ -342,6 +348,7 @@ unsigned short High_Precision_Maths_Library::OperandStream_Base::operator>>(unsi
 unsigned long High_Precision_Maths_Library::OperandStream_Base::operator>>(unsigned long value)
 {
 	if (this->state == fill) {
+		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
 		stringstream ss;
 		ss << this->data.top().to_string();
 		ss >> value;
@@ -358,6 +365,7 @@ unsigned long High_Precision_Maths_Library::OperandStream_Base::operator>>(unsig
 unsigned long long High_Precision_Maths_Library::OperandStream_Base::operator>>(unsigned long long value)
 {
 	if (this->state == fill) {
+		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
 		stringstream ss;
 		ss << this->data.top().to_string();
 		ss >> value;
@@ -523,7 +531,7 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 	char _0 = '0';
 	char _1 = '1';
 	//四舍五入
-	if (precision.type == round) {
+	if (precision.type == round || precision.type == (round | strict)) {
 		//将v移到要保留的位数的下一位（指向最低位）
 		Value<char>* v = value.data.address(value.point + precision.precision + 1);
 		//删除保留的位数的下一位之后的数据
@@ -569,9 +577,8 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 			//若保留整数，弹出小数点
 			if (precision.precision == 0) {
 				value.data.pop();
-				value.point = 0;
+				value.point = value.data.size();
 			}
-			return;
 		}
 		//四舍
 		else
@@ -580,13 +587,12 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 			//若保留整数，弹出小数点
 			if (precision.precision == 0) {
 				value.data.pop();
-				value.point = 0;
+				value.point = value.data.size();
 			}
-			return;
 		}
 	}
 	//去尾
-	else if (precision.type == round_down) {
+	else if (precision.type == round_down || precision.type == (round_down | strict)) {
 		// 将v移到要保留的位数
 		Value<char>* v = value.data.address(value.point + precision.precision);
 		//删除保留的位数之后的数据
@@ -605,12 +611,11 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 		//若保留整数，弹出小数点
 		if (precision.precision == 0) {
 			value.data.pop();
-			value.point = 0;
+			value.point = value.data.size();
 		}
-		return;
 	}
 	//进一
-	else if (precision.type == round_up) {
+	else if (precision.type == round_up || precision.type == (round_up | strict)) {
 		// 将v移到要保留的位数
 		Value<char>* v = value.data.address(value.point + precision.precision);
 		//删除保留的位数之后的数据
@@ -650,14 +655,30 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 		//若保留整数，弹出小数点
 		if (precision.precision == 0) {
 			value.data.pop();
-			value.point = 0;
+			value.point = value.data.size();
 		}
-		return;
 	}
 	//都不是则报错
 	else
 	{
 		Illegal_Data e("输入的转换类型不合法。，请在宏中进行选择。");
 		throw(e);
+	}
+	//若是严格模式，判断是否需要补0
+	if (precision.type == (round | strict) || precision.type == (round_down | strict) || precision.type == (round_up | strict)) {
+		//保留整数直接退出
+		if (precision.precision == 0) {
+			return;
+		}
+		//现有小数的位数
+		unsigned long long decimal_digits = value.data.size() - 1 - value.point;
+		//还需要补充的小数位数
+		unsigned long long need = precision.precision - decimal_digits;
+		for (unsigned long long i = 0; i < need; i++)
+		{
+			//补0
+			value.data.push_back(_0);
+		}
+		return;
 	}
 }

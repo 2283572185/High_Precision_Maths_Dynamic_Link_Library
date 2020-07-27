@@ -26,6 +26,9 @@ namespace High_Precision_Maths_Library {
 		#define round_down 2
 		//进一法
 		#define round_up 3
+		//严格模式，若小数位数不足，会用0不足，取舍策略与选择的转换类型有关，不能单独使用。
+		//使用该模式的情况下，必须再使用一种且只使用一种转换类型，两个宏之间使用按位或运算符(|)连接
+		#define strict 0xf000
 	};
 
 	/// <summary>
@@ -62,7 +65,8 @@ namespace High_Precision_Maths_Library {
 		virtual void operator<<(float value);
 		virtual void operator<<(double value);
 		virtual void operator<<(long double value);
-		//输出，若流中待输出的元素的值超出了输出类型的取值范围，会导致不可预测的结果，输出值会四舍五入
+		//输出，若流中待输出的元素的值超出了输出类型的取值范围，会导致不可预测的结果
+		//输出值会四舍五入
 		virtual int operator>>(int value);
 		virtual short operator>>(short value);
 		virtual long operator>>(long value);

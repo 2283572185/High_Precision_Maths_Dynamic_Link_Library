@@ -43,4 +43,9 @@ namespace High_Precision_Maths_Library {
 	/// <param name="left">乘数</param>
 	/// <param name="right">乘数</param>
 	Operand_Base Multiplication(Operand_Base& left, Operand_Base& right);
+
+	/// <summary>
+	/// 去除对象中无效的0，保留有效数字
+	/// </summary>
+	void retain_significant_number(Operand_Base& value);
 }

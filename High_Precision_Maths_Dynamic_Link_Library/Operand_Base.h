@@ -40,6 +40,7 @@ namespace High_Precision_Maths_Library {
 	/// <summary>
 	/// 高精度数学库的基类，支持非负有理数的加、减、乘、除、乘方、开方、阶乘、取余数，抛出的所以异常都是Error的基类
 	/// 不支持以科学计数法的方式输入数据
+	/// 注意，当小数点的位置等于该对象的长度时，这个对象是整数
 	/// </summary>
 	class Operand_Base {
 	public:
@@ -102,6 +103,15 @@ namespace High_Precision_Maths_Library {
 		/// 计算此对象与right的积并赋值给对象
 		/// </summary>
 		virtual Operand_Base& operator*=(Operand_Base& right);
+		/// <summary>
+		/// 乘方
+		/// </summary>
+		/// <param name="right">次数，请确保次数是整数</param>
+		virtual Operand_Base operator^(Operand_Base right);
+		/// <summary>
+		/// 乘方并赋值给对象
+		/// </summary>
+		virtual Operand_Base& operator^=(Operand_Base& right);
 	};
 }
 #include "Operation_Base.h"

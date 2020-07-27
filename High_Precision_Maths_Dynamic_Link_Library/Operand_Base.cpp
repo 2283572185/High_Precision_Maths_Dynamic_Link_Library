@@ -717,3 +717,22 @@ Operand_Base& High_Precision_Maths_Library::Operand_Base::operator*=(Operand_Bas
 	*this = *this * right;
 	return *this;
 }
+
+Operand_Base High_Precision_Maths_Library::Operand_Base::operator^(Operand_Base right)
+{
+	Operand_Base _0('0');
+	if (_0 == right) {
+		return Operand_Base('1');
+	}
+	Operand_Base result = right;
+	for (++_0; _0 < right; ++_0) {
+		result *= right;
+	}
+	return result;
+}
+
+Operand_Base& High_Precision_Maths_Library::Operand_Base::operator^=(Operand_Base& right)
+{
+	*this = *this ^ right;
+	return *this;
+}

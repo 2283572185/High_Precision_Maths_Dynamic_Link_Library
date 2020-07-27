@@ -122,6 +122,7 @@ Operand_Base High_Precision_Maths_Library::Addition(Operand_Base& left, Operand_
 		result.data.insert(result.data.begin(), _result.change);
 	}
 	position_point(result);
+	retain_significant_number(result);
 	return result;
 }
 
@@ -683,5 +684,57 @@ Operand_Base High_Precision_Maths_Library::Multiplication(Operand_Base& left, Op
 	}
 	result.data.insert(begin, _point);
 	position_point(result);
+	retain_significant_number(result);
 	return result;
+}
+
+void High_Precision_Maths_Library::retain_significant_number(Operand_Base& value)
+{
+	//清除前段的0
+	Value<char>* begin = value.data.begin();
+	//用于标记要删除的片段
+	Value<char>* sign = begin;
+	//用于标记另一个端点
+	Value<char>* tag = value.data.end();
+	//判断是否需要清除
+	if (*begin->value == '0') {
+		while (true)
+		{
+			//针对全是0的数据
+			if (sign->next == tag) {
+				break;
+			}
+			//碰到有效数字或小数点，退出循环
+			else if (*sign->next->value != '0') {
+				break;
+			}
+			else
+			{
+				sign = sign->next;
+			}
+		}
+	}
+	//有需要清除的元素就清除
+	if (sign != begin) {
+		value.data.remove(begin, sign);
+	}
+	//清除后端的0
+	//更新数据
+	tag = value.data.end();
+	while (true)
+	{
+		//针对全是0的数据
+		if (tag == begin) {
+			break;
+		}
+		else if (*tag->value != '0') {
+			break;
+		}
+		else
+		{
+			value.data.pop();
+			tag = tag->last;
+		}
+	}
+	return;
 }
