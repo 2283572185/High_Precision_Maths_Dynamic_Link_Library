@@ -545,6 +545,8 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 			result.change = '1';
 			//指向对象中的第一个元素的指针（指向最高位）
 			Value<char>* top = value.data.begin();
+			//将v移到要保留的位数
+			v = v->last;
 			//从最低位开始向高位做加法
 			while (true)
 			{
@@ -556,7 +558,7 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 				}
 				high_precision_add(*v->value, _0, result);
 				*v->value = result.result;
-				v = v->next;
+				v = v->last;
 			}
 			//有进位，向前插入进位
 			if (result.change == '1') {
@@ -567,6 +569,7 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 			//若保留整数，弹出小数点
 			if (precision.precision == 0) {
 				value.data.pop();
+				value.point = 0;
 			}
 			return;
 		}
@@ -577,6 +580,7 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 			//若保留整数，弹出小数点
 			if (precision.precision == 0) {
 				value.data.pop();
+				value.point = 0;
 			}
 			return;
 		}
@@ -601,6 +605,7 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 		//若保留整数，弹出小数点
 		if (precision.precision == 0) {
 			value.data.pop();
+			value.point = 0;
 		}
 		return;
 	}
@@ -636,7 +641,7 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 			}
 			high_precision_add(*v->value, _0, result);
 			*v->value = result.result;
-			v = v->next;
+			v = v->last;
 		}
 		//有进位，向前插入进位
 		if (result.change == '1') {
@@ -645,6 +650,7 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 		//若保留整数，弹出小数点
 		if (precision.precision == 0) {
 			value.data.pop();
+			value.point = 0;
 		}
 		return;
 	}

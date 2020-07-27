@@ -103,7 +103,7 @@ namespace High_Precision_Maths_Library {
 		/// <returns>若流是满的，返回true，反正，返回false</returns>
 		virtual bool is_fill();
 		/// <summary>
-		/// 精度转换函数
+		/// 精度转换函数，这个函数不会向流中输入对象
 		/// </summary>
 		/// <param name="value">要进行精度转换的对象</param>
 		/// <param name="precision">精度控制类的对象，决定了转换方式和转换后精度</param>
