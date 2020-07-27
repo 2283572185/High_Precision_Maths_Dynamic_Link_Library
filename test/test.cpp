@@ -7,9 +7,8 @@ int main()
 {
     Operand_Base o("3.1415926");
     Operand_Base _o(o);
-    o += _o;
+    o *= _o;
     OperandStream_Base os;
-    os.change_precision(o, (Precision_Base&)Precision_Base(1, round_down));
     os << o;
     string s;
     os >> s;

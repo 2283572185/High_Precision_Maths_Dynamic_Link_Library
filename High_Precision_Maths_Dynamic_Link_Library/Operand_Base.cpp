@@ -706,3 +706,14 @@ Operand_Base High_Precision_Maths_Library::Operand_Base::operator++(int)
 	++(*this);
 	return *this;
 }
+
+Operand_Base High_Precision_Maths_Library::Operand_Base::operator*(Operand_Base right)
+{
+	return Multiplication(*this, right);
+}
+
+Operand_Base& High_Precision_Maths_Library::Operand_Base::operator*=(Operand_Base& right)
+{
+	*this = *this * right;
+	return *this;
+}

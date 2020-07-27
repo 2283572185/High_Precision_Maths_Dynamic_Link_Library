@@ -36,4 +36,11 @@ namespace High_Precision_Maths_Library {
 	/// <param name="right">乘数</param>
 	/// <param name="_result">用于储存结果的类对象的引用</param>
 	void high_precision_multiplication(char& left, char& right, Result& _result);
+
+	/// <summary>
+	/// 乘法
+	/// </summary>
+	/// <param name="left">乘数</param>
+	/// <param name="right">乘数</param>
+	Operand_Base Multiplication(Operand_Base& left, Operand_Base& right);
 }

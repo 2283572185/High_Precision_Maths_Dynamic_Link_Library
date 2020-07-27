@@ -94,7 +94,14 @@ namespace High_Precision_Maths_Library {
 		/// 后置自增运算符
 		/// </summary>
 		virtual Operand_Base operator++(int);
-
+		/// <summary>
+		/// 计算此对象与right的积
+		/// </summary>
+		virtual Operand_Base operator*(Operand_Base right);
+		/// <summary>
+		/// 计算此对象与right的积并赋值给对象
+		/// </summary>
+		virtual Operand_Base& operator*=(Operand_Base& right);
 	};
 }
 #include "Operation_Base.h"
