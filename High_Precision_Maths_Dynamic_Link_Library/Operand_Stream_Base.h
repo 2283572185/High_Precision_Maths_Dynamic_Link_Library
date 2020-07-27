@@ -31,20 +31,23 @@ namespace High_Precision_Maths_Library {
 		virtual void operator<<(double value);
 		virtual void operator<<(long double value);
 		//输出
-		virtual int operator>>(int);
-		virtual short operator>>(short);
-		virtual long operator>>(long);
-		virtual long long operator>>(long long);
-		virtual unsigned int operator>>(unsigned int);
-		virtual unsigned short operator>>(unsigned short);
-		virtual unsigned long operator>>(unsigned long);
-		virtual unsigned long long operator>>(unsigned long long);
-		virtual char operator>>(char);
-		virtual std::string operator>>(std::string);
-		virtual char* operator>>(char*);
-		virtual Operand_Base& operator>>(Operand_Base&);
-		virtual float operator>>(float);
-		virtual double operator>>(double);
-		virtual long double operator>>(long double);
+		virtual int operator>>(int value);
+		virtual short operator>>(short value);
+		virtual long operator>>(long value);
+		virtual long long operator>>(long long value);
+		virtual unsigned int operator>>(unsigned int value);
+		virtual unsigned short operator>>(unsigned short value);
+		virtual unsigned long operator>>(unsigned long value);
+		virtual unsigned long long operator>>(unsigned long long value);
+		virtual char operator>>(char value);
+		virtual std::string operator>>(std::string& value);
+		/// <summary>
+		/// 会动态分配内存，当心内存泄漏
+		/// </summary>
+		virtual char* operator>>(char* value);
+		virtual Operand_Base operator>>(Operand_Base& value);
+		virtual float operator>>(float value);
+		virtual double operator>>(double value);
+		virtual long double operator>>(long double value);
 	};
 }
