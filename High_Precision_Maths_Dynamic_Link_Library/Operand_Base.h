@@ -94,6 +94,7 @@ namespace High_Precision_Maths_Library {
 		/// 后置自增运算符
 		/// </summary>
 		virtual Operand_Base operator++(int);
+
 	};
 }
 #include "Operation_Base.h"

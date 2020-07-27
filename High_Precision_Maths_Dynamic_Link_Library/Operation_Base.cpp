@@ -123,3 +123,301 @@ Operand_Base High_Precision_Maths_Library::Addition(Operand_Base& left, Operand_
 	position_point(result);
 	return result;
 }
+
+void High_Precision_Maths_Library::high_precision_multiplication(char& left, char& right, Result& _result)
+{
+	//如果是小数点，直接返回
+	if (left == '.' || right == '.') {
+		_result.result = '.';
+		return;
+	}
+	//原来的十位变成现在的个位
+	_result.result = _result.change;
+	_result.change = '0';
+	//九九乘法口诀表
+	switch (left)
+	{
+	case '0':
+		_result.result += 0;
+	case'1':
+		_result.result += (right - '0');
+	case'2':
+		switch (right)
+		{
+		case'0':
+			_result.result += 0;
+			_result.change = '0';
+		case'1':
+			_result.result += 2;
+			_result.change = '0';
+		case'2':
+			_result.result += 4;
+			_result.change = '0';
+		case'3':
+			_result.result += 6;
+			_result.change = '0';
+		case'4':
+			_result.result += 8;
+			_result.change = '0';
+		case'5':
+			_result.result += 0;
+			_result.change = '1';
+		case'6':
+			_result.result += 2;
+			_result.change = '1';
+		case'7':
+			_result.result += 4;
+			_result.change = '1';
+		case'8':
+			_result.result += 6;
+			_result.change = '1';
+		case'9':
+			_result.result += 8;
+			_result.change = '1';
+		}
+	case'3':
+		switch (right)
+		{
+		case'0':
+			_result.result += 0;
+			_result.change = '0';
+		case'1':
+			_result.result += 3;
+			_result.change = '0';
+		case'2':
+			_result.result += 6;
+			_result.change = '0';
+		case'3':
+			_result.result += 9;
+			_result.change = '0';
+		case'4':
+			_result.result += 2;
+			_result.change = '1';
+		case'5':
+			_result.result += 5;
+			_result.change = '1';
+		case'6':
+			_result.result += 8;
+			_result.change = '1';
+		case'7':
+			_result.result += 1;
+			_result.change = '2';
+		case'8':
+			_result.result += 4;
+			_result.change = '2';
+		case'9':
+			_result.result += 7;
+			_result.change = '2';
+		}
+	case'4':
+		switch (right)
+		{
+		case'0':
+			_result.result += 0;
+			_result.change = '0';
+		case'1':
+			_result.result += 4;
+			_result.change = '0';
+		case'2':
+			_result.result += 8;
+			_result.change = '0';
+		case'3':
+			_result.result += 2;
+			_result.change = '1';
+		case'4':
+			_result.result += 6;
+			_result.change = '1';
+		case'5':
+			_result.result += 0;
+			_result.change = '2';
+		case'6':
+			_result.result += 4;
+			_result.change = '2';
+		case'7':
+			_result.result += 8;
+			_result.change = '2';
+		case'8':
+			_result.result += 2;
+			_result.change = '3';
+		case'9':
+			_result.result += 6;
+			_result.change = '3';
+		}
+	case'5':
+		switch (right)
+		{
+		case'0':
+			_result.result += 0;
+			_result.change = '0';
+		case'1':
+			_result.result += 5;
+			_result.change = '0';
+		case'2':
+			_result.result += 0;
+			_result.change = '1';
+		case'3':
+			_result.result += 5;
+			_result.change = '1';
+		case'4':
+			_result.result += 0;
+			_result.change = '2';
+		case'5':
+			_result.result += 5;
+			_result.change = '2';
+		case'6':
+			_result.result += 0;
+			_result.change = '3';
+		case'7':
+			_result.result += 5;
+			_result.change = '3';
+		case'8':
+			_result.result += 0;
+			_result.change = '4';
+		case'9':
+			_result.result += 5;
+			_result.change = '4';
+		}
+	case'6':
+		switch (right)
+		{
+		case'0':
+			_result.result += 0;
+			_result.change = '0';
+		case'1':
+			_result.result += 6;
+			_result.change = '0';
+		case'2':
+			_result.result += 2;
+			_result.change = '1';
+		case'3':
+			_result.result += 8;
+			_result.change = '1';
+		case'4':
+			_result.result += 4;
+			_result.change = '2';
+		case'5':
+			_result.result += 0;
+			_result.change = '3';
+		case'6':
+			_result.result += 6;
+			_result.change = '3';
+		case'7':
+			_result.result += 2;
+			_result.change = '4';
+		case'8':
+			_result.result += 8;
+			_result.change = '4';
+		case'9':
+			_result.result += 4;
+			_result.change = '5';
+		}
+	case'7':
+		switch (right)
+		{
+		case'0':
+			_result.result += 0;
+			_result.change = '0';
+		case'1':
+			_result.result += 7;
+			_result.change = '0';
+		case'2':
+			_result.result += 4;
+			_result.change = '1';
+		case'3':
+			_result.result += 1;
+			_result.change = '2';
+		case'4':
+			_result.result += 8;
+			_result.change = '2';
+		case'5':
+			_result.result += 5;
+			_result.change = '3';
+		case'6':
+			_result.result += 2;
+			_result.change = '4';
+		case'7':
+			_result.result += 9;
+			_result.change = '4';
+		case'8':
+			_result.result += 6;
+			_result.change = '5';
+		case'9':
+			_result.result += 3;
+			_result.change = '6';
+		}
+	case'8':
+		switch (right)
+		{
+		case'0':
+			_result.result += 0;
+			_result.change = '0';
+		case'1':
+			_result.result += 8;
+			_result.change = '0';
+		case'2':
+			_result.result += 6;
+			_result.change = '1';
+		case'3':
+			_result.result += 4;
+			_result.change = '2';
+		case'4':
+			_result.result += 2;
+			_result.change = '3';
+		case'5':
+			_result.result += 0;
+			_result.change = '4';
+		case'6':
+			_result.result += 8;
+			_result.change = '4';
+		case'7':
+			_result.result += 6;
+			_result.change = '5';
+		case'8':
+			_result.result += 4;
+			_result.change = '6';
+		case'9':
+			_result.result += 2;
+			_result.change = '7';
+		}
+	case'9':
+		switch (right)
+		{
+		case'0':
+			_result.result += 0;
+			_result.change = '0';
+		case'1':
+			_result.result += 9;
+			_result.change = '0';
+		case'2':
+			_result.result += 8;
+			_result.change = '1';
+		case'3':
+			_result.result += 7;
+			_result.change = '2';
+		case'4':
+			_result.result += 6;
+			_result.change = '3';
+		case'5':
+			_result.result += 5;
+			_result.change = '4';
+		case'6':
+			_result.result += 4;
+			_result.change = '5';
+		case'7':
+			_result.result += 3;
+			_result.change = '6';
+		case'8':
+			_result.result += 2;
+			_result.change = '7';
+		case'9':
+			_result.result += 1;
+			_result.change = '8';
+		}
+	}
+	//若“个位”大于“10”，十位+1，个位-10
+	if (_result.result > '9') {
+		_result.result -= 10;
+		_result.change += 1;
+	}
+	return;
+}
