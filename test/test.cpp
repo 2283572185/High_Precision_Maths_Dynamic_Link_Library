@@ -8,10 +8,8 @@ int main()
     Operand_Base o("3.1415926");
     Operand_Base _o(o);
     string s;
-    for (int i = 0; i < 10; i++) {
-        o *= _o;
-        cout << o.to_string() << "\n";
-        cin >> s;
-    }
+    OperandStream_Base os;
+    o ^= 2;
+    cout << o.to_string();
     system("pause");
 }

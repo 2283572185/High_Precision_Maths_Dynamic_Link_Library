@@ -578,6 +578,45 @@ Operand_Base::Operand_Base(const Operand_Base& value)
 	this->data.copy((DDM<char>&)value.data);
 }
 
+High_Precision_Maths_Library::Operand_Base::Operand_Base(DDM<char>& value)
+{
+	this->data = value;
+	unsigned long long i, max;
+	max = value.size();
+	for (i = 0; i < max; i++) {
+		this->data.push_back(value[i]);
+	}
+	while (true)
+	{
+		//若以小数点开头，在前面补充一个0
+		if (this->point == 0 && this->data[point] == '.') {
+			this->data.insert(this->data.begin(), _0);
+			break;
+		}
+		//若以小数点结尾，在最后补充一个0
+		else if (this->point == max - 1 && this->data[point] == '.') {
+			this->data.push_back(_0);
+			break;
+		}
+		//若没有小数点，则补充小数点和0
+		else if (this->point == max - 1 && this->data[point] != '.') {
+			this->data.push_back(_point);
+			this->data.push_back(_0);
+			this->point++;
+			break;
+		}
+		//若碰到小数点，返回
+		else if (this->data[point] == '.') {
+			break;
+		}
+		else
+		{
+			this->point++;
+		}
+	}
+	return;
+}
+
 std::string Operand_Base::to_string()
 {
 	std::string s;
@@ -718,21 +757,20 @@ Operand_Base& High_Precision_Maths_Library::Operand_Base::operator*=(Operand_Bas
 	return *this;
 }
 
-Operand_Base High_Precision_Maths_Library::Operand_Base::operator^(Operand_Base right)
+Operand_Base High_Precision_Maths_Library::Operand_Base::operator^(unsigned long long point)
 {
-	Operand_Base _0('0');
-	if (_0 == right) {
+	if (0 == point) {
 		return Operand_Base('1');
 	}
-	Operand_Base result = right;
-	for (++_0; _0 < right; ++_0) {
-		result *= right;
+	Operand_Base result = *this;
+	for (unsigned long long i = 1; i < point; i++) {
+		result *= result;
 	}
 	return result;
 }
 
-Operand_Base& High_Precision_Maths_Library::Operand_Base::operator^=(Operand_Base& right)
+Operand_Base& High_Precision_Maths_Library::Operand_Base::operator^=(unsigned long long point)
 {
-	*this = *this ^ right;
+	*this = *this ^ point;
 	return *this;
 }

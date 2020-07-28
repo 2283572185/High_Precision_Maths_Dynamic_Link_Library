@@ -568,15 +568,11 @@ Operand_Base High_Precision_Maths_Library::Multiplication(Operand_Base& left, Op
 			}
 			else
 			{
-				position_point(result);
-				position_point(middle);
-				decimal_point(result, middle);
 				result += middle;
 				//弹出小数点和后补零
 				result.data.pop();
 				result.data.pop();
 			}
-			need++;
 			break;
 		}
 		if (*right_do->value == '.') {
@@ -618,9 +614,6 @@ Operand_Base High_Precision_Maths_Library::Multiplication(Operand_Base& left, Op
 				}
 				else
 				{
-					position_point(result);
-					position_point(middle);
-					decimal_point(result, middle);
 					result += middle;
 					//弹出小数点和后补零
 					result.data.pop();
@@ -665,9 +658,6 @@ Operand_Base High_Precision_Maths_Library::Multiplication(Operand_Base& left, Op
 		}
 		else
 		{
-			position_point(result);
-			position_point(middle);
-			decimal_point(result, middle);
 			result += middle;
 			//弹出小数点和后补零
 			result.data.pop();
@@ -690,51 +680,34 @@ Operand_Base High_Precision_Maths_Library::Multiplication(Operand_Base& left, Op
 
 void High_Precision_Maths_Library::retain_significant_number(Operand_Base& value)
 {
-	//清除前段的0
-	Value<char>* begin = value.data.begin();
-	//用于标记要删除的片段
-	Value<char>* sign = begin;
-	//用于标记另一个端点
-	Value<char>* tag = value.data.end();
-	//判断是否需要清除
-	if (*begin->value == '0') {
-		while (true)
-		{
-			//针对全是0的数据
-			if (sign->next == tag) {
-				break;
-			}
-			//碰到有效数字或小数点，退出循环
-			else if (*sign->next->value != '0') {
-				break;
-			}
-			else
-			{
-				sign = sign->next;
-			}
-		}
-	}
-	//有需要清除的元素就清除
-	if (sign != begin) {
-		value.data.remove(begin, sign);
-	}
-	//清除后端的0
-	//更新数据
-	tag = value.data.end();
+	char _0 = '0';
 	while (true)
 	{
-		//针对全是0的数据
-		if (tag == begin) {
-			break;
-		}
-		else if (*tag->value != '0') {
-			break;
+		if (*value.data.begin()->value == '0') {
+			value.data.remove(value.data.begin());
 		}
 		else
 		{
-			value.data.pop();
-			tag = tag->last;
+			break;
 		}
+	}
+	while (true)
+	{
+		if (value.data.top() == '0') {
+			value.data.pop();
+		}
+		else
+		{
+			break;
+		}
+	}
+	if (value.data.top() == '.') {
+		value.data.push_back(_0);
+		value.point = value.data.size() - 2;
+	}
+	if (value.data.bottom() == '.') {
+		value.data.insert(value.data.begin(), _0);
+		value.point = 1;
 	}
 	return;
 }

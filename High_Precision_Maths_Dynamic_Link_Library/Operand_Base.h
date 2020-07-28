@@ -68,6 +68,7 @@ namespace High_Precision_Maths_Library {
 		Operand_Base(double value);
 		Operand_Base(long double value);
 		Operand_Base(const Operand_Base& value);
+		Operand_Base(DDM<char>& value);
 		/// <summary>
 		/// 将对象内所以的字符转化成一个字符串并返回
 		/// </summary>
@@ -107,11 +108,11 @@ namespace High_Precision_Maths_Library {
 		/// 乘方
 		/// </summary>
 		/// <param name="right">次数，请确保次数是整数</param>
-		virtual Operand_Base operator^(Operand_Base right);
+		virtual Operand_Base operator^(unsigned long long point);
 		/// <summary>
 		/// 乘方并赋值给对象
 		/// </summary>
-		virtual Operand_Base& operator^=(Operand_Base& right);
+		virtual Operand_Base& operator^=(unsigned long long point);
 	};
 }
 #include "Operation_Base.h"
