@@ -764,7 +764,7 @@ Operand_Base High_Precision_Maths_Library::Operand_Base::operator^(unsigned long
 	}
 	Operand_Base result = *this;
 	for (unsigned long long i = 1; i < point; i++) {
-		result *= result;
+		result *= *this;
 	}
 	return result;
 }

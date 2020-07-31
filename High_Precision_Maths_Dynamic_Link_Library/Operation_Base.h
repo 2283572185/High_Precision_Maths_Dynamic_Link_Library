@@ -13,7 +13,7 @@ namespace High_Precision_Maths_Library {
 	/// <param name="left">加数</param>
 	/// <param name="right">加数</param>
 	/// <param name="_result">用于储存结果的类对象的引用</param>
-	void high_precision_add(char& left, char& right, Result& _result);
+	void high_precision_addition(char& left, char& right, Result& _result);
 
 	/// <summary>
 	/// 对齐小数点，在这之前，请调用High_Precision_Maths_Library::position_point
@@ -48,4 +48,12 @@ namespace High_Precision_Maths_Library {
 	/// 去除对象中无效的0，保留有效数字
 	/// </summary>
 	void retain_significant_number(Operand_Base& value);
+
+	/// <summary>
+	/// 单位高精度减法算法
+	/// </summary>
+	/// <param name="left">被减数数</param>
+	/// <param name="right">减数</param>
+	/// <param name="_result">用于储存结果的类对象的引用</param>
+	void high_precision_subtraction(char& left, char& right, Result& _result);
 }

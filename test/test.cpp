@@ -9,7 +9,7 @@ int main()
     Operand_Base _o(o);
     string s;
     OperandStream_Base os;
-    o ^= 2;
+    o ^= 3;
     cout << o.to_string();
     system("pause");
 }

@@ -1,9 +1,41 @@
 ﻿#pragma once
+/*
+	Developed by 2283572185@qq.com
+	Developed in C++
+	Compiled with Visual Studio 2019 (v142)
+	Use C++11 standard
+	Use Window SDK 10.0
+	Download https://github.com/2283572185/High_Precision_Maths_Library
+*/
+
+//写在前面：
+//该头文件所提供的类Operand_Base的对象之间支持的计算及其运算符如下
+//加法 +
+//减法 -
+//乘法 *
+//除法 /
+//乘方 ^
+//开方 &
+//取余 %
+//扩展运算符：
+//前置自增运算符 ++
+//后置自增运算符 ++(int)
+//（以上两个运算符等同于+=1）
+//前置自减运算符 --
+//后置自减运算符 --(int)
+//（以上两个运算符等同于-=1）
+//加等于 +=
+//减等于 -=
+//乘等于 *=
+//除等于 /=
+//乘方并赋值 ^=
+//开方并赋值 &=
 
 #include <iostream>
 #include <string>
 #include <sstream>
 #include "Discontinuity_Dynamic_Memory.h"
+
 template<class T>
 using DDM = Discontinuity_Dynamic_Memory::DiscontinuityDynamicMemory<T>;
 template<class T>
@@ -21,9 +53,9 @@ using Discontinuity_Dynamic_Memory::Under_Flow;
  *	#define name precision
 */
 //除法精度预设
-#define Division_Precision 30
+#define Division_Precision 10
 //开方精度预设
-#define Extraction_Of_Root_Precision 30
+#define Extraction_Of_Root_Precision 10
 
 using namespace std;
 

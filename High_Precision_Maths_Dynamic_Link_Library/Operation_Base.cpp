@@ -38,7 +38,7 @@ void High_Precision_Maths_Library::position_point(Operand_Base& value)
 	return;
 }
 
-void High_Precision_Maths_Library::high_precision_add(char& left, char& right, Result& _result)
+void High_Precision_Maths_Library::high_precision_addition(char& left, char& right, Result& _result)
 {
 	//如果是小数点，直接返回
 	if (left == '.' || right == '.') {
@@ -113,7 +113,7 @@ Operand_Base High_Precision_Maths_Library::Addition(Operand_Base& left, Operand_
 		if (max == 0) {
 			break;
 		}
-		high_precision_add(left.data[max - 1], right.data[max - 1], _result);
+		high_precision_addition(left.data[max - 1], right.data[max - 1], _result);
 		result.data.insert(result.data.begin(), _result.result);
 		max--;
 	}
@@ -708,6 +708,29 @@ void High_Precision_Maths_Library::retain_significant_number(Operand_Base& value
 	if (value.data.bottom() == '.') {
 		value.data.insert(value.data.begin(), _0);
 		value.point = 1;
+	}
+	return;
+}
+
+void High_Precision_Maths_Library::high_precision_subtraction(char& left, char& right, Result& _result)
+{
+	//遇到小数点返回
+	if (left == '.' || right == '.') {
+		_result.result = '.';
+		return;
+	}
+	left += 0x30;
+	if (_result.change == '-') {
+		left--;
+	}
+	if (left - right < '0') {
+		_result.change = '-';
+		_result.result = left + 10 - right;
+	}
+	else
+	{
+		_result.change = '0';
+		_result.result = left - right;
 	}
 	return;
 }

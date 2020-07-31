@@ -34,7 +34,7 @@ namespace High_Precision_Maths_Library {
 	/// <summary>
 	/// 基础转换流，配合Operand_Base使用，抛出的异常都是Error的子类，流中最多只能同时容纳一个元素。
 	/// 运行时，流在输出元素后不会主动清空内部元素，只是将流设置成可输入状态。
-	/// 使用clear清空流中所有元素，使用pop清除流中尚未输出的一个元素。
+	/// 使用clear清空流中所有元素，使用free让流变得可以输入。
 	/// 流提供精度转换和类型转换
 	/// </summary>
 	class OperandStream_Base {
@@ -93,9 +93,9 @@ namespace High_Precision_Maths_Library {
 		/// </summary>
 		virtual void clear();
 		/// <summary>
-		/// 清除流中尚未输出的元素
+		/// 让流变得可以输入，不释放流内元素
 		/// </summary>
-		virtual void pop();
+		virtual void free();
 		/// <summary>
 		/// 判断流是否是空的
 		/// </summary>

@@ -497,9 +497,8 @@ void High_Precision_Maths_Library::OperandStream_Base::clear()
 	return;
 }
 
-void High_Precision_Maths_Library::OperandStream_Base::pop()
+void High_Precision_Maths_Library::OperandStream_Base::free()
 {
-	this->data.pop();
 	this->state = empty;
 	return;
 }
