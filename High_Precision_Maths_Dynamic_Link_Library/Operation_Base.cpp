@@ -734,3 +734,27 @@ void High_Precision_Maths_Library::high_precision_subtraction(char& left, char& 
 	}
 	return;
 }
+
+Operand_Base High_Precision_Maths_Library::Subtraction(Operand_Base& left, Operand_Base& right)
+{
+	position_point(left);
+	position_point(right);
+	decimal_point(left, right);
+	Result _result;
+	Operand_Base result;
+	unsigned long long max = left.data.size();
+	result.data.push_back((char&)_10);
+	while (true)
+	{
+		if (max == 0) {
+			break;
+		}
+		high_precision_subtraction(left.data[max - 1], right.data[max - 1], _result);
+		result.data.insert(result.data.begin(), _result.result);
+		max--;
+	}
+	result.data.pop();
+	position_point(result);
+	retain_significant_number(result);
+	return result;
+}

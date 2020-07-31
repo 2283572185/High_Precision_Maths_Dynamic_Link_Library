@@ -56,4 +56,11 @@ namespace High_Precision_Maths_Library {
 	/// <param name="right">减数</param>
 	/// <param name="_result">用于储存结果的类对象的引用</param>
 	void high_precision_subtraction(char& left, char& right, Result& _result);
+
+	/// <summary>
+	/// 减法法
+	/// </summary>
+	/// <param name="left">被减数</param>
+	/// <param name="right">减数</param>
+	Operand_Base Subtraction(Operand_Base& left, Operand_Base& right);
 }

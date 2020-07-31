@@ -774,3 +774,27 @@ Operand_Base& High_Precision_Maths_Library::Operand_Base::operator^=(unsigned lo
 	*this = *this ^ point;
 	return *this;
 }
+
+Operand_Base High_Precision_Maths_Library::Operand_Base::operator-(Operand_Base right)
+{
+	return Subtraction(*this, right);
+}
+
+Operand_Base& High_Precision_Maths_Library::Operand_Base::operator-=(Operand_Base& right)
+{
+	*this = *this - right;
+	return *this;
+}
+
+Operand_Base& High_Precision_Maths_Library::Operand_Base::operator--()
+{
+	Operand_Base o('1');
+	*this -= o;
+	return *this;
+}
+
+Operand_Base High_Precision_Maths_Library::Operand_Base::operator--(int)
+{
+	--(*this);
+	return *this;
+}

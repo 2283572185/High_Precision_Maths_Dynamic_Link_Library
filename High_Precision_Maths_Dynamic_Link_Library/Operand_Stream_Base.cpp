@@ -559,11 +559,11 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 			{
 				//当低位和高位的指针重合时，加法完成
 				if (v == top) {
-					high_precision_add(*v->value, _0, result);
+					high_precision_addition(*v->value, _0, result);
 					*v->value = result.result;
 					break;
 				}
-				high_precision_add(*v->value, _0, result);
+				high_precision_addition(*v->value, _0, result);
 				*v->value = result.result;
 				v = v->last;
 			}
@@ -639,11 +639,11 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 		{
 			//当低位和高位的指针重合时，加法完成
 			if (v == top) {
-				high_precision_add(*v->value, _0, result);
+				high_precision_addition(*v->value, _0, result);
 				*v->value = result.result;
 				break;
 			}
-			high_precision_add(*v->value, _0, result);
+			high_precision_addition(*v->value, _0, result);
 			*v->value = result.result;
 			v = v->last;
 		}

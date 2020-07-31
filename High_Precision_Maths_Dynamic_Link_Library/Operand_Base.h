@@ -145,6 +145,22 @@ namespace High_Precision_Maths_Library {
 		/// 乘方并赋值给对象
 		/// </summary>
 		virtual Operand_Base& operator^=(unsigned long long point);
+		/// <summary>
+		/// 计算此对象与right的差
+		/// </summary>
+		virtual Operand_Base operator-(Operand_Base right);
+		/// <summary>
+		/// 计算此对象与right的差并赋值给此对象
+		/// </summary>
+		virtual Operand_Base& operator-=(Operand_Base& right);
+		/// <summary>
+		/// 前置自减运算符
+		/// </summary>
+		virtual Operand_Base& operator--();
+		/// <summary>
+		/// 后置自减运算符
+		/// </summary>
+		virtual Operand_Base operator--(int);
 	};
 }
 #include "Operation_Base.h"
