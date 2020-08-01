@@ -239,6 +239,9 @@ namespace Discontinuity_Dynamic_Memory {
 		T& operator[](unsigned long long n);
 
 		T& operator[](Value<T>* point);
+
+		void operator=(DiscontinuityDynamicMemory<T>& value);
+
 		/// <summary>
 		/// 清空当前对象中所有的元素
 		/// </summary>
@@ -585,6 +588,13 @@ namespace Discontinuity_Dynamic_Memory {
 	inline T& DiscontinuityDynamicMemory<T>::operator[](Value<T>* point)
 	{
 		return *(point->value);
+	}
+
+	template<class T>
+	inline void DiscontinuityDynamicMemory<T>::operator=(DiscontinuityDynamicMemory<T>& value)
+	{
+		this->copy(value);
+		return;
 	}
 
 	template<class T>

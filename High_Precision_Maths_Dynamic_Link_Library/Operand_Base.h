@@ -161,6 +161,22 @@ namespace High_Precision_Maths_Library {
 		/// 后置自减运算符
 		/// </summary>
 		virtual Operand_Base operator--(int);
+		/// <summary>
+		/// 计算此对象与right的商
+		/// </summary>
+		virtual Operand_Base operator/(Operand_Base right);
+		/// <summary>
+		/// 计算此对象与right的商并赋值给对象
+		/// </summary>
+		virtual Operand_Base& operator/=(Operand_Base& right);
+		/// <summary>
+		/// 扩大10^n倍
+		/// </summary>
+		virtual Operand_Base operator>>(unsigned long long n);
+		/// <summary>
+		/// 扩大10^n倍并赋值给对象
+		/// </summary>
+		virtual Operand_Base& operator>>=(unsigned long long n);
 	};
 }
 #include "Operation_Base.h"

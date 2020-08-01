@@ -47,20 +47,27 @@ namespace High_Precision_Maths_Library {
 	/// <summary>
 	/// 去除对象中无效的0，保留有效数字
 	/// </summary>
-	void retain_significant_number(Operand_Base& value);
+	void remain_significant_number(Operand_Base& value);
 
 	/// <summary>
 	/// 单位高精度减法算法
 	/// </summary>
-	/// <param name="left">被减数数</param>
+	/// <param name="left">被减数</param>
 	/// <param name="right">减数</param>
 	/// <param name="_result">用于储存结果的类对象的引用</param>
 	void high_precision_subtraction(char& left, char& right, Result& _result);
 
 	/// <summary>
-	/// 减法法
+	/// 减法
 	/// </summary>
 	/// <param name="left">被减数</param>
 	/// <param name="right">减数</param>
 	Operand_Base Subtraction(Operand_Base& left, Operand_Base& right);
+
+	/// <summary>
+	/// 除法
+	/// </summary>
+	/// <param name="left">被除数</param>
+	/// <param name="right">除数</param>
+	Operand_Base Division(Operand_Base left, Operand_Base right);
 }

@@ -122,7 +122,7 @@ Operand_Base High_Precision_Maths_Library::Addition(Operand_Base& left, Operand_
 		result.data.insert(result.data.begin(), _result.change);
 	}
 	position_point(result);
-	retain_significant_number(result);
+	remain_significant_number(result);
 	return result;
 }
 
@@ -674,11 +674,11 @@ Operand_Base High_Precision_Maths_Library::Multiplication(Operand_Base& left, Op
 	}
 	result.data.insert(begin, _point);
 	position_point(result);
-	retain_significant_number(result);
+	remain_significant_number(result);
 	return result;
 }
 
-void High_Precision_Maths_Library::retain_significant_number(Operand_Base& value)
+void High_Precision_Maths_Library::remain_significant_number(Operand_Base& value)
 {
 	char _0 = '0';
 	while (true)
@@ -755,6 +755,60 @@ Operand_Base High_Precision_Maths_Library::Subtraction(Operand_Base& left, Opera
 	}
 	result.data.pop();
 	position_point(result);
-	retain_significant_number(result);
+	remain_significant_number(result);
+	return result;
+}
+
+Operand_Base High_Precision_Maths_Library::Division(Operand_Base left, Operand_Base right)
+{
+	position_point(left);
+	position_point(right);
+	Operand_Base result('0');
+	result.point = 0;
+	char _point = '.';
+	char _0 = '0';
+	//算整数
+	while (true)
+	{
+		if (left < right) {
+			//使得结果以小数点结尾，退出循环
+			result.data.pop();
+			result.point = result.data.size() - 1;
+			break;
+		}
+		else
+		{
+			left -= right;
+			result++;
+		}
+	}
+	char i;
+	//算小数
+	while (true)
+	{
+		if (result.data.size() - 1 - result.point == Division_Precision + 1) {
+			break;
+		}
+		//商
+		i = '0';
+		//余数扩大10倍
+		left >>= 1;
+		//不够减了，退出
+		while (true) {
+			if (left < right) {
+				break;
+			}
+			else
+			{
+				left -= right;
+				i++;
+			}
+		}
+		result.data.push_back(i);
+	}
+	position_point(result);
+	remain_significant_number(result);
+	OperandStream_Base os;
+	os.change_precision(result, (Precision_Base&)Precision_Base(Division_Precision, round));
 	return result;
 }

@@ -529,31 +529,114 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 {
 	char _0 = '0';
 	char _1 = '1';
-	//四舍五入
-	if (precision.type == round || precision.type == (round | strict)) {
-		//将v移到要保留的位数的下一位（指向最低位）
-		Value<char>* v = value.data.address(value.point + precision.precision + 1);
-		//删除保留的位数的下一位之后的数据
-		while (true)
-		{
-			//当保留的位数的下一位成为对象中的最后一个元素时，退出
-			if (value.data.end() == v) {
-				break;
+	//需要舍去小数点则舍去，不需要则跳过
+	if ((value.data.size() - 1 - value.point > precision.precision) &&
+		(precision.type != (round | strict) && precision.type != (round_down | strict) && precision.type != (round_up | strict))) {
+		//四舍五入
+		if (precision.type == round || precision.type == (round | strict)) {
+			//将v移到要保留的位数的下一位（指向最低位）
+			Value<char>* v = value.data.address(value.point + precision.precision + 1);
+			//删除保留的位数的下一位之后的数据
+			while (true)
+			{
+				//当保留的位数的下一位成为对象中的最后一个元素时，退出
+				if (value.data.end() == v) {
+					break;
+				}
+				else
+				{
+					//弹出最后一个元素
+					value.data.pop();
+				}
 			}
+			//五入
+			if (*v->value > '4') {
+				Result result;
+				result.change = '1';
+				//指向对象中的第一个元素的指针（指向最高位）
+				Value<char>* top = value.data.begin();
+				//将v移到要保留的位数
+				v = v->last;
+				//从最低位开始向高位做加法
+				while (true)
+				{
+					//当低位和高位的指针重合时，加法完成
+					if (v == top) {
+						high_precision_addition(*v->value, _0, result);
+						*v->value = result.result;
+						break;
+					}
+					high_precision_addition(*v->value, _0, result);
+					*v->value = result.result;
+					v = v->last;
+				}
+				//有进位，向前插入进位
+				if (result.change == '1') {
+					value.data.insert(top, _1);
+				}
+				//弹出保留的位数的下一位
+				value.data.pop();
+				//若保留整数，弹出小数点
+				if (precision.precision == 0) {
+					value.data.pop();
+					value.point = value.data.size();
+				}
+			}
+			//四舍
 			else
 			{
-				//弹出最后一个元素
 				value.data.pop();
+				//若保留整数，弹出小数点
+				if (precision.precision == 0) {
+					value.data.pop();
+					value.point = value.data.size();
+				}
 			}
 		}
-		//五入
-		if (*v->value > '4') {
+		//去尾
+		else if (precision.type == round_down || precision.type == (round_down | strict)) {
+			// 将v移到要保留的位数
+			Value<char>* v = value.data.address(value.point + precision.precision);
+			//删除保留的位数之后的数据
+			while (true)
+			{
+				//当保留的位数成为对象中的最后一个元素时，退出
+				if (value.data.end() == v) {
+					break;
+				}
+				else
+				{
+					//弹出最后一个元素
+					value.data.pop();
+				}
+			}
+			//若保留整数，弹出小数点
+			if (precision.precision == 0) {
+				value.data.pop();
+				value.point = value.data.size();
+			}
+		}
+		//进一
+		else if (precision.type == round_up || precision.type == (round_up | strict)) {
+			// 将v移到要保留的位数
+			Value<char>* v = value.data.address(value.point + precision.precision);
+			//删除保留的位数之后的数据
+			while (true)
+			{
+				//当保留的位数成为对象中的最后一个元素时，退出
+				if (value.data.end() == v) {
+					break;
+				}
+				else
+				{
+					//弹出最后一个元素
+					value.data.pop();
+				}
+			}
 			Result result;
 			result.change = '1';
 			//指向对象中的第一个元素的指针（指向最高位）
 			Value<char>* top = value.data.begin();
-			//将v移到要保留的位数
-			v = v->last;
 			//从最低位开始向高位做加法
 			while (true)
 			{
@@ -571,97 +654,18 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 			if (result.change == '1') {
 				value.data.insert(top, _1);
 			}
-			//弹出保留的位数的下一位
-			value.data.pop();
 			//若保留整数，弹出小数点
 			if (precision.precision == 0) {
 				value.data.pop();
 				value.point = value.data.size();
 			}
 		}
-		//四舍
+		//都不是则报错
 		else
 		{
-			value.data.pop();
-			//若保留整数，弹出小数点
-			if (precision.precision == 0) {
-				value.data.pop();
-				value.point = value.data.size();
-			}
+			Illegal_Data e("输入的转换类型不合法。，请在宏中进行选择。");
+			throw(e);
 		}
-	}
-	//去尾
-	else if (precision.type == round_down || precision.type == (round_down | strict)) {
-		// 将v移到要保留的位数
-		Value<char>* v = value.data.address(value.point + precision.precision);
-		//删除保留的位数之后的数据
-		while (true)
-		{
-			//当保留的位数成为对象中的最后一个元素时，退出
-			if (value.data.end() == v) {
-				break;
-			}
-			else
-			{
-				//弹出最后一个元素
-				value.data.pop();
-			}
-		}
-		//若保留整数，弹出小数点
-		if (precision.precision == 0) {
-			value.data.pop();
-			value.point = value.data.size();
-		}
-	}
-	//进一
-	else if (precision.type == round_up || precision.type == (round_up | strict)) {
-		// 将v移到要保留的位数
-		Value<char>* v = value.data.address(value.point + precision.precision);
-		//删除保留的位数之后的数据
-		while (true)
-		{
-			//当保留的位数成为对象中的最后一个元素时，退出
-			if (value.data.end() == v) {
-				break;
-			}
-			else
-			{
-				//弹出最后一个元素
-				value.data.pop();
-			}
-		}
-		Result result;
-		result.change = '1';
-		//指向对象中的第一个元素的指针（指向最高位）
-		Value<char>* top = value.data.begin();
-		//从最低位开始向高位做加法
-		while (true)
-		{
-			//当低位和高位的指针重合时，加法完成
-			if (v == top) {
-				high_precision_addition(*v->value, _0, result);
-				*v->value = result.result;
-				break;
-			}
-			high_precision_addition(*v->value, _0, result);
-			*v->value = result.result;
-			v = v->last;
-		}
-		//有进位，向前插入进位
-		if (result.change == '1') {
-			value.data.insert(top, _1);
-		}
-		//若保留整数，弹出小数点
-		if (precision.precision == 0) {
-			value.data.pop();
-			value.point = value.data.size();
-		}
-	}
-	//都不是则报错
-	else
-	{
-		Illegal_Data e("输入的转换类型不合法。，请在宏中进行选择。");
-		throw(e);
 	}
 	//若是严格模式，判断是否需要补0
 	if (precision.type == (round | strict) || precision.type == (round_down | strict) || precision.type == (round_up | strict)) {
@@ -680,4 +684,5 @@ void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_
 		}
 		return;
 	}
+	return;
 }

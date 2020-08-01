@@ -760,6 +760,10 @@ Operand_Base& High_Precision_Maths_Library::Operand_Base::operator*=(Operand_Bas
 Operand_Base High_Precision_Maths_Library::Operand_Base::operator^(unsigned long long point)
 {
 	if (0 == point) {
+		if (*this == (Operand_Base&)Operand_Base('0')) {
+			Illegal_Data e("0的0次方没有意义。");
+			throw e;
+		}
 		return Operand_Base('1');
 	}
 	Operand_Base result = *this;
@@ -796,5 +800,43 @@ Operand_Base& High_Precision_Maths_Library::Operand_Base::operator--()
 Operand_Base High_Precision_Maths_Library::Operand_Base::operator--(int)
 {
 	--(*this);
+	return *this;
+}
+
+Operand_Base High_Precision_Maths_Library::Operand_Base::operator/(Operand_Base right)
+{
+	return Division(*this, right);
+}
+
+Operand_Base& High_Precision_Maths_Library::Operand_Base::operator/=(Operand_Base& right)
+{
+	*this = *this / right;
+	return *this;
+}
+
+Operand_Base High_Precision_Maths_Library::Operand_Base::operator>>(unsigned long long n)
+{
+	Operand_Base result(*this);
+	for (unsigned long long i = 0; i < n; i++) {
+		//将小数点变成小数点的下一位
+		result.data[result.point] = result.data[result.point + 1];
+		//将小数点的下一位变成小数点
+		result.data[result.point + 1] = '.';
+		//小数点的位置++
+		result.point++;
+	}
+	return result;
+}
+
+Operand_Base& High_Precision_Maths_Library::Operand_Base::operator>>=(unsigned long long n)
+{
+	for (unsigned long long i = 0; i < n; i++) {
+		//将小数点变成小数点的下一位
+		this->data[this->point] = this->data[this->point + 1];
+		//将小数点的下一位变成小数点
+		this->data[this->point + 1] = '.';
+		//小数点的位置++
+		this->point++;
+	}
 	return *this;
 }
