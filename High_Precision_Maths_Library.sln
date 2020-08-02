@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "High_Precision_Maths_Library", "High_Precision_Maths_Dynamic_Link_Library\High_Precision_Maths_Dynamic_Link_Library.vcxproj", "{51E8DAE8-5884-4889-BF89-B6EEC905C6E2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "High_Precision_Maths_Library", "High_Precision_Maths_Library\High_Precision_Maths_Library.vcxproj", "{51E8DAE8-5884-4889-BF89-B6EEC905C6E2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{E1BBC951-0AE1-4B00-AFA1-5EF15364A9DB}"
 	ProjectSection(ProjectDependencies) = postProject

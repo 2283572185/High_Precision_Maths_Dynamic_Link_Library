@@ -94,7 +94,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>C:\Users\ASUS\source\repos\High_Precision_Maths_Dynamic_Link_Library\Debug\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\Users\ASUS\source\repos\High_Precision_Maths_Library\Debug\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>false</Profile>
       <OptimizeReferences>false</OptimizeReferences>
     </Link>
@@ -113,10 +113,11 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>false</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>C:\Users\ASUS\source\repos\High_Precision_Maths_Dynamic_Link_Library\Release\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\Users\ASUS\source\repos\High_Precision_Maths_Library\Release\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>false</Profile>
+      <OptimizeReferences>true</OptimizeReferences>
+      <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -131,7 +132,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>C:\Users\ASUS\source\repos\High_Precision_Maths_Dynamic_Link_Library\x64\Debug\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\Users\ASUS\source\repos\High_Precision_Maths_Library\x64\Debug\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>false</Profile>
       <OptimizeReferences>false</OptimizeReferences>
     </Link>
@@ -150,10 +151,11 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>false</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>C:\Users\ASUS\source\repos\High_Precision_Maths_Dynamic_Link_Library\x64\Release\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\Users\ASUS\source\repos\High_Precision_Maths_Library\x64\Release\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>false</Profile>
+      <OptimizeReferences>true</OptimizeReferences>
+      <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

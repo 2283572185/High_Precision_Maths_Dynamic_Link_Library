@@ -1,4 +1,4 @@
-﻿#include "../High_Precision_Maths_Dynamic_Link_Library/Operand_Standard.h"
+﻿#include "../High_Precision_Maths_Library/Operand_Standard.h"
 #include <iostream>
 #include <string>
 #include <time.h>
