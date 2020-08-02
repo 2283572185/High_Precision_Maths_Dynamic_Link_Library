@@ -12,7 +12,10 @@ int main()
     OperandStream_Base os;
     clock_t start, finish;
     start = clock();
-    o &= 2;
+    change_precision(division, 40);
+    change_precision(extraction_of_root, 40);
+    change_precision(extraction_of_root_time, 7);
+    o &= 3;
     cout << o.to_string() << "\n";
     finish = clock();
     cout << finish - start;

@@ -1,10 +1,10 @@
 #include "Operation_Base.h"
 //除法精度预设
-unsigned long long Division_Precision = 10;
+unsigned long long Division_Precision = 15;
 //开方精度预设
-unsigned long long Extraction_Of_Root_Precision = 10;
+unsigned long long Extraction_Of_Root_Precision = 15;
 //开方迭代次数
-unsigned long long Extraction_Of_Root_Time = 30;
+unsigned long long Extraction_Of_Root_Time = 7;
 constexpr auto _10 = ':';
 using namespace High_Precision_Maths_Library;
 void High_Precision_Maths_Library::position_point(Operand_Base& value)
@@ -898,6 +898,9 @@ void High_Precision_Maths_Library::change_precision(int type, unsigned long long
 	}
 	else if (type == extraction_of_root) {
 		Extraction_Of_Root_Precision = precision;
+	}
+	else if (type == extraction_of_root_time) {
+		Extraction_Of_Root_Time = precision;
 	}
 	else
 	{
