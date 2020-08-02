@@ -1,4 +1,21 @@
 #pragma once
+/*
+	Developed by 2283572185@qq.com
+	Developed in C++
+	Compiled with Visual Studio 2019 (v142)
+	Use C++17 standard
+	Use Window SDK 10.0
+	Use __fastcall in the caller to speed up execution
+	Download https://github.com/2283572185/High_Precision_Maths_Library
+*/
+//非常重要的一点：请按照数的位数来调高开方的迭代次数
+//2位数，迭代次数7
+//4位数，迭代次数15
+//8位数，迭代次数20
+//以此类推，数位数越多，迭代次数越多
+//迭代次数越多，效率越低
+//当开方精度增加时，适当调高迭代次数
+//开方精度值不要超过除法精度值以免浪费算力
 #include "Discontinuity_Dynamic_Memory.h"
 #include "Operand_Base.h"
 #include "Operand_Standard.h"
@@ -7,7 +24,7 @@
 using namespace High_Precision_Maths_Library;
 using Operand = Operand_Standard;
 //常数表，使用常数表来提高效率
-
+namespace High_Precision_Maths_Library {
 //π
 #define pai "3.14"
 //π(7位)
@@ -69,14 +86,15 @@ using Operand = Operand_Standard;
 //√7
 #define $7 "2.646"
 //√7(10位)
-#define $7_10 ""
+#define $7_10 "2.6457513111"
 //√8
 #define $8 "2.828"
 //√8(10位)
-#define $8_10 ""
+#define $8_10 "2.8284271247"
 //√9
 #define $9 "3"
 //√10
 #define $10 "3.162"
 //√10(10位)
-#define $10_10 ""
+#define $10_10 "3.1622776602"
+}

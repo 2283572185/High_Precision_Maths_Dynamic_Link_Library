@@ -777,6 +777,53 @@ bool High_Precision_Maths_Library::Operand_Standard::operator>(Operand_Standard&
 	}
 }
 
+bool High_Precision_Maths_Library::Operand_Standard::operator<=(Operand_Standard& right)
+{
+	return !(*this > right);
+}
+
+bool High_Precision_Maths_Library::Operand_Standard::operator<(Operand_Standard& right)
+{
+	//左正右负，返回false
+	if (!this->minus && right.minus) {
+		return false;
+	}
+	//左负右正，返回true
+	else if (this->minus && !right.minus) {
+		return true;
+	}
+	//同正
+	else if (!this->minus) {
+		//左边绝对值大，返回false
+		if (this->data > right.data) {
+			return false;
+		}
+		//反之，返回false
+		else
+		{
+			return true;
+		}
+	}
+	//同负
+	else
+	{
+		//左边绝对值小，返回false
+		if (this->data < right.data) {
+			return false;
+		}
+		//反之，返回true
+		else
+		{
+			return true;
+		}
+	}
+}
+
+bool High_Precision_Maths_Library::Operand_Standard::operator>=(Operand_Standard& right)
+{
+	return !(*this < right);
+}
+
 Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator+(Operand_Standard& right)
 {
 	Operand_Standard result;
@@ -790,7 +837,7 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator+(Opera
 	//若有一者为负数
 	else if (this->minus || right.minus) {
 		//左边大，左减右
-		if (this->data > right.data) {
+		if (this->data >= right.data) {
 			//计算绝对值
 			result.data = Subtraction(this->data, right.data);
 			//大数为负，结果为负，反正为正
@@ -802,7 +849,7 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator+(Opera
 				result.minus = false;
 			}
 		}
-		//右边大或等于左边，右减左
+		//右边大，右减左
 		else
 		{
 			//计算绝对值
@@ -848,6 +895,58 @@ Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator+=(Ope
 	//若有一者为负数
 	else if (this->minus || right.minus) {
 		//左边大，左减右
+		if (this->data >= right.data) {
+			//计算绝对值
+			this->data = Subtraction(this->data, right.data);
+			//大数为负，结果为负，反正为正
+			if (this->minus) {
+				this->minus = true;
+			}
+			else
+			{
+				this->minus = false;
+			}
+		}
+		//右边大，右减左
+		else
+		{
+			//计算绝对值
+			this->data = Subtraction(right.data, this->data);
+			//两数相同，结果为正
+			if (this->data == right.data) {
+				this->minus = true;
+			}
+			//右边大
+			else
+			{
+				//大数为负，结果为负，反正为正
+				if (this->minus) {
+					this->minus = false;
+				}
+				else
+				{
+					this->minus = true;
+				}
+			}
+		}
+	}
+	//均为正数
+	else
+	{
+		//计算绝对值
+		this->data = Addition(this->data, right.data);
+		//计算符号
+		this->minus = false;
+	}
+	return *this;
+}
+
+Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator++()
+{
+	Operand_Standard right('1');
+	//若有一者为负数
+	if (this->minus || right.minus) {
+		//左边大，左减右
 		if (this->data > right.data) {
 			//计算绝对值
 			this->data = Subtraction(this->data, right.data);
@@ -892,5 +991,92 @@ Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator+=(Ope
 		this->minus = false;
 	}
 	return *this;
+}
+
+Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator++(int)
+{
+	Operand_Standard right('1');
+	//若有一者为负数
+	if (this->minus || right.minus) {
+		//左边大，左减右
+		if (this->data > right.data) {
+			//计算绝对值
+			this->data = Subtraction(this->data, right.data);
+			//大数为负，结果为负，反正为正
+			if (this->minus) {
+				this->minus = true;
+			}
+			else
+			{
+				this->minus = false;
+			}
+		}
+		//右边大或等于左边，右减左
+		else
+		{
+			//计算绝对值
+			this->data = Subtraction(right.data, this->data);
+			//两数相同，结果为正
+			if (this->data == right.data) {
+				this->minus = true;
+			}
+			//右边大
+			else
+			{
+				//大数为负，结果为负，反正为正
+				if (this->minus) {
+					this->minus = false;
+				}
+				else
+				{
+					this->minus = true;
+				}
+			}
+		}
+	}
+	//均为正数
+	else
+	{
+		//计算绝对值
+		this->data = Addition(this->data, right.data);
+		//计算符号
+		this->minus = false;
+	}
+	return *this;
+}
+
+Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator-(Operand_Standard& right)
+{
+	Operand_Standard result;
+	//均为负数
+	if (this->minus && right.minus) {
+		
+	}
+	//若有一者为负数
+	else if (this->minus || right.minus) {
+		
+	}
+	//均为正数
+	else
+	{
+		//左大于右，左减右，结果为正
+		if (this->data >= right.data) {
+			result.data = Subtraction(this->data, right.data);
+			result.minus = true;
+		}
+		//反之，右减左，结果为负
+		else
+		{
+			result.data = Subtraction(right.data,this->data);
+			result.minus = false;
+		}
+	}
+	return result;
+}
+
+Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator-=(Operand_Standard& right)
+{
+	Operand_Standard result;
+	return result;
 }
 

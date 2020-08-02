@@ -96,6 +96,18 @@ namespace High_Precision_Maths_Library {
 		/// </summary>
 		bool operator>(Operand_Standard& right);
 		/// <summary>
+		/// 小于等于
+		/// </summary>
+		bool operator<=(Operand_Standard& right);
+		/// <summary>
+		/// 小于
+		/// </summary>
+		bool operator<(Operand_Standard& right);
+		/// <summary>
+		/// 大于等于
+		/// </summary>
+		bool operator>=(Operand_Standard& right);
+		/// <summary>
 		/// 加
 		/// </summary>
 		Operand_Standard operator+(Operand_Standard& right);
@@ -103,5 +115,21 @@ namespace High_Precision_Maths_Library {
 		/// 加等于
 		/// </summary>
 		Operand_Standard& operator+=(Operand_Standard& right);
+		/// <summary>
+		/// 前置自增运算符
+		/// </summary>
+		Operand_Standard& operator++();
+		/// <summary>
+		/// 后置自增运算符
+		/// </summary>
+		Operand_Standard operator++(int);
+		/// <summary>
+		/// 减
+		/// </summary>
+		Operand_Standard operator-(Operand_Standard& right);
+		/// <summary>
+		/// 减等于
+		/// </summary>
+		Operand_Standard& operator-=(Operand_Standard& right);
 	};
 }
