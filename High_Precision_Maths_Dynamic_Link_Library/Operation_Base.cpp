@@ -864,7 +864,6 @@ Operand_Base High_Precision_Maths_Library::Division(Operand_Base left, Operand_B
 		}
 		result.data.push_back(i);
 	}
-	position_point(result);
 	remain_significant_number(result);
 	OperandStream_Base os;
 	os.change_precision(result, (Precision_Base&)Precision_Base(Division_Precision, round));
@@ -884,11 +883,61 @@ Operand_Base High_Precision_Maths_Library::Extraction(Operand_Base left, unsigne
 	for (unsigned long long i = 0; i < Extraction_Of_Root_Time; i++) {
 		a = Division(Addition((Operand_Base&)Division(left, (a ^ (n - 1))), (Operand_Base&)(Multiplication(a, (Operand_Base&)Operand_Base(n - 1)))), n);
 	}
-	position_point(a);
 	remain_significant_number(a);
 	OperandStream_Base os;
 	os.change_precision(a, (Precision_Base&)Precision_Base(Extraction_Of_Root_Precision, round));
 	return a;
+}
+
+Operand_Base High_Precision_Maths_Library::Remainder(Operand_Base left, Operand_Base right)
+{
+	position_point(left);
+	position_point(right);
+	//记录原除数的小数点位置
+	unsigned long long point = right.point;
+	//将除数的整数位数扩大到和被除数的整数位数一样大
+	while (true)
+	{
+		if (right.point == left.point) {
+			break;
+		}
+		else
+		{
+			right >>= 1;
+		}
+	}
+	//取余数
+	while (true)
+	{
+		if (right.point == point) {
+			//不够减了，退出
+			while (true) {
+				if (left < right) {
+					break;
+				}
+				else
+				{
+					left -= right;
+				}
+			}
+			break;
+		}
+		//不够减了，退出
+		while (true) {
+			if (left < right) {
+				break;
+			}
+			else
+			{
+				left -= right;
+			}
+		}
+		//除数缩小10倍
+		right <<= 1;
+	}
+	remain_significant_number(left);
+	position_point(left);
+	return left;
 }
 
 void High_Precision_Maths_Library::change_precision(int type, unsigned long long precision)

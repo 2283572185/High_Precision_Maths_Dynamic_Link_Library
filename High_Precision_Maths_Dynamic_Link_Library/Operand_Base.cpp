@@ -893,3 +893,14 @@ Operand_Base& High_Precision_Maths_Library::Operand_Base::operator&=(unsigned lo
 	*this = Extraction(*this, n);
 	return *this;
 }
+
+Operand_Base High_Precision_Maths_Library::Operand_Base::operator%(Operand_Base right)
+{
+	return Remainder(*this,right);
+}
+
+Operand_Base& High_Precision_Maths_Library::Operand_Base::operator%=(Operand_Base& right)
+{
+	*this = Remainder(*this, right);
+	return *this;
+}

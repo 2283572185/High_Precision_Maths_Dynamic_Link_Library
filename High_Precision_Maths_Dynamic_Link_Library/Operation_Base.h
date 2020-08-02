@@ -77,6 +77,11 @@ namespace High_Precision_Maths_Library {
 	Operand_Base Extraction(Operand_Base left, unsigned long long n);
 
 	/// <summary>
+	/// 取余数
+	/// </summary>
+	Operand_Base Remainder(Operand_Base left, Operand_Base right);
+
+	/// <summary>
 	/// 改变预设精度
 	/// </summary>
 	/// <param name="type">要改变的运算符的类型，在下列宏中选择</param>

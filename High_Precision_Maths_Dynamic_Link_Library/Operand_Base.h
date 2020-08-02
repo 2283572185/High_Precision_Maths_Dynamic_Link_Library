@@ -9,14 +9,17 @@
 */
 
 //写在前面：
-//该头文件所提供的类Operand_Base的对象之间支持的计算及其运算符如下
+//该头文件所提供的类Operand_Base的对象之间支持的计算及其运算符如下：
 //加法 +
 //减法 -
 //乘法 *
 //除法 /
 //乘方 ^
+//右移 >>
+//左移 <<
 //开方 &
 //取余 %
+//-------------------------------------------------------------------
 //扩展运算符：
 //前置自增运算符 ++
 //后置自增运算符 ++(int)
@@ -29,7 +32,10 @@
 //乘等于 *=
 //除等于 /=
 //乘方并赋值 ^=
+//右移并赋值 >>=
+//左移并赋值 <<=
 //开方并赋值 &=
+//取余并赋值 %=
 
 #include <iostream>
 #include <string>
@@ -69,7 +75,7 @@ namespace High_Precision_Maths_Library {
 		/// </summary>
 		DDM<char> data;
 		/// <summary>
-		/// 表示小时点的位置，从左往右数，从零开始
+		/// 表示小数点的位置，从左往右数，从零开始
 		/// </summary>
 		unsigned long long point = 0;
 		Operand_Base();
@@ -199,6 +205,14 @@ namespace High_Precision_Maths_Library {
 		/// 求对象的n次方根并赋值给对象
 		/// </summary>
 		virtual Operand_Base& operator&=(unsigned long long n);
+		/// <summary>
+		/// 计算此对象与right的余数
+		/// </summary>
+		virtual Operand_Base operator%(Operand_Base right);
+		/// <summary>
+		/// 计算此对象与right的余数并赋值给对象
+		/// </summary>
+		virtual Operand_Base& operator%=(Operand_Base& right);
 	};
 }
 #include "Operation_Base.h"
