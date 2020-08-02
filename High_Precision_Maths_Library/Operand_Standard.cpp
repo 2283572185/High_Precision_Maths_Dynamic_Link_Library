@@ -746,6 +746,35 @@ bool High_Precision_Maths_Library::Operand_Standard::operator>(Operand_Standard&
 	if (!this->minus && right.minus) {
 		return true;
 	}
+	//左负右正，返回false
+	else if (this->minus && !right.minus) {
+		return false;
+	}
+	//同正
+	else if (!this->minus) {
+		//左边绝对值大，返回true
+		if (this->data > right.data) {
+			return true;
+		}
+		//反之，返回false
+		else
+		{
+			return false;
+		}
+	}
+	//同负
+	else
+	{
+		//左边绝对值小，返回true
+		if (this->data < right.data) {
+			return true;
+		}
+		//反之，返回false
+		else
+		{
+			return false;
+		}
+	}
 }
 
 Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator+(Operand_Standard& right)

@@ -778,10 +778,12 @@ Operand_Base High_Precision_Maths_Library::Division(Operand_Base left, Operand_B
 	char i;
 	//记录原除数的小数点位置
 	unsigned long long point = right.point;
+	unsigned long long n = 0;
 	//将除数的整数位数扩大到和被除数的整数位数一样大
 	while (true)
 	{
-		if (right.point == left.point) {
+		if (right.point >= left.point) {
+			n = right.point - point;
 			break;
 		}
 		else
@@ -792,7 +794,7 @@ Operand_Base High_Precision_Maths_Library::Division(Operand_Base left, Operand_B
 	//算整数
 	while (true)
 	{
-		if (right.point == point) {
+		if (n == 0) {
 			//商
 			i = '0';
 			//不够减了，退出
@@ -827,6 +829,7 @@ Operand_Base High_Precision_Maths_Library::Division(Operand_Base left, Operand_B
 		result.data.push_back(i);
 		//除数缩小10倍
 		right <<= 1;
+		n--;
 	}
 	//补充小数点
 	result.data.push_back(_point);
@@ -883,7 +886,7 @@ Operand_Base High_Precision_Maths_Library::Extraction(Operand_Base left, unsigne
 	}
 	Operand_Base a('1');
 	for (unsigned long long i = 0; i < Extraction_Of_Root_Time; i++) {
-		a = Division(Addition((Operand_Base&)Division(left, (a ^ (n - 1))), (Operand_Base&)(Multiplication(a, (Operand_Base&)Operand_Base(n - 1)))), n);
+		a = (((left / (a ^ (n - 1))) + (a * (n - 1)))) / n;
 	}
 	remain_significant_number(a);
 	OperandStream_Base os;

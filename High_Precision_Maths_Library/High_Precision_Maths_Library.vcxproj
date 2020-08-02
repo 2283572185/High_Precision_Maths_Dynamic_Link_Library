@@ -161,6 +161,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Discontinuity_Dynamic_Memory.h" />
+    <ClInclude Include="Operand.h" />
     <ClInclude Include="Operand_Base.h" />
     <ClInclude Include="Operand_Standard.h" />
     <ClInclude Include="Operand_Stream_Base.h" />

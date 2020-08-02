@@ -1,4 +1,4 @@
-﻿#include "../High_Precision_Maths_Library/Operand_Standard.h"
+﻿#include "../High_Precision_Maths_Library/Operand.h"
 #include <iostream>
 #include <string>
 #include <time.h>
@@ -6,12 +6,11 @@ using namespace std;
 using namespace High_Precision_Maths_Library;
 int main()
 {
-    clock_t start, finish;
-    start = clock();
-    Operand_Standard o("2");
-    Operand_Standard _o("1");
-    o += _o;
-    finish = clock();
-    cout << o.to_string() << '\n';
-    cout << finish - start;
+    Operand_Base o(10);
+    Operand_Base _o("1112");
+    change_precision(division, 32);
+    change_precision(extraction_of_root, 31);
+    change_precision(extraction_of_root_time, 7);
+    o &= 2;
+    cout << o.to_string();
 }

@@ -30,6 +30,9 @@
     <ClInclude Include="Operand_Standard.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Operand.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Operand_Base.cpp">
