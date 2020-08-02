@@ -1,7 +1,7 @@
 ﻿#include "Operand_Base.h"
 using namespace High_Precision_Maths_Library;
-char _0 = '0';
-char _point = '.';
+static char _0 = '0';
+static char _point = '.';
 
 class High_Precision_Maths_Library::Operand_Base;
 class High_Precision_Maths_Library::Result;

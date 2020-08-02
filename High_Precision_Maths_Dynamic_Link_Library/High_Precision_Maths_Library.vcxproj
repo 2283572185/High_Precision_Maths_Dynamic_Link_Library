@@ -168,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Operand_Base.cpp" />
+    <ClCompile Include="Operand_Standard.cpp" />
     <ClCompile Include="Operand_Stream_Base.cpp" />
     <ClCompile Include="Operation_Base.cpp" />
   </ItemGroup>

@@ -41,5 +41,8 @@
     <ClCompile Include="Operand_Stream_Base.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Operand_Standard.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
