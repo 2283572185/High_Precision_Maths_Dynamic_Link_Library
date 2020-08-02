@@ -3,8 +3,9 @@
 	Developed by 2283572185@qq.com
 	Developed in C++
 	Compiled with Visual Studio 2019 (v142)
-	Use C++11 standard
+	Use C++17 standard
 	Use Window SDK 10.0
+	Use __fastcall in the caller to speed up execution
 	Download https://github.com/2283572185/High_Precision_Maths_Library
 */
 
@@ -123,6 +124,9 @@ namespace High_Precision_Maths_Library {
 		/// 大于等于返回true，反正返回false
 		/// </summary>
 		virtual bool operator>=(Operand_Base& right);
+		/// <summary>
+		/// 将right的值赋值给对象
+		/// </summary>
 		virtual Operand_Base& operator=(const Operand_Base right);
 		/// <summary>
 		/// 计算此对象与right的和

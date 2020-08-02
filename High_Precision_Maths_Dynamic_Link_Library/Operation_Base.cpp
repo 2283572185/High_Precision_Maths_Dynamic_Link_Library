@@ -1,4 +1,9 @@
 #include "Operation_Base.h"
+
+class High_Precision_Maths_Library::Operand_Base;
+class High_Precision_Maths_Library::Result;
+class High_Precision_Maths_Library::OperandStream_Base;
+
 //除法精度预设
 unsigned long long Division_Precision = 15;
 //开方精度预设
