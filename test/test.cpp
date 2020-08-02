@@ -6,14 +6,14 @@ using namespace std;
 using namespace High_Precision_Maths_Library;
 int main()
 {
-    Operand_Base o("10000");
-    Operand_Base _o("3");
+    Operand_Base o("2");
+    Operand_Base _o("2");
     string s;
     OperandStream_Base os;
     clock_t start, finish;
     start = clock();
-    o /= _o;
-    finish = clock();
+    o &= 2;
     cout << o.to_string() << "\n";
+    finish = clock();
     cout << finish - start;
 }

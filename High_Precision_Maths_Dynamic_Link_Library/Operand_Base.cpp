@@ -880,3 +880,16 @@ Operand_Base& High_Precision_Maths_Library::Operand_Base::operator<<=(unsigned l
 	remain_significant_number(*this);
 	return *this;
 }
+
+Operand_Base High_Precision_Maths_Library::Operand_Base::operator&(unsigned long long n)
+{
+	Operand_Base result;
+	result = Extraction(*this, n);
+	return result;
+}
+
+Operand_Base& High_Precision_Maths_Library::Operand_Base::operator&=(unsigned long long n)
+{
+	*this = Extraction(*this, n);
+	return *this;
+}

@@ -1,4 +1,10 @@
 #include "Operation_Base.h"
+//除法精度预设
+unsigned long long Division_Precision = 10;
+//开方精度预设
+unsigned long long Extraction_Of_Root_Precision = 10;
+//开方迭代次数
+unsigned long long Extraction_Of_Root_Time = 30;
 constexpr auto _10 = ':';
 using namespace High_Precision_Maths_Library;
 void High_Precision_Maths_Library::position_point(Operand_Base& value)
@@ -834,6 +840,7 @@ Operand_Base High_Precision_Maths_Library::Division(Operand_Base left, Operand_B
 			result.data.remove(v);
 		}
 	}
+	result.point = result.data.size() - 1;
 	//算小数
 	while (true)
 	{
@@ -862,4 +869,39 @@ Operand_Base High_Precision_Maths_Library::Division(Operand_Base left, Operand_B
 	OperandStream_Base os;
 	os.change_precision(result, (Precision_Base&)Precision_Base(Division_Precision, round));
 	return result;
+}
+
+Operand_Base High_Precision_Maths_Library::Extraction(Operand_Base left, unsigned long long n)
+{
+	if (n == 0) {
+		Illegal_Data e("不存在0次方根。");
+		throw(e);
+	}
+	else if (n == 1) {
+		return left;
+	}
+	Operand_Base a('1');
+	for (unsigned long long i = 0; i < Extraction_Of_Root_Time; i++) {
+		a = Division(Addition((Operand_Base&)Division(left, (a ^ (n - 1))), (Operand_Base&)(Multiplication(a, (Operand_Base&)Operand_Base(n - 1)))), n);
+	}
+	position_point(a);
+	remain_significant_number(a);
+	OperandStream_Base os;
+	os.change_precision(a, (Precision_Base&)Precision_Base(Extraction_Of_Root_Precision, round));
+	return a;
+}
+
+void High_Precision_Maths_Library::change_precision(int type, unsigned long long precision)
+{
+	if (type == division) {
+		Division_Precision = precision;
+	}
+	else if (type == extraction_of_root) {
+		Extraction_Of_Root_Precision = precision;
+	}
+	else
+	{
+		Illegal_Data e("所选用的类型超出了支持的范围。");
+		throw(e);
+	}
 }

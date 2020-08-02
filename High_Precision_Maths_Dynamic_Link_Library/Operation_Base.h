@@ -70,4 +70,23 @@ namespace High_Precision_Maths_Library {
 	/// <param name="left">被除数</param>
 	/// <param name="right">除数</param>
 	Operand_Base Division(Operand_Base left, Operand_Base right);
+
+	/// <summary>
+	/// 开方
+	/// </summary>
+	Operand_Base Extraction(Operand_Base left, unsigned long long n);
+
+	/// <summary>
+	/// 改变预设精度
+	/// </summary>
+	/// <param name="type">要改变的运算符的类型，在下列宏中选择</param>
+	/// <param name="precision">新的精度</param>
+	void change_precision(int type, unsigned long long precision);
+	//可选用的运算符类型
+	//除法
+	#define division 1
+	//开方，开方的精度因小于等于除法精度，否则开方精度为除法精度
+	#define extraction_of_root 2
+	//开方迭代次数，此时precision表示新的迭代次数，迭代次数越大，精度越高
+	#define extraction_of_root_time 3
 }

@@ -45,18 +45,6 @@ using Discontinuity_Dynamic_Memory::Illegal_Data;
 using Discontinuity_Dynamic_Memory::Over_Flow;
 using Discontinuity_Dynamic_Memory::Under_Flow;
 
-/*这是一些运算的精度预设
- *请务必保留这些宏的定义
- *下面，用name来代替宏的名称，用precision来代替你想要的精度
- *如果你想修改下面预设的运算符的精度，请使用以下语句
- *	#undef name
- *	#define name precision
-*/
-//除法精度预设
-#define Division_Precision 10
-//开方精度预设
-#define Extraction_Of_Root_Precision 10
-
 using namespace std;
 
 namespace High_Precision_Maths_Library {
@@ -203,6 +191,14 @@ namespace High_Precision_Maths_Library {
 		/// 缩小10^n倍并赋值给对象
 		/// </summary>
 		virtual Operand_Base& operator<<=(unsigned long long n);
+		/// <summary>
+		/// 求对象的n次方根
+		/// </summary>
+		virtual Operand_Base operator&(unsigned long long n);
+		/// <summary>
+		/// 求对象的n次方根并赋值给对象
+		/// </summary>
+		virtual Operand_Base& operator&=(unsigned long long n);
 	};
 }
 #include "Operation_Base.h"
