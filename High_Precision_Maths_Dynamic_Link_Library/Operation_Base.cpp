@@ -763,26 +763,77 @@ Operand_Base High_Precision_Maths_Library::Division(Operand_Base left, Operand_B
 {
 	position_point(left);
 	position_point(right);
-	Operand_Base result('0');
+	Operand_Base result;
 	result.point = 0;
 	char _point = '.';
 	char _0 = '0';
-	//算整数
+	char i;
+	//记录原除数的小数点位置
+	unsigned long long point = right.point;
+	//将除数的整数位数扩大到和被除数的整数位数一样大
 	while (true)
 	{
-		if (left < right) {
-			//使得结果以小数点结尾，退出循环
-			result.data.pop();
-			result.point = result.data.size() - 1;
+		if (right.point == left.point) {
 			break;
 		}
 		else
 		{
-			left -= right;
-			result++;
+			right >>= 1;
 		}
 	}
-	char i;
+	//算整数
+	while (true)
+	{
+		if (right.point == point) {
+			//商
+			i = '0';
+			//不够减了，退出
+			while (true) {
+				if (left < right) {
+					break;
+				}
+				else
+				{
+					left -= right;
+					i++;
+				}
+			}
+			//储存商
+			result.data.push_back(i);
+			break;
+		}
+		//商
+		i = '0';
+		//不够减了，退出
+		while (true) {
+			if (left < right) {
+				break;
+			}
+			else
+			{
+				left -= right;
+				i++;
+			}
+		}
+		//储存商
+		result.data.push_back(i);
+		//除数缩小10倍
+		right <<= 1;
+	}
+	//补充小数点
+	result.data.push_back(_point);
+	Value<char>* v = result.data.begin();
+	//去除无用的0
+	while (true)
+	{
+		if (*v->value != '0') {
+			break;
+		}
+		else
+		{
+			result.data.remove(v);
+		}
+	}
 	//算小数
 	while (true)
 	{

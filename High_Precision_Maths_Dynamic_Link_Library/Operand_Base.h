@@ -105,11 +105,29 @@ namespace High_Precision_Maths_Library {
 		/// 将对象内所以的字符转化成一个字符串并返回
 		/// </summary>
 		virtual std::string to_string();
+		/// <summary>
+		/// 相等返回true，反正返回false
+		/// </summary>
 		virtual bool operator==(Operand_Base& right);
+		/// <summary>
+		/// 不相等true，反正返回false
+		/// </summary>
 		virtual bool operator!=(Operand_Base& right);
+		/// <summary>
+		/// 大于返回true，反正返回false
+		/// </summary>
 		virtual bool operator>(Operand_Base& right);
+		/// <summary>
+		/// 小于等于返回true，反正返回false
+		/// </summary>
 		virtual bool operator<=(Operand_Base& right);
+		/// <summary>
+		/// 小于返回true，反正返回false
+		/// </summary>
 		virtual bool operator<(Operand_Base& right);
+		/// <summary>
+		/// 大于等于返回true，反正返回false
+		/// </summary>
 		virtual bool operator>=(Operand_Base& right);
 		virtual Operand_Base& operator=(const Operand_Base right);
 		/// <summary>
@@ -177,6 +195,14 @@ namespace High_Precision_Maths_Library {
 		/// 扩大10^n倍并赋值给对象
 		/// </summary>
 		virtual Operand_Base& operator>>=(unsigned long long n);
+		/// <summary>
+		/// 缩小10^n倍
+		/// </summary>
+		virtual Operand_Base operator<<(unsigned long long n);
+		/// <summary>
+		/// 缩小10^n倍并赋值给对象
+		/// </summary>
+		virtual Operand_Base& operator<<=(unsigned long long n);
 	};
 }
 #include "Operation_Base.h"

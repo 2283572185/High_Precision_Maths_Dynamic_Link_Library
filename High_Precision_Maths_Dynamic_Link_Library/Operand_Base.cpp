@@ -629,6 +629,8 @@ std::string Operand_Base::to_string()
 
 bool Operand_Base::operator==(Operand_Base& right)
 {
+	remain_significant_number(*this);
+	remain_significant_number(right);
 	if (this->data.size() != right.data.size()) {
 		return false;
 	}
@@ -651,16 +653,16 @@ bool Operand_Base::operator!=(Operand_Base& right)
 
 bool Operand_Base::operator>(Operand_Base& right)
 {
-	position_point(*this);
-	position_point(right);
-	decimal_point(*this, right);
-	unsigned long long max = this->data.size();
-	unsigned long long i = 0;
 	if (*this == right) {
 		return false;
 	}
 	else
 	{
+		position_point(*this);
+		position_point(right);
+		decimal_point(*this, right);
+		unsigned long long max = this->data.size();
+		unsigned long long i = 0;
 		while (true)
 		{
 			if (this->data[i] == right.data[i]) {
@@ -684,16 +686,16 @@ bool Operand_Base::operator<=(Operand_Base& right)
 
 bool Operand_Base::operator<(Operand_Base& right)
 {
-	position_point(*this);
-	position_point(right);
-	decimal_point(*this, right);
-	unsigned long long max = this->data.size();
-	unsigned long long i = 0;
 	if (*this == right) {
 		return false;
 	}
 	else
 	{
+		position_point(*this);
+		position_point(right);
+		decimal_point(*this, right);
+		unsigned long long max = this->data.size();
+		unsigned long long i = 0;
 		while (true)
 		{
 			if (this->data[i] == right.data[i]) {
@@ -729,20 +731,21 @@ Operand_Base Operand_Base::operator+(Operand_Base right)
 
 Operand_Base& Operand_Base::operator+=(Operand_Base& right)
 {
-	*this = *this + right;
+	*this = Addition(*this, right);
 	return *this;
 }
 
 Operand_Base& Operand_Base::operator++()
 {
 	Operand_Base o('1');
-	*this += o;
+	*this = Addition(*this, o);
 	return *this;
 }
 
 Operand_Base High_Precision_Maths_Library::Operand_Base::operator++(int)
 {
-	++(*this);
+	Operand_Base o('1');
+	*this = Addition(*this, o);
 	return *this;
 }
 
@@ -753,7 +756,7 @@ Operand_Base High_Precision_Maths_Library::Operand_Base::operator*(Operand_Base 
 
 Operand_Base& High_Precision_Maths_Library::Operand_Base::operator*=(Operand_Base& right)
 {
-	*this = *this * right;
+	*this = Multiplication(*this, right);
 	return *this;
 }
 
@@ -768,7 +771,7 @@ Operand_Base High_Precision_Maths_Library::Operand_Base::operator^(unsigned long
 	}
 	Operand_Base result = *this;
 	for (unsigned long long i = 1; i < point; i++) {
-		result *= *this;
+		result = Multiplication(result, *this);
 	}
 	return result;
 }
@@ -786,20 +789,21 @@ Operand_Base High_Precision_Maths_Library::Operand_Base::operator-(Operand_Base 
 
 Operand_Base& High_Precision_Maths_Library::Operand_Base::operator-=(Operand_Base& right)
 {
-	*this = *this - right;
+	*this = Subtraction(*this, right);
 	return *this;
 }
 
 Operand_Base& High_Precision_Maths_Library::Operand_Base::operator--()
 {
 	Operand_Base o('1');
-	*this -= o;
+	*this = Subtraction(*this, o);
 	return *this;
 }
 
 Operand_Base High_Precision_Maths_Library::Operand_Base::operator--(int)
 {
-	--(*this);
+	Operand_Base o('1');
+	*this = Subtraction(*this, o);
 	return *this;
 }
 
@@ -810,13 +814,14 @@ Operand_Base High_Precision_Maths_Library::Operand_Base::operator/(Operand_Base 
 
 Operand_Base& High_Precision_Maths_Library::Operand_Base::operator/=(Operand_Base& right)
 {
-	*this = *this / right;
+	*this = Division(*this, right);
 	return *this;
 }
 
 Operand_Base High_Precision_Maths_Library::Operand_Base::operator>>(unsigned long long n)
 {
 	Operand_Base result(*this);
+	result.data.push_back((char&)(const char&)'0');
 	for (unsigned long long i = 0; i < n; i++) {
 		//将小数点变成小数点的下一位
 		result.data[result.point] = result.data[result.point + 1];
@@ -825,11 +830,13 @@ Operand_Base High_Precision_Maths_Library::Operand_Base::operator>>(unsigned lon
 		//小数点的位置++
 		result.point++;
 	}
+	remain_significant_number(result);
 	return result;
 }
 
 Operand_Base& High_Precision_Maths_Library::Operand_Base::operator>>=(unsigned long long n)
 {
+	this->data.push_back((char&)(const char&)'0');
 	for (unsigned long long i = 0; i < n; i++) {
 		//将小数点变成小数点的下一位
 		this->data[this->point] = this->data[this->point + 1];
@@ -838,5 +845,38 @@ Operand_Base& High_Precision_Maths_Library::Operand_Base::operator>>=(unsigned l
 		//小数点的位置++
 		this->point++;
 	}
+	remain_significant_number(*this);
+	return *this;
+}
+
+Operand_Base High_Precision_Maths_Library::Operand_Base::operator<<(unsigned long long n)
+{
+	Operand_Base result(*this);
+	result.data.insert(result.data.begin(), (char&)(const char&)'0');
+	for (unsigned long long i = 0; i < n; i++) {
+		//将小数点变成小数点的上一位
+		result.data[result.point] = result.data[result.point - 1];
+		//将小数点的上一位变成小数点
+		result.data[result.point - 1] = '.';
+		//小数点的位置--
+		result.point--;
+	}
+	remain_significant_number(result);
+	return result;
+}
+
+Operand_Base& High_Precision_Maths_Library::Operand_Base::operator<<=(unsigned long long n)
+{
+	this->data.insert(this->data.begin(), (char&)(const char&)'0');
+	this->point++;
+	for (unsigned long long i = 0; i < n; i++) {
+		//将小数点变成小数点的上一位
+		this->data[this->point] = this->data[this->point - 1];
+		//将小数点的上一位变成小数点
+		this->data[this->point - 1] = '.';
+		//小数点的位置--
+		this->point--;
+	}
+	remain_significant_number(*this);
 	return *this;
 }
