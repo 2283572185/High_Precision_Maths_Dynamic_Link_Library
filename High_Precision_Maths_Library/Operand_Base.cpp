@@ -3,10 +3,6 @@ using namespace High_Precision_Maths_Library;
 static char _0 = '0';
 static char _point = '.';
 
-class High_Precision_Maths_Library::Operand_Base;
-class High_Precision_Maths_Library::Result;
-class High_Precision_Maths_Library::OperandStream_Base;
-
 High_Precision_Maths_Library::Operand_Base::Operand_Base()
 {
 	this->point = 0;
@@ -621,7 +617,7 @@ High_Precision_Maths_Library::Operand_Base::Operand_Base(DDM<char>& value)
 	return;
 }
 
-inline std::string High_Precision_Maths_Library::Operand_Base::to_string()
+std::string High_Precision_Maths_Library::Operand_Base::to_string()
 {
 	std::string s;
 	unsigned long long max = this->data.size();
@@ -631,7 +627,7 @@ inline std::string High_Precision_Maths_Library::Operand_Base::to_string()
 	return s;
 }
 
-inline bool High_Precision_Maths_Library::Operand_Base::operator==(Operand_Base& right)
+bool High_Precision_Maths_Library::Operand_Base::operator==(Operand_Base& right)
 {
 	remain_significant_number(*this);
 	remain_significant_number(right);
@@ -650,12 +646,12 @@ inline bool High_Precision_Maths_Library::Operand_Base::operator==(Operand_Base&
 	}
 }
 
-inline bool High_Precision_Maths_Library::Operand_Base::operator!=(Operand_Base& right)
+bool High_Precision_Maths_Library::Operand_Base::operator!=(Operand_Base& right)
 {
 	return !(*this == right);
 }
 
-inline bool High_Precision_Maths_Library::Operand_Base::operator>(Operand_Base& right)
+bool High_Precision_Maths_Library::Operand_Base::operator>(Operand_Base& right)
 {
 	if (*this == right) {
 		return false;
@@ -683,12 +679,12 @@ inline bool High_Precision_Maths_Library::Operand_Base::operator>(Operand_Base& 
 	}
 }
 
-inline bool High_Precision_Maths_Library::Operand_Base::operator<=(Operand_Base& right)
+bool High_Precision_Maths_Library::Operand_Base::operator<=(Operand_Base& right)
 {
 	return !(*this > right);
 }
 
-inline bool High_Precision_Maths_Library::Operand_Base::operator<(Operand_Base& right)
+bool High_Precision_Maths_Library::Operand_Base::operator<(Operand_Base& right)
 {
 	if (*this == right) {
 		return false;
@@ -717,54 +713,54 @@ inline bool High_Precision_Maths_Library::Operand_Base::operator<(Operand_Base& 
 	return true;
 }
 
-inline bool High_Precision_Maths_Library::Operand_Base::operator>=(Operand_Base& right)
+bool High_Precision_Maths_Library::Operand_Base::operator>=(Operand_Base& right)
 {
 	return !(*this < right);
 }
 
-inline High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator=(const Operand_Base right) {
+High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator=(const Operand_Base right) {
 	this->point = right.point;
 	this->data.copy((DDM<char>&)right.data);
 	return *this;
 }
 
-inline High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator+(Operand_Base right)
+High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator+(Operand_Base right)
 {
 	return Addition(*this, right);
 }
 
-inline High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator+=(Operand_Base& right)
+High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator+=(Operand_Base& right)
 {
 	*this = Addition(*this, right);
 	return *this;
 }
 
-inline High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator++()
+High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator++()
 {
 	Operand_Base o('1');
 	*this = Addition(*this, o);
 	return *this;
 }
 
-inline High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator++(int)
+High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator++(int)
 {
 	Operand_Base o('1');
 	*this = Addition(*this, o);
 	return *this;
 }
 
-inline High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator*(Operand_Base right)
+High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator*(Operand_Base right)
 {
 	return Multiplication(*this, right);
 }
 
-inline High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator*=(Operand_Base& right)
+High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator*=(Operand_Base& right)
 {
 	*this = Multiplication(*this, right);
 	return *this;
 }
 
-inline High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator^(unsigned long long point)
+High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator^(unsigned long long point)
 {
 	if (0 == point) {
 		if (*this == (Operand_Base&)Operand_Base('0')) {
@@ -780,49 +776,49 @@ inline High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::
 	return result;
 }
 
-inline High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator^=(unsigned long long point)
+High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator^=(unsigned long long point)
 {
 	*this = *this ^ point;
 	return *this;
 }
 
-inline High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator-(Operand_Base right)
+High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator-(Operand_Base right)
 {
 	return Subtraction(*this, right);
 }
 
-inline High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator-=(Operand_Base& right)
+High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator-=(Operand_Base& right)
 {
 	*this = Subtraction(*this, right);
 	return *this;
 }
 
-inline High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator--()
+High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator--()
 {
 	Operand_Base o('1');
 	*this = Subtraction(*this, o);
 	return *this;
 }
 
-inline High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator--(int)
+High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator--(int)
 {
 	Operand_Base o('1');
 	*this = Subtraction(*this, o);
 	return *this;
 }
 
-inline High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator/(Operand_Base right)
+High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator/(Operand_Base right)
 {
 	return Division(*this, right);
 }
 
-inline High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator/=(Operand_Base& right)
+High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator/=(Operand_Base& right)
 {
 	*this = Division(*this, right);
 	return *this;
 }
 
-inline High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator>>(unsigned long long n)
+High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator>>(unsigned long long n)
 {
 	Operand_Base result(*this);
 	result.data.push_back((char&)(const char&)'0');
@@ -838,7 +834,7 @@ inline High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::
 	return result;
 }
 
-inline High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator>>=(unsigned long long n)
+High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator>>=(unsigned long long n)
 {
 	this->data.push_back((char&)(const char&)'0');
 	for (unsigned long long i = 0; i < n; i++) {
@@ -853,7 +849,7 @@ inline High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library:
 	return *this;
 }
 
-inline High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator<<(unsigned long long n)
+High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator<<(unsigned long long n)
 {
 	Operand_Base result(*this);
 	result.data.insert(result.data.begin(), (char&)(const char&)'0');
@@ -869,7 +865,7 @@ inline High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::
 	return result;
 }
 
-inline High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator<<=(unsigned long long n)
+High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator<<=(unsigned long long n)
 {
 	this->data.insert(this->data.begin(), (char&)(const char&)'0');
 	this->point++;
@@ -885,25 +881,25 @@ inline High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library:
 	return *this;
 }
 
-inline High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator&(unsigned long long n)
+High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator&(unsigned long long n)
 {
 	Operand_Base result;
 	result = Extraction(*this, n);
 	return result;
 }
 
-inline High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator&=(unsigned long long n)
+High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator&=(unsigned long long n)
 {
 	*this = Extraction(*this, n);
 	return *this;
 }
 
-inline High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator%(Operand_Base right)
+High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator%(Operand_Base right)
 {
 	return Remainder(*this,right);
 }
 
-inline High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator%=(Operand_Base& right)
+High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator%=(Operand_Base& right)
 {
 	*this = Remainder(*this, right);
 	return *this;

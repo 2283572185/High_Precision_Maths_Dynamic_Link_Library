@@ -8,7 +8,9 @@ int main()
 {
     clock_t start, finish;
     start = clock();
-    Operand_Standard o("-1");
+    Operand_Standard o("2");
+    Operand_Standard _o("1");
+    o += _o;
     finish = clock();
     cout << o.to_string() << '\n';
     cout << finish - start;

@@ -1,9 +1,5 @@
 #include "Operation_Base.h"
 
-class High_Precision_Maths_Library::Operand_Base;
-class High_Precision_Maths_Library::Result;
-class High_Precision_Maths_Library::OperandStream_Base;
-
 //除法精度预设
 unsigned long long Division_Precision = 15;
 //开方精度预设
@@ -12,6 +8,7 @@ unsigned long long Extraction_Of_Root_Precision = 15;
 unsigned long long Extraction_Of_Root_Time = 7;
 constexpr auto _10 = ':';
 using namespace High_Precision_Maths_Library;
+
 void High_Precision_Maths_Library::position_point(Operand_Base& value)
 {
 	char _point = '.';
