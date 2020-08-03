@@ -6,8 +6,8 @@ using namespace std;
 using namespace High_Precision_Maths_Library;
 int main()
 {
-    Operand_Standard o('3');
-    Operand_Standard _o("-3");
-    o += _o;
+    Operand_Standard o("-3");
+    Operand_Standard _o("-4");
+    o -= _o;
     cout << o.to_string();
 }

@@ -1050,11 +1050,31 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator-(Opera
 	Operand_Standard result;
 	//均为负数
 	if (this->minus && right.minus) {
-		
+		//左边的绝对值大，绝对值大减小，结果为负
+		if (this->data > right.data) {
+			result.data = Subtraction(this->data, right.data);
+			result.minus = true;
+		}
+		//右边边的绝对值大，绝对值大减小，结果为正
+		else
+		{
+			result.data = Subtraction(right.data, this->data);
+			result.minus = false;
+		}
 	}
 	//若有一者为负数
 	else if (this->minus || right.minus) {
-		
+		//左边为负，绝对值相加，结果为负
+		if (this->minus) {
+			result.data = Addition(right.data, this->data);
+			result.minus = true;
+		}
+		//右边为负,绝对值相加，结果为正
+		else
+		{
+			result.data = Addition(right.data, this->data);
+			result.minus = false;
+		}
 	}
 	//均为正数
 	else
@@ -1062,13 +1082,13 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator-(Opera
 		//左大于右，左减右，结果为正
 		if (this->data >= right.data) {
 			result.data = Subtraction(this->data, right.data);
-			result.minus = true;
+			result.minus = false;
 		}
 		//反之，右减左，结果为负
 		else
 		{
 			result.data = Subtraction(right.data,this->data);
-			result.minus = false;
+			result.minus = true;
 		}
 	}
 	return result;
@@ -1076,7 +1096,49 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator-(Opera
 
 Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator-=(Operand_Standard& right)
 {
-	Operand_Standard result;
-	return result;
+	//均为负数
+	if (this->minus && right.minus) {
+		//左边的绝对值大，绝对值大减小，结果为负
+		if (this->data > right.data) {
+			this->data = Subtraction(this->data, right.data);
+			this->minus = true;
+		}
+		//右边边的绝对值大，绝对值大减小，结果为正
+		else
+		{
+			this->data = Subtraction(right.data, this->data);
+			this->minus = false;
+		}
+	}
+	//若有一者为负数
+	else if (this->minus || right.minus) {
+		//左边为负，绝对值相加，结果为负
+		if (this->minus) {
+			this->data = Addition(right.data, this->data);
+			this->minus = true;
+		}
+		//右边为负,绝对值相加，结果为正
+		else
+		{
+			this->data = Addition(right.data, this->data);
+			this->minus = false;
+		}
+	}
+	//均为正数
+	else
+	{
+		//左大于右，左减右，结果为正
+		if (this->data >= right.data) {
+			this->data = Subtraction(this->data, right.data);
+			this->minus = false;
+		}
+		//反之，右减左，结果为负
+		else
+		{
+			this->data = Subtraction(right.data, this->data);
+			this->minus = true;
+		}
+	}
+	return *this;
 }
 

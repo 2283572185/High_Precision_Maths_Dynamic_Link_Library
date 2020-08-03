@@ -52,6 +52,8 @@
 #include <string>
 #include <sstream>
 #include "Discontinuity_Dynamic_Memory.h"
+#include <thread>
+#include <mutex>
 
 template<class T>
 using DDM = Discontinuity_Dynamic_Memory::DiscontinuityDynamicMemory<T>;
