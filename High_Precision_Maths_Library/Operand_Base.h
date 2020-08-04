@@ -102,6 +102,7 @@ namespace High_Precision_Maths_Library {
 		friend Operand_Base Division(Operand_Base left, Operand_Base right);
 		friend Operand_Base Extraction(Operand_Base left, unsigned long long n);
 		friend Operand_Base Remainder(Operand_Base left, Operand_Base right);
+		friend void Multiplication_thread(Operand_Base* a, Value<char>* value, unsigned long long n, Operand_Base** result, unsigned long long m);
 		friend class Operand_Standard;
 		friend class OperandStream_Base;
 		Operand_Base();

@@ -9,6 +9,16 @@ void Extraction_theard_1(Operand_Base* a, unsigned long long n, Operand_Base* re
 /// </summary>
 void Extraction_theard_2(Operand_Base* a, unsigned long long n, Operand_Base* result);
 
+/// <summary>
+/// 多线程乘法
+/// </summary>
+/// <param name="a">完整的乘数</param>
+/// <param name="value">乘数的一部分</param>
+/// <param name="n">单位高精度乘法调用的次数</param>
+/// <param name="result">储存每一次乘法</param>
+/// <param name="m">第一次乘法补充0的个数</param>
+void High_Precision_Maths_Library::Multiplication_thread(Operand_Base* a, Value<char>* value, unsigned long long n, Operand_Base** result, unsigned long long m);
+
 //除法精度预设
 unsigned long long Division_Precision = 15;
 //开方精度预设
@@ -543,6 +553,21 @@ Operand_Base High_Precision_Maths_Library::Multiplication(Operand_Base& left, Op
 	unsigned long long rl_point = (left.data.size() - 1 - left.point) + (right.data.size() - 1 - right.point);
 	Result _result;
 	Operand_Base result;
+	//分段乘法次数
+	unsigned long long max;
+	if (left.data.size() > right.data.size()) {
+		max = left.data.size() - 1;
+	}
+	else
+	{
+		max = right.data.size() - 1;
+	}
+	//动态数组
+	Operand_Base** ppresult = new Operand_Base*[max];
+	//开辟储存空间
+	for (unsigned long long i = 0; i < max; i++) {
+		ppresult[i] = new Operand_Base;
+	}
 	//用于储存中间数据
 	Operand_Base middle;
 	Value<char>* left_max = left.data.begin();
@@ -984,4 +1009,62 @@ inline void Extraction_theard_1(Operand_Base* a, unsigned long long n, Operand_B
 inline void Extraction_theard_2(Operand_Base* a, unsigned long long n, Operand_Base* result) {
 	*result = (*a) * (n - 1);
 	return;
+}
+
+namespace High_Precision_Maths_Library {
+	inline void Multiplication_thread(Operand_Base* a, Value<char>* value, unsigned long long n, Operand_Base** result, unsigned long long m) {
+		Result _result;
+		Value<char>* left_do = a->data.end();
+		Value<char>* left_max = a->data.begin();
+		Value<char>* begin;
+		char _0 = '0';
+		//循环乘法
+		for (unsigned long long i = 0; i < n; i++) {
+			//遇到小数点，算下一位
+			if (*value->value == '.') {
+				value = value->last;
+				i++;
+				continue;
+			}
+			//归零
+			_result.change = '0';
+			_result.result = '0';
+			//最后加入一个0使迭代器可用
+			result[m]->data.push_back(_0);
+			while (true)
+			{
+				begin = result[m]->data.begin();
+				//到达顶部，执行最后一次乘法
+				if (left_do == left_max) {
+					high_precision_multiplication(*left_do->value, *value->value, _result);
+					result[m]->data.insert(begin, _result.result);
+					break;
+				}
+				//遇到小数点，跳过
+				if (*left_do->value == '.') {
+					left_do = left_do->last;
+					continue;
+				}
+				high_precision_multiplication(*left_do->value, *value->value, _result);
+				result[m]->data.insert(begin, _result.result);
+				left_do = left_do->last;
+			}
+			if (_result.change != '0') {
+				result[m]->data.insert(begin, _result.change);
+			}
+			//弹出补上的0
+			result[m]->data.pop();
+			//插入0
+			for (unsigned long long k = 0; k < m; k++) {
+				result[m]->data.push_back(_0);
+			}
+			m++;
+			left_do = a->data.end();
+			//未到顶就上移
+			if (value->last != nullptr) {
+				value = value->last;
+			}
+		}
+		return;
+	}
 }
