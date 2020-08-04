@@ -95,3 +95,4 @@ namespace High_Precision_Maths_Library {
 	//开方迭代次数，此时precision表示新的迭代次数，迭代次数越大，精度越高
 	#define extraction_of_root_time 3
 }
+

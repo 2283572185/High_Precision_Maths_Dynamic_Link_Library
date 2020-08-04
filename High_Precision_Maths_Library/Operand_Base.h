@@ -54,6 +54,7 @@
 #include "Discontinuity_Dynamic_Memory.h"
 #include <thread>
 #include <mutex>
+#include <Windows.h>
 
 template<class T>
 using DDM = Discontinuity_Dynamic_Memory::DiscontinuityDynamicMemory<T>;

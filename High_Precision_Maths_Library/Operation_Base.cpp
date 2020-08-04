@@ -1,4 +1,13 @@
 #include "Operation_Base.h"
+/// <summary>
+/// 开方多线程函数1，计算a ^ (n - 1)
+/// </summary>
+void Extraction_theard_1(Operand_Base* a, unsigned long long n, Operand_Base* result);
+
+/// <summary>
+/// 开方多线程函数2，计算a * (n - 1)
+/// </summary>
+void Extraction_theard_2(Operand_Base* a, unsigned long long n, Operand_Base* result);
 
 //除法精度预设
 unsigned long long Division_Precision = 15;
@@ -9,7 +18,7 @@ unsigned long long Extraction_Of_Root_Time = 7;
 constexpr auto _10 = ':';
 using namespace High_Precision_Maths_Library;
 
-void High_Precision_Maths_Library::position_point(Operand_Base& value)
+inline void High_Precision_Maths_Library::position_point(Operand_Base& value)
 {
 	char _point = '.';
 	char _0 = '0';
@@ -46,7 +55,7 @@ void High_Precision_Maths_Library::position_point(Operand_Base& value)
 	return;
 }
 
-void High_Precision_Maths_Library::high_precision_addition(char& left, char& right, Result& _result)
+inline void High_Precision_Maths_Library::high_precision_addition(char& left, char& right, Result& _result)
 {
 	//如果是小数点，直接返回
 	if (left == '.' || right == '.') {
@@ -71,7 +80,7 @@ void High_Precision_Maths_Library::high_precision_addition(char& left, char& rig
 	return;
 }
 
-void High_Precision_Maths_Library::decimal_point(Operand_Base& left, Operand_Base& right)
+inline void High_Precision_Maths_Library::decimal_point(Operand_Base& left, Operand_Base& right)
 {
 	//补充前导零
 	char _0 = '0';
@@ -134,7 +143,7 @@ Operand_Base High_Precision_Maths_Library::Addition(Operand_Base& left, Operand_
 	return result;
 }
 
-void High_Precision_Maths_Library::high_precision_multiplication(char& left, char& right, Result& _result)
+inline void High_Precision_Maths_Library::high_precision_multiplication(char& left, char& right, Result& _result)
 {
 	//如果是小数点，重置，直接返回
 	if (left == '.' || right == '.') {
@@ -686,7 +695,7 @@ Operand_Base High_Precision_Maths_Library::Multiplication(Operand_Base& left, Op
 	return result;
 }
 
-void High_Precision_Maths_Library::remain_significant_number(Operand_Base& value)
+inline void High_Precision_Maths_Library::remain_significant_number(Operand_Base& value)
 {
 	char _0 = '0';
 	while (true)
@@ -720,7 +729,7 @@ void High_Precision_Maths_Library::remain_significant_number(Operand_Base& value
 	return;
 }
 
-void High_Precision_Maths_Library::high_precision_subtraction(char& left, char& right, Result& _result)
+inline void High_Precision_Maths_Library::high_precision_subtraction(char& left, char& right, Result& _result)
 {
 	//遇到小数点返回
 	if (left == '.' || right == '.') {
@@ -869,9 +878,7 @@ Operand_Base High_Precision_Maths_Library::Division(Operand_Base left, Operand_B
 		}
 		result.data.push_back(i);
 	}
-	remain_significant_number(result);
-	OperandStream_Base os;
-	os.change_precision(result, (Precision_Base&)Precision_Base(Division_Precision, round));
+	OperandStream_Base::change_precision(result, (Precision_Base&)Precision_Base(Division_Precision, round));
 	return result;
 }
 
@@ -885,8 +892,14 @@ Operand_Base High_Precision_Maths_Library::Extraction(Operand_Base left, unsigne
 		return left;
 	}
 	Operand_Base a('1');
+	Operand_Base thread_1;
+	Operand_Base thread_2;
 	for (unsigned long long i = 0; i < Extraction_Of_Root_Time; i++) {
-		a = (((left / (a ^ (n - 1))) + (a * (n - 1)))) / n;
+		thread first(Extraction_theard_1, &a, n, &thread_1);
+		thread second(Extraction_theard_2, &a, n, &thread_2);
+		first.join();
+		second.join();
+		a = (((left / thread_1) + thread_2)) / n;
 	}
 	remain_significant_number(a);
 	OperandStream_Base os;
@@ -961,4 +974,14 @@ void High_Precision_Maths_Library::change_precision(int type, unsigned long long
 		Illegal_Data e("所选用的类型超出了支持的范围。");
 		throw(e);
 	}
+}
+
+inline void Extraction_theard_1(Operand_Base* a, unsigned long long n, Operand_Base* result) {
+	*result = (*a) ^ (n - 1);
+	return;
+}
+
+inline void Extraction_theard_2(Operand_Base* a, unsigned long long n, Operand_Base* result) {
+	*result = (*a) * (n - 1);
+	return;
 }

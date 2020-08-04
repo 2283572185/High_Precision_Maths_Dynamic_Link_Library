@@ -111,6 +111,6 @@ namespace High_Precision_Maths_Library {
 		/// </summary>
 		/// <param name="value">要进行精度转换的对象</param>
 		/// <param name="precision">精度控制类的对象，决定了转换方式和转换后精度</param>
-		virtual void change_precision(Operand_Base& value, Precision_Base& precision);
+		static void change_precision(Operand_Base& value, Precision_Base& precision);
 	};
 }

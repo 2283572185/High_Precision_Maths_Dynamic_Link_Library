@@ -6,8 +6,13 @@ using namespace std;
 using namespace High_Precision_Maths_Library;
 int main()
 {
-    Operand_Standard o("-3");
-    Operand_Standard _o("-4");
-    o -= _o;
-    cout << o.to_string();
+    clock_t start, finish;
+    Operand_Base o("3.1415926");
+    change_precision(division, 20);
+    //change_precision(extraction_of_root_time, 7);
+    start = clock();
+    o &= 2;
+    finish = clock();
+    cout << o.to_string() << "\n";
+    cout << finish - start;
 }
