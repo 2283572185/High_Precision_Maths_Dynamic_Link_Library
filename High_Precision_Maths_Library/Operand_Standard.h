@@ -55,7 +55,7 @@ namespace High_Precision_Maths_Library {
 	/// 高精度数学库的标准类，支持所有有理数的加、减、乘、除、乘方、开方、阶乘、取余数，抛出的所以异常都是Error的基类
 	/// 不支持以科学计数法的方式输入数据
 	/// </summary>
-	class Operand_Standard {
+	class DLL_API Operand_Standard {
 	private:
 		//值，不储存符号
 		Operand_Base data;
@@ -131,5 +131,77 @@ namespace High_Precision_Maths_Library {
 		/// 减等于
 		/// </summary>
 		Operand_Standard& operator-=(Operand_Standard& right);
+		/// <summary>
+		/// 前置自减运算符
+		/// </summary>
+		Operand_Standard& operator--();
+		/// <summary>
+		/// 后置自减运算符
+		/// </summary>
+		Operand_Standard operator--(int);
+		/// <summary>
+		/// 左移
+		/// </summary>
+		Operand_Standard operator<<(unsigned long long n);
+		/// <summary>
+		/// 左移并赋值
+		/// </summary>
+		Operand_Standard& operator<<=(unsigned long long n);
+		/// <summary>
+		/// 右移
+		/// </summary>
+		Operand_Standard operator>>(unsigned long long n);
+		/// <summary>
+		/// 右移并赋值
+		/// </summary>
+		Operand_Standard& operator>>=(unsigned long long n);
+		/// <summary>
+		/// 乘
+		/// </summary>
+		Operand_Standard operator*(Operand_Standard& right);
+		/// <summary>
+		/// 乘等于
+		/// </summary>
+		Operand_Standard& operator*=(Operand_Standard& right);
+		/// <summary>
+		/// 除
+		/// </summary>
+		Operand_Standard operator/(Operand_Standard& right);
+		/// <summary>
+		/// 除等于
+		/// </summary>
+		Operand_Standard& operator/=(Operand_Standard& right);
+		/// <summary>
+		/// 开方
+		/// </summary>
+		Operand_Standard operator&(unsigned long long n);
+		/// <summary>
+		/// 开方并赋值
+		/// </summary>
+		Operand_Standard& operator&=(unsigned long long n);
+		/// <summary>
+		/// 乘方
+		/// </summary>
+		Operand_Standard operator^(unsigned long long n);
+		/// <summary>
+		/// 乘方并赋值
+		/// </summary>
+		Operand_Standard& operator^=(unsigned long long n);
+		/// <summary>
+		/// 取余
+		/// </summary>
+		Operand_Standard operator^(Operand_Standard& right);
+		/// <summary>
+		/// 取余并赋值
+		/// </summary>
+		Operand_Standard& operator^=(Operand_Standard& right);
+		/// <summary>
+		/// 清空当前对象的值并用value的值初始化当前对象
+		/// </summary>
+		void copy(Operand_Standard& value);
+		/// <summary>
+		/// 清空当前对象的值并用value的值初始化当前对象
+		/// </summary>
+		void operator()(Operand_Standard& value);
 	};
 }

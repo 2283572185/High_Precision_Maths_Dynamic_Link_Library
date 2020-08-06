@@ -821,37 +821,6 @@ High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operan
 High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator>>(unsigned long long n)
 {
 	Operand_Base result(*this);
-	result.data.push_back((char&)(const char&)'0');
-	for (unsigned long long i = 0; i < n; i++) {
-		//将小数点变成小数点的下一位
-		result.data[result.point] = result.data[result.point + 1];
-		//将小数点的下一位变成小数点
-		result.data[result.point + 1] = '.';
-		//小数点的位置++
-		result.point++;
-	}
-	remain_significant_number(result);
-	return result;
-}
-
-High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator>>=(unsigned long long n)
-{
-	this->data.push_back((char&)(const char&)'0');
-	for (unsigned long long i = 0; i < n; i++) {
-		//将小数点变成小数点的下一位
-		this->data[this->point] = this->data[this->point + 1];
-		//将小数点的下一位变成小数点
-		this->data[this->point + 1] = '.';
-		//小数点的位置++
-		this->point++;
-	}
-	remain_significant_number(*this);
-	return *this;
-}
-
-High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator<<(unsigned long long n)
-{
-	Operand_Base result(*this);
 	result.data.insert(result.data.begin(), (char&)(const char&)'0');
 	for (unsigned long long i = 0; i < n; i++) {
 		//将小数点变成小数点的上一位
@@ -865,7 +834,7 @@ High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand
 	return result;
 }
 
-High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator<<=(unsigned long long n)
+High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator>>=(unsigned long long n)
 {
 	this->data.insert(this->data.begin(), (char&)(const char&)'0');
 	this->point++;
@@ -876,6 +845,37 @@ High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operan
 		this->data[this->point - 1] = '.';
 		//小数点的位置--
 		this->point--;
+	}
+	remain_significant_number(*this);
+	return *this;
+}
+
+High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator<<(unsigned long long n)
+{
+	Operand_Base result(*this);
+	result.data.push_back((char&)(const char&)'0');
+	for (unsigned long long i = 0; i < n; i++) {
+		//将小数点变成小数点的下一位
+		result.data[result.point] = result.data[result.point + 1];
+		//将小数点的下一位变成小数点
+		result.data[result.point + 1] = '.';
+		//小数点的位置++
+		result.point++;
+	}
+	remain_significant_number(result);
+	return result;
+}
+
+High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator<<=(unsigned long long n)
+{
+	this->data.push_back((char&)(const char&)'0');
+	for (unsigned long long i = 0; i < n; i++) {
+		//将小数点变成小数点的下一位
+		this->data[this->point] = this->data[this->point + 1];
+		//将小数点的下一位变成小数点
+		this->data[this->point + 1] = '.';
+		//小数点的位置++
+		this->point++;
 	}
 	remain_significant_number(*this);
 	return *this;

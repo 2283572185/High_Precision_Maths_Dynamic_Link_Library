@@ -1142,3 +1142,326 @@ Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator-=(Ope
 	return *this;
 }
 
+Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator--()
+{
+	Operand_Standard right('1');
+	//若有一者为负数
+	if (this->minus || right.minus) {
+		//左边为负，绝对值相加，结果为负
+		if (this->minus) {
+			this->data = Addition(right.data, this->data);
+			this->minus = true;
+		}
+		//右边为负,绝对值相加，结果为正
+		else
+		{
+			this->data = Addition(right.data, this->data);
+			this->minus = false;
+		}
+	}
+	//均为正数
+	else
+	{
+		//左大于右，左减右，结果为正
+		if (this->data >= right.data) {
+			this->data = Subtraction(this->data, right.data);
+			this->minus = false;
+		}
+		//反之，右减左，结果为负
+		else
+		{
+			this->data = Subtraction(right.data, this->data);
+			this->minus = true;
+		}
+	}
+	return *this;
+}
+
+Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator--(int)
+{
+	Operand_Standard right('1');
+	//若有一者为负数
+	if (this->minus || right.minus) {
+		//左边为负，绝对值相加，结果为负
+		if (this->minus) {
+			this->data = Addition(right.data, this->data);
+			this->minus = true;
+		}
+		//右边为负,绝对值相加，结果为正
+		else
+		{
+			this->data = Addition(right.data, this->data);
+			this->minus = false;
+		}
+	}
+	//均为正数
+	else
+	{
+		//左大于右，左减右，结果为正
+		if (this->data >= right.data) {
+			this->data = Subtraction(this->data, right.data);
+			this->minus = false;
+		}
+		//反之，右减左，结果为负
+		else
+		{
+			this->data = Subtraction(right.data, this->data);
+			this->minus = true;
+		}
+	}
+	return *this;
+}
+
+Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator<<(unsigned long long n)
+{
+	Operand_Standard result(*this);
+	result.data.data.push_back((char&)(const char&)'0');
+	for (unsigned long long i = 0; i < n; i++) {
+		//将小数点变成小数点的下一位
+		result.data.data[result.data.point] = result.data.data[result.data.point + 1];
+		//将小数点的下一位变成小数点
+		result.data.data[result.data.point + 1] = '.';
+		//小数点的位置++
+		result.data.point++;
+	}
+	remain_significant_number(result.data);
+	return result;
+}
+
+Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator<<=(unsigned long long n)
+{
+	this->data.data.push_back((char&)(const char&)'0');
+	for (unsigned long long i = 0; i < n; i++) {
+		//将小数点变成小数点的下一位
+		this->data.data[this->data.point] = this->data.data[this->data.point + 1];
+		//将小数点的下一位变成小数点
+		this->data.data[this->data.point + 1] = '.';
+		//小数点的位置++
+		this->data.point++;
+	}
+	remain_significant_number(this->data);
+	return *this;
+}
+
+Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator>>(unsigned long long n)
+{
+	Operand_Standard result(*this);
+	result.data.data.insert(result.data.data.begin(), (char&)(const char&)'0');
+	for (unsigned long long i = 0; i < n; i++) {
+		//将小数点变成小数点的上一位
+		result.data.data[result.data.point] = result.data.data[result.data.point - 1];
+		//将小数点的上一位变成小数点
+		result.data.data[result.data.point - 1] = '.';
+		//小数点的位置--
+		result.data.point--;
+	}
+	remain_significant_number(result.data);
+	return result;
+}
+
+Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator>>=(unsigned long long n)
+{
+	this->data.data.insert(this->data.data.begin(), (char&)(const char&)'0');
+	for (unsigned long long i = 0; i < n; i++) {
+		//将小数点变成小数点的上一位
+		this->data.data[this->data.point] = this->data.data[this->data.point - 1];
+		//将小数点的上一位变成小数点
+		this->data.data[this->data.point - 1] = '.';
+		//小数点的位置--
+		this->data.point--;
+	}
+	remain_significant_number(this->data);
+	return *this;
+}
+
+Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator*(Operand_Standard& right)
+{
+	Operand_Standard result;
+	//符号相同结果为正
+	if (this->minus == right.minus) {
+		result.data = Multiplication(this->data, right.data);
+		result.minus = false;
+	}
+	//反正结果为负
+	else
+	{
+		result.data = Multiplication(this->data, right.data);
+		result.minus = true;
+	}
+	return result;
+}
+
+Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator*=(Operand_Standard& right)
+{
+	//符号相同结果为正
+	if (this->minus == right.minus) {
+		this->data = Multiplication(this->data, right.data);
+		this->minus = false;
+	}
+	//反正结果为负
+	else
+	{
+		this->data = Multiplication(this->data, right.data);
+		this->minus = true;
+	}
+	return *this;
+}
+
+Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator/(Operand_Standard& right)
+{
+	Operand_Standard result;
+	//符号相同结果为正
+	if (this->minus == right.minus) {
+		result.data = Division(this->data, right.data);
+		result.minus = false;
+	}
+	//反正结果为负
+	else
+	{
+		result.data = Division(this->data, right.data);
+		result.minus = true;
+	}
+	return result;
+}
+
+Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator/=(Operand_Standard& right)
+{
+	//符号相同结果为正
+	if (this->minus == right.minus) {
+		this->data = Division(this->data, right.data);
+		this->minus = false;
+	}
+	//反正结果为负
+	else
+	{
+		this->data = Division(this->data, right.data);
+		this->minus = true;
+	}
+	return *this;
+}
+
+Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator&(unsigned long long n)
+{
+	//偶次根式的被开方数不能是负数
+	if (n % 2 == 0 && this->minus) {
+		Illegal_Data e("偶次根式的被开方数不能是负数。");
+		throw(e);
+	}
+	Operand_Standard result;
+	if (this->minus) {
+		result.minus = true;
+	}
+	else
+	{
+		result.minus = false;
+	}
+	result.data = Extraction(this->data, n);
+	return result;
+}
+
+Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator&=(unsigned long long n)
+{
+	//偶次根式的被开方数不能是负数
+	if (n % 2 == 0 && this->minus) {
+		Illegal_Data e("偶次根式的被开方数不能是负数。");
+		throw(e);
+	}
+	//开方后符号不变
+	this->data = Extraction(this->data, n);
+	return *this;
+}
+
+Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator^(unsigned long long n)
+{
+	if (n == 0) {
+		if (*this == (Operand_Standard&)Operand_Standard('0')) {
+			Illegal_Data e("0的0次方没有意义。");
+			throw e;
+		}
+		return Operand_Standard('1');
+	}
+	else if (n == 1) {
+		return *this;
+	}
+	Operand_Standard result = *this;
+	//偶数次方为正，奇数次方符号不变
+	if (n % 2 == 0) {
+		result.minus = false;
+	}
+	for (unsigned long long i = 1; i < n; i++) {
+		result.data = Multiplication(result.data, this->data);
+	}
+	return result;
+}
+
+Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator^=(unsigned long long n)
+{
+	if (n == 0) {
+		if (*this == (Operand_Standard&)Operand_Standard('0')) {
+			Illegal_Data e("0的0次方没有意义。");
+			throw e;
+		}
+		*this = '1';
+		return *this;
+	}
+	else if (n == 1) {
+		return *this;
+	}
+	//偶数次方为正，奇数次方符号不变
+	if (n % 2 == 0) {
+		this->minus = false;
+	}
+	Operand_Standard middle(*this);
+	for (unsigned long long i = 1; i < n; i++) {
+		this->data = Multiplication(middle.data, this->data);
+	}
+	return *this;
+}
+
+Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator^(Operand_Standard& right)
+{
+	Operand_Standard result;
+	//符号相同结果为正
+	if (this->minus == right.minus) {
+		result.data = Remainder(this->data, right.data);
+		result.minus = false;
+	}
+	//反正结果为负
+	else
+	{
+		result.data = Remainder(this->data, right.data);
+		result.minus = true;
+	}
+	return result;
+}
+
+Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator^=(Operand_Standard& right)
+{
+	//符号相同结果为正
+	if (this->minus == right.minus) {
+		this->data = Remainder(this->data, right.data);
+		this->minus = false;
+	}
+	//反正结果为负
+	else
+	{
+		this->data = Remainder(this->data, right.data);
+		this->minus = true;
+	}
+	return *this;
+}
+
+void High_Precision_Maths_Library::Operand_Standard::copy(Operand_Standard& value)
+{
+	this->minus = value.minus;
+	this->data.data.copy(value.data.data);
+	return;
+}
+
+void High_Precision_Maths_Library::Operand_Standard::operator()(Operand_Standard& value)
+{
+	this->minus = value.minus;
+	this->data.data.copy(value.data.data);
+	return;
+}
+

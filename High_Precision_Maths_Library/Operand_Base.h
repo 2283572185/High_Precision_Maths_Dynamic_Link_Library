@@ -55,6 +55,12 @@
 #include <thread>
 #include <mutex>
 #include <Windows.h>
+#ifdef _WINDLL
+#define DLL_API __declspec(dllexport)
+#else
+#define DLL_API __declspec(dllimport)
+#endif // _WINDLL
+#pragma warning(disable:4251)
 
 template<class T>
 using DDM = Discontinuity_Dynamic_Memory::DiscontinuityDynamicMemory<T>;
@@ -71,7 +77,7 @@ namespace High_Precision_Maths_Library {
 	/// <summary>
 	/// 用于储存单位运算后的结果
 	/// </summary>
-	class Result {
+	class DLL_API Result {
 	public:
 		char result = '0';
 		char change = '0';
@@ -82,7 +88,7 @@ namespace High_Precision_Maths_Library {
 	/// 不支持以科学计数法的方式输入数据
 	/// 注意，当小数点的位置等于该对象的长度时，这个对象是整数
 	/// </summary>
-	class Operand_Base {
+	class DLL_API Operand_Base {
 	private:
 		/// <summary>
 		/// 这个对象的数据
@@ -102,7 +108,6 @@ namespace High_Precision_Maths_Library {
 		friend Operand_Base Division(Operand_Base left, Operand_Base right);
 		friend Operand_Base Extraction(Operand_Base left, unsigned long long n);
 		friend Operand_Base Remainder(Operand_Base left, Operand_Base right);
-		friend void Multiplication_thread(Operand_Base* a, Value<char>* value, unsigned long long n, Operand_Base** result, unsigned long long m);
 		friend class Operand_Standard;
 		friend class OperandStream_Base;
 		Operand_Base();
@@ -212,19 +217,19 @@ namespace High_Precision_Maths_Library {
 		/// </summary>
 		Operand_Base& operator/=(Operand_Base& right);
 		/// <summary>
-		/// 扩大10^n倍
+		/// 缩小10^n倍
 		/// </summary>
 		Operand_Base operator>>(unsigned long long n);
 		/// <summary>
-		/// 扩大10^n倍并赋值给对象
+		/// 缩小10^n倍并赋值给对象
 		/// </summary>
 		Operand_Base& operator>>=(unsigned long long n);
 		/// <summary>
-		/// 缩小10^n倍
+		/// 扩大10^n倍
 		/// </summary>
 		Operand_Base operator<<(unsigned long long n);
 		/// <summary>
-		/// 缩小10^n倍并赋值给对象
+		/// 扩大10^n倍并赋值给对象
 		/// </summary>
 		Operand_Base& operator<<=(unsigned long long n);
 		/// <summary>

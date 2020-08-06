@@ -1,4 +1,8 @@
 #include "Operation_Base.h"
+#include <cassert>
+//线程标志
+std::mutex _mutex;
+
 /// <summary>
 /// 开方多线程函数1，计算a ^ (n - 1)
 /// </summary>
@@ -9,16 +13,6 @@ void Extraction_theard_1(Operand_Base* a, unsigned long long n, Operand_Base* re
 /// </summary>
 void Extraction_theard_2(Operand_Base* a, unsigned long long n, Operand_Base* result);
 
-/// <summary>
-/// 多线程乘法
-/// </summary>
-/// <param name="a">完整的乘数</param>
-/// <param name="value">乘数的一部分</param>
-/// <param name="n">单位高精度乘法调用的次数</param>
-/// <param name="result">储存每一次乘法</param>
-/// <param name="m">第一次乘法补充0的个数</param>
-void High_Precision_Maths_Library::Multiplication_thread(Operand_Base* a, Value<char>* value, unsigned long long n, Operand_Base** result, unsigned long long m);
-
 //除法精度预设
 unsigned long long Division_Precision = 15;
 //开方精度预设
@@ -28,7 +22,7 @@ unsigned long long Extraction_Of_Root_Time = 7;
 constexpr auto _10 = ':';
 using namespace High_Precision_Maths_Library;
 
-inline void High_Precision_Maths_Library::position_point(Operand_Base& value)
+__forceinline void High_Precision_Maths_Library::position_point(Operand_Base& value)
 {
 	char _point = '.';
 	char _0 = '0';
@@ -65,7 +59,7 @@ inline void High_Precision_Maths_Library::position_point(Operand_Base& value)
 	return;
 }
 
-inline void High_Precision_Maths_Library::high_precision_addition(char& left, char& right, Result& _result)
+__forceinline void High_Precision_Maths_Library::high_precision_addition(char& left, char& right, Result& _result)
 {
 	//如果是小数点，直接返回
 	if (left == '.' || right == '.') {
@@ -90,7 +84,7 @@ inline void High_Precision_Maths_Library::high_precision_addition(char& left, ch
 	return;
 }
 
-inline void High_Precision_Maths_Library::decimal_point(Operand_Base& left, Operand_Base& right)
+__forceinline void High_Precision_Maths_Library::decimal_point(Operand_Base& left, Operand_Base& right)
 {
 	//补充前导零
 	char _0 = '0';
@@ -153,7 +147,7 @@ Operand_Base High_Precision_Maths_Library::Addition(Operand_Base& left, Operand_
 	return result;
 }
 
-inline void High_Precision_Maths_Library::high_precision_multiplication(char& left, char& right, Result& _result)
+__forceinline void High_Precision_Maths_Library::high_precision_multiplication(char& left, char& right, Result& _result)
 {
 	//如果是小数点，重置，直接返回
 	if (left == '.' || right == '.') {
@@ -547,27 +541,11 @@ Operand_Base High_Precision_Maths_Library::Multiplication(Operand_Base& left, Op
 	char _point = '.';
 	position_point(left);
 	position_point(right);
-	decimal_point(left, right);
 	unsigned long long need = 0;
 	//小数点位置，从右往左数
 	unsigned long long rl_point = (left.data.size() - 1 - left.point) + (right.data.size() - 1 - right.point);
 	Result _result;
 	Operand_Base result;
-	//分段乘法次数
-	unsigned long long max;
-	if (left.data.size() > right.data.size()) {
-		max = left.data.size() - 1;
-	}
-	else
-	{
-		max = right.data.size() - 1;
-	}
-	//动态数组
-	Operand_Base** ppresult = new Operand_Base*[max];
-	//开辟储存空间
-	for (unsigned long long i = 0; i < max; i++) {
-		ppresult[i] = new Operand_Base;
-	}
 	//用于储存中间数据
 	Operand_Base middle;
 	Value<char>* left_max = left.data.begin();
@@ -576,6 +554,139 @@ Operand_Base High_Precision_Maths_Library::Multiplication(Operand_Base& left, Op
 	Value<char>* right_do = right.data.end();
 	Value<char>* begin = nullptr;
 	char _0 = '0';
+	while (true)
+	{
+		if (right_do == right_max) {
+			middle.data.clear();
+			middle.data.push_back((char&)_10);
+			begin = middle.data.begin();
+			_result.change = '0';
+			_result.result = '0';
+			while (true)
+			{
+				if (left_do == left_max) {
+					high_precision_multiplication(*left_do->value, *right_do->value, _result);
+					middle.data.insert(begin, _result.result);
+					break;
+				}
+				if (*left_do->value == '.') {
+					left_do = left_do->last;
+				}
+				high_precision_multiplication(*left_do->value, *right_do->value, _result);
+				middle.data.insert(begin, _result.result);
+				left_do = left_do->last;
+			}
+			if (_result.change != '0') {
+				middle.data.insert(begin, _result.change);
+			}
+			middle.data.pop();
+			for (unsigned long long i = 0; i < need; i++) {
+				middle.data.push_back(_0);
+			}
+			if (need == 0) {
+				result = middle;
+			}
+			else
+			{
+				result += middle;
+				//弹出小数点和后补零
+				result.data.pop();
+				result.data.pop();
+			}
+			break;
+		}
+		if (*right_do->value == '.') {
+			right_do = right_do->last;
+			if (right_do == right_max) {
+				middle.data.clear();
+				middle.data.push_back((char&)_10);
+				begin = middle.data.begin();
+				_result.change = '0';
+				_result.result = '0';
+				while (true)
+				{
+					if (left_do == left_max) {
+						high_precision_multiplication(*left_do->value, *right_do->value, _result);
+						middle.data.insert(begin, _result.result);
+						break;
+					}
+					if (*left_do->value == '.') {
+						left_do = left_do->last;
+						if (left_do == left_max) {
+							high_precision_multiplication(*left_do->value, *right_do->value, _result);
+							middle.data.insert(begin, _result.result);
+							break;
+						}
+					}
+					high_precision_multiplication(*left_do->value, *right_do->value, _result);
+					middle.data.insert(begin, _result.result);
+					left_do = left_do->last;
+				}
+				if (_result.change != '0') {
+					middle.data.insert(begin, _result.change);
+				}
+				middle.data.pop();
+				for (unsigned long long i = 0; i < need; i++) {
+					middle.data.push_back(_0);
+				}
+				if (need == 0) {
+					result = middle;
+				}
+				else
+				{
+					result += middle;
+					//弹出小数点和后补零
+					result.data.pop();
+					result.data.pop();
+				}
+				break;
+			}
+		}
+		middle.data.clear();
+		middle.data.push_back((char&)_10);
+		begin = middle.data.begin();
+		_result.change = '0';
+		_result.result = '0';
+		while (true)
+		{
+			if (left_do == left_max) {
+				high_precision_multiplication(*left_do->value, *right_do->value, _result);
+				middle.data.insert(begin, _result.result);
+				break;
+			}
+			if (*left_do->value == '.') {
+				left_do = left_do->last;
+				if (left_do == left_max) {
+					high_precision_multiplication(*left_do->value, *right_do->value, _result);
+					middle.data.insert(begin, _result.result);
+					break;
+				}
+			}
+			high_precision_multiplication(*left_do->value, *right_do->value, _result);
+			middle.data.insert(begin, _result.result);
+			left_do = left_do->last;
+		}
+		if (_result.change != '0') {
+			middle.data.insert(begin, _result.change);
+		}
+		middle.data.pop();
+		for (unsigned long long i = 0; i < need; i++) {
+			middle.data.push_back(_0);
+		}
+		if (need == 0) {
+			result = middle;
+		}
+		else
+		{
+			result += middle;
+			//弹出小数点和后补零
+			result.data.pop();
+			result.data.pop();
+		}
+		need++;
+		right_do = right_do->last;
+		left_do = left.data.end();
+	}
 	//插入小数点
 	begin = result.data.end();
 	for (unsigned long long i = 0; i < rl_point - 1; i++) {
@@ -587,7 +698,7 @@ Operand_Base High_Precision_Maths_Library::Multiplication(Operand_Base& left, Op
 	return result;
 }
 
-inline void High_Precision_Maths_Library::remain_significant_number(Operand_Base& value)
+__forceinline void High_Precision_Maths_Library::remain_significant_number(Operand_Base& value)
 {
 	char _0 = '0';
 	while (true)
@@ -621,7 +732,7 @@ inline void High_Precision_Maths_Library::remain_significant_number(Operand_Base
 	return;
 }
 
-inline void High_Precision_Maths_Library::high_precision_subtraction(char& left, char& right, Result& _result)
+__forceinline void High_Precision_Maths_Library::high_precision_subtraction(char& left, char& right, Result& _result)
 {
 	//遇到小数点返回
 	if (left == '.' || right == '.') {
@@ -689,7 +800,7 @@ Operand_Base High_Precision_Maths_Library::Division(Operand_Base left, Operand_B
 		}
 		else
 		{
-			right >>= 1;
+			right <<= 1;
 		}
 	}
 	//算整数
@@ -729,7 +840,7 @@ Operand_Base High_Precision_Maths_Library::Division(Operand_Base left, Operand_B
 		//储存商
 		result.data.push_back(i);
 		//除数缩小10倍
-		right <<= 1;
+		right >>= 1;
 		n--;
 	}
 	//补充小数点
@@ -756,7 +867,7 @@ Operand_Base High_Precision_Maths_Library::Division(Operand_Base left, Operand_B
 		//商
 		i = '0';
 		//余数扩大10倍
-		left >>= 1;
+		left <<= 1;
 		//不够减了，退出
 		while (true) {
 			if (left < right) {
@@ -813,7 +924,7 @@ Operand_Base High_Precision_Maths_Library::Remainder(Operand_Base left, Operand_
 		}
 		else
 		{
-			right >>= 1;
+			right <<= 1;
 		}
 	}
 	//取余数
@@ -843,7 +954,7 @@ Operand_Base High_Precision_Maths_Library::Remainder(Operand_Base left, Operand_
 			}
 		}
 		//除数缩小10倍
-		right <<= 1;
+		right >>= 1;
 	}
 	remain_significant_number(left);
 	position_point(left);
@@ -863,75 +974,18 @@ void High_Precision_Maths_Library::change_precision(int type, unsigned long long
 	}
 	else
 	{
+		//assert(false);
 		Illegal_Data e("所选用的类型超出了支持的范围。");
 		throw(e);
 	}
 }
 
-inline void Extraction_theard_1(Operand_Base* a, unsigned long long n, Operand_Base* result) {
+__forceinline void Extraction_theard_1(Operand_Base* a, unsigned long long n, Operand_Base* result) {
 	*result = (*a) ^ (n - 1);
 	return;
 }
 
-inline void Extraction_theard_2(Operand_Base* a, unsigned long long n, Operand_Base* result) {
+__forceinline void Extraction_theard_2(Operand_Base* a, unsigned long long n, Operand_Base* result) {
 	*result = (*a) * (n - 1);
 	return;
-}
-
-namespace High_Precision_Maths_Library {
-	inline void Multiplication_thread(Operand_Base* a, Value<char>* value, unsigned long long n, Operand_Base** result, unsigned long long m) {
-		Result _result;
-		Value<char>* left_do = a->data.end();
-		Value<char>* left_max = a->data.begin();
-		Value<char>* begin;
-		char _0 = '0';
-		//循环乘法
-		for (unsigned long long i = 0; i < n; i++) {
-			//遇到小数点，算下一位
-			if (*value->value == '.') {
-				value = value->last;
-				i++;
-				continue;
-			}
-			//归零
-			_result.change = '0';
-			_result.result = '0';
-			//最后加入一个0使迭代器可用
-			result[m]->data.push_back(_0);
-			while (true)
-			{
-				begin = result[m]->data.begin();
-				//到达顶部，执行最后一次乘法
-				if (left_do == left_max) {
-					high_precision_multiplication(*left_do->value, *value->value, _result);
-					result[m]->data.insert(begin, _result.result);
-					break;
-				}
-				//遇到小数点，跳过
-				if (*left_do->value == '.') {
-					left_do = left_do->last;
-					continue;
-				}
-				high_precision_multiplication(*left_do->value, *value->value, _result);
-				result[m]->data.insert(begin, _result.result);
-				left_do = left_do->last;
-			}
-			if (_result.change != '0') {
-				result[m]->data.insert(begin, _result.change);
-			}
-			//弹出补上的0
-			result[m]->data.pop();
-			//插入0
-			for (unsigned long long k = 0; k < m; k++) {
-				result[m]->data.push_back(_0);
-			}
-			m++;
-			left_do = a->data.end();
-			//未到顶就上移
-			if (value->last != nullptr) {
-				value = value->last;
-			}
-		}
-		return;
-	}
 }

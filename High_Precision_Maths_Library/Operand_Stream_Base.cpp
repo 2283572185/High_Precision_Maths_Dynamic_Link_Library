@@ -19,7 +19,7 @@ High_Precision_Maths_Library::OperandStream_Base::OperandStream_Base(const Opera
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(int value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(int value)
 {
 	if (this->state == empty) {
 		Operand_Base o(value);
@@ -34,7 +34,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(int val
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(short value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(short value)
 {
 	if (this->state == empty) {
 		Operand_Base o(value);
@@ -49,7 +49,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(short v
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(long value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(long value)
 {
 	if (this->state == empty) {
 		Operand_Base o(value);
@@ -64,7 +64,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(long va
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(long long value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(long long value)
 {
 	if (this->state == empty) {
 		Operand_Base o(value);
@@ -79,7 +79,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(long lo
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(unsigned int value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(unsigned int value)
 {
 	if (this->state == empty) {
 		Operand_Base o(value);
@@ -94,7 +94,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(unsigne
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(unsigned short value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(unsigned short value)
 {
 	if (this->state == empty) {
 		Operand_Base o(value);
@@ -109,7 +109,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(unsigne
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(unsigned long value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(unsigned long value)
 {
 	if (this->state == empty) {
 		Operand_Base o(value);
@@ -124,7 +124,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(unsigne
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(unsigned long long value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(unsigned long long value)
 {
 	if (this->state == empty) {
 		Operand_Base o(value);
@@ -139,7 +139,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(unsigne
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(char value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(char value)
 {
 	if (this->state == empty) {
 		Operand_Base o(value);
@@ -154,7 +154,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(char va
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(string value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(string value)
 {
 	if (this->state == empty) {
 		Operand_Base o(value);
@@ -169,7 +169,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(string 
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(char* value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(char* value)
 {
 	if (this->state == empty) {
 		Operand_Base o(value);
@@ -184,7 +184,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(char* v
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(Operand_Base& value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(Operand_Base& value)
 {
 	if (this->state == empty) {
 		this->data.push_back(value);
@@ -198,7 +198,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(Operand
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(float value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(float value)
 {
 	if (this->state == empty) {
 		Operand_Base o(value);
@@ -213,7 +213,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(float v
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(double value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(double value)
 {
 	if (this->state == empty) {
 		Operand_Base o(value);
@@ -228,7 +228,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(double 
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(long double value)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::operator<<(long double value)
 {
 	if (this->state == empty) {
 		Operand_Base o(value);
@@ -243,7 +243,7 @@ inline void High_Precision_Maths_Library::OperandStream_Base::operator<<(long do
 	return;
 }
 
-inline int High_Precision_Maths_Library::OperandStream_Base::operator>>(int value)
+__forceinline int High_Precision_Maths_Library::OperandStream_Base::operator>>(int value)
 {
 	if (this->state == fill) {
 		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
@@ -260,7 +260,7 @@ inline int High_Precision_Maths_Library::OperandStream_Base::operator>>(int valu
 	return value;
 }
 
-inline short High_Precision_Maths_Library::OperandStream_Base::operator>>(short value)
+__forceinline short High_Precision_Maths_Library::OperandStream_Base::operator>>(short value)
 {
 	if (this->state == fill) {
 		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
@@ -277,7 +277,7 @@ inline short High_Precision_Maths_Library::OperandStream_Base::operator>>(short 
 	return value;
 }
 
-inline long High_Precision_Maths_Library::OperandStream_Base::operator>>(long value)
+__forceinline long High_Precision_Maths_Library::OperandStream_Base::operator>>(long value)
 {
 	if (this->state == fill) {
 		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
@@ -294,7 +294,7 @@ inline long High_Precision_Maths_Library::OperandStream_Base::operator>>(long va
 	return value;
 }
 
-inline long long High_Precision_Maths_Library::OperandStream_Base::operator>>(long long value)
+__forceinline long long High_Precision_Maths_Library::OperandStream_Base::operator>>(long long value)
 {
 	if (this->state == fill) {
 		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
@@ -311,7 +311,7 @@ inline long long High_Precision_Maths_Library::OperandStream_Base::operator>>(lo
 	return value;
 }
 
-inline unsigned int High_Precision_Maths_Library::OperandStream_Base::operator>>(unsigned int value)
+__forceinline unsigned int High_Precision_Maths_Library::OperandStream_Base::operator>>(unsigned int value)
 {
 	if (this->state == fill) {
 		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
@@ -328,7 +328,7 @@ inline unsigned int High_Precision_Maths_Library::OperandStream_Base::operator>>
 	return value;
 }
 
-inline unsigned short High_Precision_Maths_Library::OperandStream_Base::operator>>(unsigned short value)
+__forceinline unsigned short High_Precision_Maths_Library::OperandStream_Base::operator>>(unsigned short value)
 {
 	if (this->state == fill) {
 		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
@@ -345,7 +345,7 @@ inline unsigned short High_Precision_Maths_Library::OperandStream_Base::operator
 	return value;
 }
 
-inline unsigned long High_Precision_Maths_Library::OperandStream_Base::operator>>(unsigned long value)
+__forceinline unsigned long High_Precision_Maths_Library::OperandStream_Base::operator>>(unsigned long value)
 {
 	if (this->state == fill) {
 		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
@@ -362,7 +362,7 @@ inline unsigned long High_Precision_Maths_Library::OperandStream_Base::operator>
 	return value;
 }
 
-inline unsigned long long High_Precision_Maths_Library::OperandStream_Base::operator>>(unsigned long long value)
+__forceinline unsigned long long High_Precision_Maths_Library::OperandStream_Base::operator>>(unsigned long long value)
 {
 	if (this->state == fill) {
 		this->change_precision((Operand_Base&)this->data.top(), (Precision_Base&)Precision_Base(0, round));
@@ -379,7 +379,7 @@ inline unsigned long long High_Precision_Maths_Library::OperandStream_Base::oper
 	return value;
 }
 
-inline char High_Precision_Maths_Library::OperandStream_Base::operator>>(char value)
+__forceinline char High_Precision_Maths_Library::OperandStream_Base::operator>>(char value)
 {
 	if (this->state == fill) {
 		stringstream ss;
@@ -395,7 +395,7 @@ inline char High_Precision_Maths_Library::OperandStream_Base::operator>>(char va
 	return value;
 }
 
-inline string High_Precision_Maths_Library::OperandStream_Base::operator>>(string& value)
+__forceinline string High_Precision_Maths_Library::OperandStream_Base::operator>>(string& value)
 {
 	if (this->state == fill) {
 		value = this->data.top().to_string();
@@ -409,7 +409,7 @@ inline string High_Precision_Maths_Library::OperandStream_Base::operator>>(strin
 	return value;
 }
 
-inline char* High_Precision_Maths_Library::OperandStream_Base::operator>>(char* value)
+__forceinline char* High_Precision_Maths_Library::OperandStream_Base::operator>>(char* value)
 {
 	if (this->state == fill) {
 		string s = this->data.top().to_string();
@@ -428,7 +428,7 @@ inline char* High_Precision_Maths_Library::OperandStream_Base::operator>>(char* 
 	return value;
 }
 
-inline Operand_Base High_Precision_Maths_Library::OperandStream_Base::operator>>(Operand_Base& value)
+__forceinline Operand_Base High_Precision_Maths_Library::OperandStream_Base::operator>>(Operand_Base& value)
 {
 	if (this->state == fill) {
 		value = this->data.top();
@@ -442,7 +442,7 @@ inline Operand_Base High_Precision_Maths_Library::OperandStream_Base::operator>>
 	return value;
 }
 
-inline float High_Precision_Maths_Library::OperandStream_Base::operator>>(float value)
+__forceinline float High_Precision_Maths_Library::OperandStream_Base::operator>>(float value)
 {
 	if (this->state == fill) {
 		stringstream ss;
@@ -458,7 +458,7 @@ inline float High_Precision_Maths_Library::OperandStream_Base::operator>>(float 
 	return value;
 }
 
-inline double High_Precision_Maths_Library::OperandStream_Base::operator>>(double value)
+__forceinline double High_Precision_Maths_Library::OperandStream_Base::operator>>(double value)
 {
 	if (this->state == fill) {
 		stringstream ss;
@@ -474,7 +474,7 @@ inline double High_Precision_Maths_Library::OperandStream_Base::operator>>(doubl
 	return value;
 }
 
-inline long double High_Precision_Maths_Library::OperandStream_Base::operator>>(long double value)
+__forceinline long double High_Precision_Maths_Library::OperandStream_Base::operator>>(long double value)
 {
 	if (this->state == fill) {
 		stringstream ss;
@@ -490,20 +490,20 @@ inline long double High_Precision_Maths_Library::OperandStream_Base::operator>>(
 	return value;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::clear()
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::clear()
 {
 	this->data.clear();
 	this->state = empty;
 	return;
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::free()
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::free()
 {
 	this->state = empty;
 	return;
 }
 
-inline bool High_Precision_Maths_Library::OperandStream_Base::is_empty()
+__forceinline bool High_Precision_Maths_Library::OperandStream_Base::is_empty()
 {
 	if (this->state == empty) {
 		return true;
@@ -514,7 +514,7 @@ inline bool High_Precision_Maths_Library::OperandStream_Base::is_empty()
 	}
 }
 
-inline bool High_Precision_Maths_Library::OperandStream_Base::is_fill()
+__forceinline bool High_Precision_Maths_Library::OperandStream_Base::is_fill()
 {
 	if (this->state == fill) {
 		return true;
@@ -525,7 +525,7 @@ inline bool High_Precision_Maths_Library::OperandStream_Base::is_fill()
 	}
 }
 
-inline void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_Base& value, Precision_Base& precision)
+__forceinline void High_Precision_Maths_Library::OperandStream_Base::change_precision(Operand_Base& value, Precision_Base& precision)
 {
 	char _0 = '0';
 	char _1 = '1';

@@ -86,7 +86,7 @@ namespace High_Precision_Maths_Library {
 	/// </summary>
 	/// <param name="type">要改变的运算符的类型，在下列宏中选择</param>
 	/// <param name="precision">新的精度</param>
-	void change_precision(int type, unsigned long long precision);
+	void DLL_API change_precision(int type, unsigned long long precision);
 	//可选用的运算符类型
 	//除法
 	#define division 1
@@ -95,4 +95,3 @@ namespace High_Precision_Maths_Library {
 	//开方迭代次数，此时precision表示新的迭代次数，迭代次数越大，精度越高
 	#define extraction_of_root_time 3
 }
-void High_Precision_Maths_Library::Multiplication_thread(Operand_Base* a, Value<char>* value, unsigned long long n, Operand_Base** result, unsigned long long m);

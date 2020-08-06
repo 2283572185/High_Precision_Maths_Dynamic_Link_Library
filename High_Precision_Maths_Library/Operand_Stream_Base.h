@@ -8,7 +8,7 @@ namespace High_Precision_Maths_Library {
 	/// <summary>
 	/// 精度转换控制基类
 	/// </summary>
-	class Precision_Base {
+	class DLL_API Precision_Base {
 	protected:
 		friend class OperandStream_Base;
 		//精度，即转换后小数位数，0即为整数
@@ -37,14 +37,14 @@ namespace High_Precision_Maths_Library {
 	/// 使用clear清空流中所有元素，使用free让流变得可以输入。
 	/// 流提供精度转换和类型转换
 	/// </summary>
-	class OperandStream_Base {
+	class DLL_API OperandStream_Base {
 	protected:
 	#define fill  true
 	#define empty false
 		/// <summary>
 		/// 用于储存流内部的数据
 		/// </summary>
-		DDM<Operand_Base> data;
+		DDM<High_Precision_Maths_Library::Operand_Base> data;
 		bool state;
 	public:
 		OperandStream_Base();
@@ -61,7 +61,7 @@ namespace High_Precision_Maths_Library {
 		virtual void operator<<(char value);
 		virtual void operator<<(std::string value);
 		virtual void operator<<(char* value);
-		virtual void operator<<(Operand_Base& value);
+		virtual void operator<<(High_Precision_Maths_Library::Operand_Base& value);
 		virtual void operator<<(float value);
 		virtual void operator<<(double value);
 		virtual void operator<<(long double value);
@@ -84,7 +84,7 @@ namespace High_Precision_Maths_Library {
 		/// 会动态分配内存，当心内存泄漏
 		/// </summary>
 		virtual char* operator>>(char* value);
-		virtual Operand_Base operator>>(Operand_Base& value);
+		virtual High_Precision_Maths_Library::Operand_Base operator>>(High_Precision_Maths_Library::Operand_Base& value);
 		virtual float operator>>(float value);
 		virtual double operator>>(double value);
 		virtual long double operator>>(long double value);
@@ -111,6 +111,6 @@ namespace High_Precision_Maths_Library {
 		/// </summary>
 		/// <param name="value">要进行精度转换的对象</param>
 		/// <param name="precision">精度控制类的对象，决定了转换方式和转换后精度</param>
-		static void change_precision(Operand_Base& value, Precision_Base& precision);
+		static void change_precision(High_Precision_Maths_Library::Operand_Base& value, Precision_Base& precision);
 	};
 }

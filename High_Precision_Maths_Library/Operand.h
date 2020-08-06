@@ -23,6 +23,7 @@
 #include "Operation_Base.h"
 using namespace High_Precision_Maths_Library;
 using Operand = Operand_Standard;
+using OperandStream = OperandStream_Base;
 //常数表，使用常数表来提高效率
 namespace High_Precision_Maths_Library {
 //π

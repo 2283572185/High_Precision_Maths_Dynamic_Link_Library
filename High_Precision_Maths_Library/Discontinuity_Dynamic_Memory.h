@@ -495,6 +495,7 @@ namespace Discontinuity_Dynamic_Memory {
 			throw(e);
 		}
 		Value<T>* pp = point;
+		delete point->value;
 		while (true)
 		{
 			if (pp == this->_top) {
