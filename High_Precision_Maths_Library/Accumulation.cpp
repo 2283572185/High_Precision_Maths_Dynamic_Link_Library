@@ -87,7 +87,7 @@ __forceinline Operand_Standard High_Precision_Maths_Library::Accumulation::get_r
 {
 	Operand_Standard result;
 	Value<Operand_Standard>* sign = this->data.begin();
-	unsigned long long max = this->data.size();
+	unsigned long long max = this->data.size() - 1;
 	for (unsigned long long i = 0; i < max; i++) {
 		if (i == 0) {
 			result = *sign->value;

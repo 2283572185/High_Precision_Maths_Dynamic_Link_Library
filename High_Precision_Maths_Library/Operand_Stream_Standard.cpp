@@ -649,8 +649,14 @@ __forceinline void High_Precision_Maths_Library::OperandStream_Standard::free()
 	return;
 }
 
-void High_Precision_Maths_Library::OperandStream_Standard::change_precision(High_Precision_Maths_Library::Operand_Standard& value, Precision_Base& precision)
+__forceinline void High_Precision_Maths_Library::OperandStream_Standard::change_precision(High_Precision_Maths_Library::Operand_Standard& value, Precision_Base& precision)
 {
 	OperandStream_Base::change_precision(value.data, precision);
+	return;
+}
+
+__forceinline void High_Precision_Maths_Library::OperandStream_Standard::absolute_value(High_Precision_Maths_Library::Operand_Standard& value)
+{
+	value.minus = false;
 	return;
 }

@@ -2,7 +2,7 @@
 #include "Operand_Standard.h"
 namespace High_Precision_Maths_Library {
 	/// <summary>
-	/// 累加类，将输入Operand_Standard或Operand_Base对象相加并输出，提供查找函数，是Operand_Standard的集合，可以进行从小到大排序
+	/// 累加类，将输入Operand_Standard或Operand_Base对象相加并输出，是Operand_Standard的集合，可以进行从小到大排序
 	/// 抛出的所有异常都是Error的子类
 	/// </summary>
 	class DLL_API Accumulation {
@@ -10,6 +10,7 @@ namespace High_Precision_Maths_Library {
 		//累加类内部的元素
 		DDM<Operand_Standard> data;
 	public:
+		friend class Statistics;
 		/// <summary>
 		/// 构造一个空的对象
 		/// </summary>
@@ -81,3 +82,4 @@ namespace High_Precision_Maths_Library {
 		void put(Operand_Base& value);
 	};
 }
+#include "Statistics.h"

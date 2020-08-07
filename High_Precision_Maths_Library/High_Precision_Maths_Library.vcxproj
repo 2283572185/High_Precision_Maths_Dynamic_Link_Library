@@ -168,6 +168,7 @@
     <ClInclude Include="Operand_Stream_Base.h" />
     <ClInclude Include="Operand_Stream_Standard.h" />
     <ClInclude Include="Operation_Base.h" />
+    <ClInclude Include="Statistics.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Accumulation.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="Operand_Stream_Base.cpp" />
     <ClCompile Include="Operand_Stream_Standard.cpp" />
     <ClCompile Include="Operation_Base.cpp" />
+    <ClCompile Include="Statistics.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

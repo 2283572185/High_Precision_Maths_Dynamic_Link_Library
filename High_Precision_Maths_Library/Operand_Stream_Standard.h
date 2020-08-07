@@ -72,5 +72,9 @@ namespace High_Precision_Maths_Library {
 		/// <param name="value">要进行精度转换的对象</param>
 		/// <param name="precision">精度控制类的对象，决定了转换方式和转换后精度</param>
 		static void change_precision(High_Precision_Maths_Library::Operand_Standard& value, High_Precision_Maths_Library::Precision_Base& precision);
+		/// <summary>
+		/// 计算绝对值
+		/// </summary>
+		static void absolute_value(High_Precision_Maths_Library::Operand_Standard& value);
 	};
 }
