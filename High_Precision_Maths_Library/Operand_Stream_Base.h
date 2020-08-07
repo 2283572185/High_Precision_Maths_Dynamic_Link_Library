@@ -36,7 +36,7 @@ namespace High_Precision_Maths_Library {
 	/// </summary>
 	class DLL_API OperandStream_Base {
 	protected:
-#define fill  true
+#define fill true
 #define empty false
 		/// <summary>
 		/// 用于储存流内部的数据

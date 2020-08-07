@@ -160,6 +160,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Accumulation.h" />
     <ClInclude Include="Discontinuity_Dynamic_Memory.h" />
     <ClInclude Include="Operand.h" />
     <ClInclude Include="Operand_Base.h" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Operation_Base.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Accumulation.cpp" />
     <ClCompile Include="Operand_Base.cpp" />
     <ClCompile Include="Operand_Standard.cpp" />
     <ClCompile Include="Operand_Stream_Base.cpp" />

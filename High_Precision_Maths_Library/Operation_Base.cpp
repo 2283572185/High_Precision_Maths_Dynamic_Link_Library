@@ -21,7 +21,7 @@ unsigned long long Extraction_Of_Root_Time = 7;
 constexpr auto _10 = ':';
 using namespace High_Precision_Maths_Library;
 
-__forceinline void __fastcall High_Precision_Maths_Library::position_point(Operand_Base& value)
+__forceinline void High_Precision_Maths_Library::position_point(Operand_Base& value)
 {
 	char _point = '.';
 	char _0 = '0';
@@ -58,7 +58,7 @@ __forceinline void __fastcall High_Precision_Maths_Library::position_point(Opera
 	return;
 }
 
-__forceinline void __fastcall High_Precision_Maths_Library::high_precision_addition(char& left, char& right, Result& _result)
+__forceinline void High_Precision_Maths_Library::high_precision_addition(char& left, char& right, Result& _result)
 {
 	//如果是小数点，直接返回
 	if (left == '.' || right == '.') {
@@ -83,7 +83,7 @@ __forceinline void __fastcall High_Precision_Maths_Library::high_precision_addit
 	return;
 }
 
-__forceinline void __fastcall High_Precision_Maths_Library::decimal_point(Operand_Base& left, Operand_Base& right)
+__forceinline void High_Precision_Maths_Library::decimal_point(Operand_Base& left, Operand_Base& right)
 {
 	//补充前导零
 	char _0 = '0';
@@ -119,7 +119,7 @@ __forceinline void __fastcall High_Precision_Maths_Library::decimal_point(Operan
 	}
 }
 
-Operand_Base __fastcall High_Precision_Maths_Library::Addition(Operand_Base& left, Operand_Base& right)
+Operand_Base High_Precision_Maths_Library::Addition(Operand_Base& left, Operand_Base& right)
 {
 	position_point(left);
 	position_point(right);
@@ -146,7 +146,7 @@ Operand_Base __fastcall High_Precision_Maths_Library::Addition(Operand_Base& lef
 	return result;
 }
 
-__forceinline void __fastcall High_Precision_Maths_Library::high_precision_multiplication(char& left, char& right, Result& _result)
+__forceinline void High_Precision_Maths_Library::high_precision_multiplication(char& left, char& right, Result& _result)
 {
 	//如果是小数点，重置，直接返回
 	if (left == '.' || right == '.') {
@@ -535,7 +535,7 @@ __forceinline void __fastcall High_Precision_Maths_Library::high_precision_multi
 	return;
 }
 
-Operand_Base __fastcall High_Precision_Maths_Library::Multiplication(Operand_Base& left, Operand_Base& right)
+Operand_Base High_Precision_Maths_Library::Multiplication(Operand_Base& left, Operand_Base& right)
 {
 	char _point = '.';
 	position_point(left);
@@ -697,7 +697,7 @@ Operand_Base __fastcall High_Precision_Maths_Library::Multiplication(Operand_Bas
 	return result;
 }
 
-__forceinline void __fastcall High_Precision_Maths_Library::remain_significant_number(Operand_Base& value)
+__forceinline void High_Precision_Maths_Library::remain_significant_number(Operand_Base& value)
 {
 	char _0 = '0';
 	while (true)
@@ -731,7 +731,7 @@ __forceinline void __fastcall High_Precision_Maths_Library::remain_significant_n
 	return;
 }
 
-__forceinline void __fastcall High_Precision_Maths_Library::high_precision_subtraction(char& left, char& right, Result& _result)
+__forceinline void High_Precision_Maths_Library::high_precision_subtraction(char& left, char& right, Result& _result)
 {
 	//遇到小数点返回
 	if (left == '.' || right == '.') {
@@ -754,7 +754,7 @@ __forceinline void __fastcall High_Precision_Maths_Library::high_precision_subtr
 	return;
 }
 
-Operand_Base __fastcall High_Precision_Maths_Library::Subtraction(Operand_Base& left, Operand_Base& right)
+Operand_Base High_Precision_Maths_Library::Subtraction(Operand_Base& left, Operand_Base& right)
 {
 	position_point(left);
 	position_point(right);
@@ -778,7 +778,7 @@ Operand_Base __fastcall High_Precision_Maths_Library::Subtraction(Operand_Base& 
 	return result;
 }
 
-Operand_Base __fastcall High_Precision_Maths_Library::Division(Operand_Base left, Operand_Base right)
+Operand_Base High_Precision_Maths_Library::Division(Operand_Base left, Operand_Base right)
 {
 	position_point(left);
 	position_point(right);
@@ -884,7 +884,7 @@ Operand_Base __fastcall High_Precision_Maths_Library::Division(Operand_Base left
 	return result;
 }
 
-Operand_Base __fastcall High_Precision_Maths_Library::Extraction(Operand_Base left, unsigned long long n)
+Operand_Base High_Precision_Maths_Library::Extraction(Operand_Base left, unsigned long long n)
 {
 	if (n == 0) {
 		Illegal_Data e("不存在0次方根。");
@@ -909,7 +909,7 @@ Operand_Base __fastcall High_Precision_Maths_Library::Extraction(Operand_Base le
 	return a;
 }
 
-Operand_Base __fastcall High_Precision_Maths_Library::Remainder(Operand_Base left, Operand_Base right)
+Operand_Base High_Precision_Maths_Library::Remainder(Operand_Base left, Operand_Base right)
 {
 	position_point(left);
 	position_point(right);
@@ -960,7 +960,7 @@ Operand_Base __fastcall High_Precision_Maths_Library::Remainder(Operand_Base lef
 	return left;
 }
 
-void __fastcall High_Precision_Maths_Library::change_precision(int type, unsigned long long precision)
+void High_Precision_Maths_Library::change_precision(int type, unsigned long long precision)
 {
 	if (type == division) {
 		Division_Precision = precision;
@@ -979,12 +979,12 @@ void __fastcall High_Precision_Maths_Library::change_precision(int type, unsigne
 	}
 }
 
-__forceinline void __fastcall Extraction_theard_1(Operand_Base* a, unsigned long long n, Operand_Base* result) {
+__forceinline void Extraction_theard_1(Operand_Base* a, unsigned long long n, Operand_Base* result) {
 	*result = (*a) ^ (n - 1);
 	return;
 }
 
-__forceinline void __fastcall Extraction_theard_2(Operand_Base* a, unsigned long long n, Operand_Base* result) {
+__forceinline void Extraction_theard_2(Operand_Base* a, unsigned long long n, Operand_Base* result) {
 	*result = (*a) * (n - 1);
 	return;
 }

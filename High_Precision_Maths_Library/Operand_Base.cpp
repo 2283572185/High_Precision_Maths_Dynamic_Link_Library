@@ -617,7 +617,7 @@ High_Precision_Maths_Library::Operand_Base::Operand_Base(DDM<char>& value)
 	return;
 }
 
-std::string   High_Precision_Maths_Library::Operand_Base::to_string()
+std::string  High_Precision_Maths_Library::Operand_Base::to_string()
 {
 	std::string s;
 	unsigned long long max = this->data.size();
@@ -627,7 +627,7 @@ std::string   High_Precision_Maths_Library::Operand_Base::to_string()
 	return s;
 }
 
-bool   High_Precision_Maths_Library::Operand_Base::operator==(Operand_Base& right)
+bool  High_Precision_Maths_Library::Operand_Base::operator==(Operand_Base& right)
 {
 	remain_significant_number(*this);
 	remain_significant_number(right);
@@ -646,12 +646,12 @@ bool   High_Precision_Maths_Library::Operand_Base::operator==(Operand_Base& righ
 	}
 }
 
-bool   High_Precision_Maths_Library::Operand_Base::operator!=(Operand_Base& right)
+bool  High_Precision_Maths_Library::Operand_Base::operator!=(Operand_Base& right)
 {
 	return !(*this == right);
 }
 
-bool   High_Precision_Maths_Library::Operand_Base::operator>(Operand_Base& right)
+bool  High_Precision_Maths_Library::Operand_Base::operator>(Operand_Base& right)
 {
 	if (*this == right) {
 		return false;

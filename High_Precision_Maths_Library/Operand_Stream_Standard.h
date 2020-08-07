@@ -13,7 +13,7 @@ namespace High_Precision_Maths_Library {
 		DDM<High_Precision_Maths_Library::Operand_Standard> data_S;
 		bool is_S = false;
 	public:
-#define fill  true
+#define fill true
 #define empty false
 		OperandStream_Standard();
 		OperandStream_Standard(const OperandStream_Standard& value);

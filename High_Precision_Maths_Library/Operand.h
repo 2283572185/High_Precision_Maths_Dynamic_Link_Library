@@ -5,7 +5,6 @@
 	Compiled with Visual Studio 2019 (v142)
 	Use C++17 standard
 	Use Window SDK 10.0
-	Use __fastcall in the caller to speed up execution
 	Download https://github.com/2283572185/High_Precision_Maths_Library
 */
 //非常重要的一点：请按照数的位数来调高开方的迭代次数
@@ -22,6 +21,7 @@
 #include "Operand_Stream_Base.h"
 #include "Operation_Base.h"
 #include "Operand_Stream_Standard.h"
+#include "Accumulation.h"
 using namespace High_Precision_Maths_Library;
 using Operand = Operand_Standard;
 using OperandStream = OperandStream_Standard;

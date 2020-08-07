@@ -5,7 +5,6 @@
 	Compiled with Visual Studio 2019 (v142)
 	Use C++17 standard
 	Use Window SDK 10.0
-	Use __fastcall in the caller to speed up execution
 	Download https://github.com/2283572185/High_Precision_Maths_Library
 */
 
@@ -109,144 +108,144 @@ namespace High_Precision_Maths_Library {
 		friend Operand_Base Remainder(Operand_Base left, Operand_Base right);
 		friend class Operand_Standard;
 		friend class OperandStream_Base;
-		__fastcall Operand_Base();
-		__fastcall Operand_Base(int value);
-		__fastcall Operand_Base(short value);
-		__fastcall Operand_Base(long value);
-		__fastcall Operand_Base(long long value);
-		__fastcall Operand_Base(unsigned int value);
-		__fastcall Operand_Base(unsigned short value);
-		__fastcall Operand_Base(unsigned long value);
-		__fastcall Operand_Base(unsigned long long value);
-		__fastcall Operand_Base(char value);
-		__fastcall Operand_Base(std::string value);
-		__fastcall Operand_Base(char* value);
-		__fastcall Operand_Base(float value);
-		__fastcall Operand_Base(double value);
-		__fastcall Operand_Base(long double value);
-		__fastcall Operand_Base(const Operand_Base& value);
-		__fastcall Operand_Base(DDM<char>& value);
+		Operand_Base();
+		Operand_Base(int value);
+		Operand_Base(short value);
+		Operand_Base(long value);
+		Operand_Base(long long value);
+		Operand_Base(unsigned int value);
+		Operand_Base(unsigned short value);
+		Operand_Base(unsigned long value);
+		Operand_Base(unsigned long long value);
+		Operand_Base(char value);
+		Operand_Base(std::string value);
+		Operand_Base(char* value);
+		Operand_Base(float value);
+		Operand_Base(double value);
+		Operand_Base(long double value);
+		Operand_Base(const Operand_Base& value);
+		Operand_Base(DDM<char>& value);
 		/// <summary>
 		/// 将对象内所以的字符转化成一个字符串并返回
 		/// </summary>
-		std::string __fastcall to_string();
+		std::string to_string();
 		/// <summary>
 		/// 相等返回true，反正返回false
 		/// </summary>
-		bool __fastcall operator==(Operand_Base& right);
+		bool operator==(Operand_Base& right);
 		/// <summary>
 		/// 不相等true，反正返回false
 		/// </summary>
-		bool __fastcall operator!=(Operand_Base& right);
+		bool operator!=(Operand_Base& right);
 		/// <summary>
 		/// 大于返回true，反正返回false
 		/// </summary>
-		bool __fastcall operator>(Operand_Base& right);
+		bool operator>(Operand_Base& right);
 		/// <summary>
 		/// 小于等于返回true，反正返回false
 		/// </summary>
-		bool __fastcall operator<=(Operand_Base& right);
+		bool operator<=(Operand_Base& right);
 		/// <summary>
 		/// 小于返回true，反正返回false
 		/// </summary>
-		bool __fastcall operator<(Operand_Base& right);
+		bool operator<(Operand_Base& right);
 		/// <summary>
 		/// 大于等于返回true，反正返回false
 		/// </summary>
-		bool __fastcall operator>=(Operand_Base& right);
+		bool operator>=(Operand_Base& right);
 		/// <summary>
 		/// 将right的值赋值给对象
 		/// </summary>
-		Operand_Base& __fastcall operator=(const Operand_Base right);
+		Operand_Base& operator=(const Operand_Base right);
 		/// <summary>
 		/// 计算此对象与right的和
 		/// </summary>
-		Operand_Base __fastcall operator+(Operand_Base right);
+		Operand_Base operator+(Operand_Base right);
 		/// <summary>
 		/// 计算此对象与right的和并赋值给此对象
 		/// </summary>
-		Operand_Base& __fastcall operator+=(Operand_Base& right);
+		Operand_Base& operator+=(Operand_Base& right);
 		/// <summary>
 		/// 前置自增运算符
 		/// </summary>
-		Operand_Base& __fastcall operator++();
+		Operand_Base& operator++();
 		/// <summary>
 		/// 后置自增运算符
 		/// </summary>
-		Operand_Base __fastcall operator++(int);
+		Operand_Base operator++(int);
 		/// <summary>
 		/// 计算此对象与right的积
 		/// </summary>
-		Operand_Base __fastcall operator*(Operand_Base right);
+		Operand_Base operator*(Operand_Base right);
 		/// <summary>
 		/// 计算此对象与right的积并赋值给对象
 		/// </summary>
-		Operand_Base& __fastcall operator*=(Operand_Base& right);
+		Operand_Base& operator*=(Operand_Base& right);
 		/// <summary>
 		/// 乘方
 		/// </summary>
 		/// <param name="right">次数，请确保次数是整数</param>
-		Operand_Base __fastcall operator^(unsigned long long point);
+		Operand_Base operator^(unsigned long long point);
 		/// <summary>
 		/// 乘方并赋值给对象
 		/// </summary>
-		Operand_Base& __fastcall operator^=(unsigned long long point);
+		Operand_Base& operator^=(unsigned long long point);
 		/// <summary>
 		/// 计算此对象与right的差
 		/// </summary>
-		Operand_Base __fastcall operator-(Operand_Base right);
+		Operand_Base operator-(Operand_Base right);
 		/// <summary>
 		/// 计算此对象与right的差并赋值给此对象
 		/// </summary>
-		Operand_Base& __fastcall operator-=(Operand_Base& right);
+		Operand_Base& operator-=(Operand_Base& right);
 		/// <summary>
 		/// 前置自减运算符
 		/// </summary>
-		Operand_Base& __fastcall operator--();
+		Operand_Base& operator--();
 		/// <summary>
 		/// 后置自减运算符
 		/// </summary>
-		Operand_Base __fastcall operator--(int);
+		Operand_Base operator--(int);
 		/// <summary>
 		/// 计算此对象与right的商
 		/// </summary>
-		Operand_Base __fastcall operator/(Operand_Base right);
+		Operand_Base operator/(Operand_Base right);
 		/// <summary>
 		/// 计算此对象与right的商并赋值给对象
 		/// </summary>
-		Operand_Base& __fastcall operator/=(Operand_Base& right);
+		Operand_Base& operator/=(Operand_Base& right);
 		/// <summary>
 		/// 缩小10^n倍
 		/// </summary>
-		Operand_Base __fastcall operator>>(unsigned long long n);
+		Operand_Base operator>>(unsigned long long n);
 		/// <summary>
 		/// 缩小10^n倍并赋值给对象
 		/// </summary>
-		Operand_Base& __fastcall operator>>=(unsigned long long n);
+		Operand_Base& operator>>=(unsigned long long n);
 		/// <summary>
 		/// 扩大10^n倍
 		/// </summary>
-		Operand_Base __fastcall operator<<(unsigned long long n);
+		Operand_Base operator<<(unsigned long long n);
 		/// <summary>
 		/// 扩大10^n倍并赋值给对象
 		/// </summary>
-		Operand_Base& __fastcall operator<<=(unsigned long long n);
+		Operand_Base& operator<<=(unsigned long long n);
 		/// <summary>
 		/// 求对象的n次方根
 		/// </summary>
-		Operand_Base __fastcall operator&(unsigned long long n);
+		Operand_Base operator&(unsigned long long n);
 		/// <summary>
 		/// 求对象的n次方根并赋值给对象
 		/// </summary>
-		Operand_Base& __fastcall operator&=(unsigned long long n);
+		Operand_Base& operator&=(unsigned long long n);
 		/// <summary>
 		/// 计算此对象与right的余数
 		/// </summary>
-		Operand_Base __fastcall operator%(Operand_Base right);
+		Operand_Base operator%(Operand_Base right);
 		/// <summary>
 		/// 计算此对象与right的余数并赋值给对象
 		/// </summary>
-		Operand_Base& __fastcall operator%=(Operand_Base& right);
+		Operand_Base& operator%=(Operand_Base& right);
 	};
 }
 #include "Operation_Base.h"

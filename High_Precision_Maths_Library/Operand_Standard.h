@@ -7,7 +7,6 @@
 	Compiled with Visual Studio 2019 (v142)
 	Use C++17 standard
 	Use Window SDK 10.0
-	Use __fastcall in the caller to speed up execution
 	Download https://github.com/2283572185/High_Precision_Maths_Library
 */
 
@@ -62,6 +61,7 @@ namespace High_Precision_Maths_Library {
 		bool minus;
 	public:
 		friend class OperandStream_Standard;
+		friend class Accumulation;
 		Operand_Standard();
 		Operand_Standard(int value);
 		Operand_Standard(short value);
@@ -205,3 +205,4 @@ namespace High_Precision_Maths_Library {
 		void operator()(Operand_Standard& value);
 	};
 }
+#include "Accumulation.h"
