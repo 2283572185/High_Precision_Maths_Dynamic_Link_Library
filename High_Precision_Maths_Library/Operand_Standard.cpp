@@ -3,12 +3,12 @@
 static char _0 = '0';
 static char _point = '.';
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard()
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard()
 {
 	this->minus = false;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(int value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(int value)
 {
 	stringstream ss;
 	string s;
@@ -60,7 +60,7 @@ High_Precision_Maths_Library::Operand_Standard::Operand_Standard(int value)
 	return;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(short value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(short value)
 {
 	stringstream ss;
 	string s;
@@ -112,7 +112,7 @@ High_Precision_Maths_Library::Operand_Standard::Operand_Standard(short value)
 	return;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(long value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(long value)
 {
 	stringstream ss;
 	string s;
@@ -164,7 +164,7 @@ High_Precision_Maths_Library::Operand_Standard::Operand_Standard(long value)
 	return;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(long long value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(long long value)
 {
 	stringstream ss;
 	string s;
@@ -216,7 +216,7 @@ High_Precision_Maths_Library::Operand_Standard::Operand_Standard(long long value
 	return;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(unsigned int value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(unsigned int value)
 {
 	stringstream ss;
 	string s;
@@ -230,49 +230,7 @@ High_Precision_Maths_Library::Operand_Standard::Operand_Standard(unsigned int va
 	return;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(unsigned short value)
-{
-	stringstream ss;
-	string s;
-	ss << value;
-	ss >> s;
-	unsigned long long max = s.length();
-	for (unsigned long long i = 0; i < max; i++) {
-		this->data.data.push_back(s[i]);
-	}
-	this->minus = false;
-	while (true)
-	{
-		//若以小数点开头，在前面补充一个0
-		if (this->data.point == 0 && this->data.data[this->data.point] == '.') {
-			this->data.data.insert(this->data.data.begin(), _0);
-			break;
-		}
-		//若以小数点结尾，在最后补充一个0
-		else if (this->data.point == max - 1 && this->data.data[this->data.point] == '.') {
-			this->data.data.push_back(_0);
-			break;
-		}
-		//若没有小数点，则补充小数点和0
-		else if (this->data.point == max - 1 && this->data.data[this->data.point] != '.') {
-			this->data.data.push_back(_point);
-			this->data.data.push_back(_0);
-			this->data.point++;
-			break;
-		}
-		//若碰到小数点，返回
-		else if (this->data.data[this->data.point] == '.') {
-			break;
-		}
-		else
-		{
-			this->data.point++;
-		}
-	}
-	return;
-}
-
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(unsigned long value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(unsigned short value)
 {
 	stringstream ss;
 	string s;
@@ -314,7 +272,7 @@ High_Precision_Maths_Library::Operand_Standard::Operand_Standard(unsigned long v
 	return;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(unsigned long long value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(unsigned long value)
 {
 	stringstream ss;
 	string s;
@@ -356,7 +314,49 @@ High_Precision_Maths_Library::Operand_Standard::Operand_Standard(unsigned long l
 	return;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(char value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(unsigned long long value)
+{
+	stringstream ss;
+	string s;
+	ss << value;
+	ss >> s;
+	unsigned long long max = s.length();
+	for (unsigned long long i = 0; i < max; i++) {
+		this->data.data.push_back(s[i]);
+	}
+	this->minus = false;
+	while (true)
+	{
+		//若以小数点开头，在前面补充一个0
+		if (this->data.point == 0 && this->data.data[this->data.point] == '.') {
+			this->data.data.insert(this->data.data.begin(), _0);
+			break;
+		}
+		//若以小数点结尾，在最后补充一个0
+		else if (this->data.point == max - 1 && this->data.data[this->data.point] == '.') {
+			this->data.data.push_back(_0);
+			break;
+		}
+		//若没有小数点，则补充小数点和0
+		else if (this->data.point == max - 1 && this->data.data[this->data.point] != '.') {
+			this->data.data.push_back(_point);
+			this->data.data.push_back(_0);
+			this->data.point++;
+			break;
+		}
+		//若碰到小数点，返回
+		else if (this->data.data[this->data.point] == '.') {
+			break;
+		}
+		else
+		{
+			this->data.point++;
+		}
+	}
+	return;
+}
+
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(char value)
 {
 	if ((value < '0' || value > '9') && value != '.') {
 		Illegal_Data e("value不是一个数字或小数点，不能用于初始化对象");
@@ -378,7 +378,7 @@ High_Precision_Maths_Library::Operand_Standard::Operand_Standard(char value)
 	return;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(std::string value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(std::string value)
 {
 	if (value[0] == '-') {
 		//标记为负数
@@ -426,7 +426,7 @@ High_Precision_Maths_Library::Operand_Standard::Operand_Standard(std::string val
 	return;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(char* value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(char* value)
 {
 	stringstream ss;
 	string s;
@@ -478,7 +478,7 @@ High_Precision_Maths_Library::Operand_Standard::Operand_Standard(char* value)
 	return;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(float value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(float value)
 {
 	stringstream ss;
 	string s;
@@ -530,7 +530,7 @@ High_Precision_Maths_Library::Operand_Standard::Operand_Standard(float value)
 	return;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(double value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(double value)
 {
 	stringstream ss;
 	string s;
@@ -582,7 +582,7 @@ High_Precision_Maths_Library::Operand_Standard::Operand_Standard(double value)
 	return;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(long double value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(long double value)
 {
 	stringstream ss;
 	string s;
@@ -634,14 +634,14 @@ High_Precision_Maths_Library::Operand_Standard::Operand_Standard(long double val
 	return;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(const Operand_Standard& value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(const Operand_Standard& value)
 {
 	this->minus = value.minus;
 	this->data.data.copy((DDM<char>&)value.data.data);
 	this->data.point = value.data.point;
 }
 
-High_Precision_Maths_Library::Operand_Standard::Operand_Standard(DDM<char>& value)
+__fastcall High_Precision_Maths_Library::Operand_Standard::Operand_Standard(DDM<char>& value)
 {
 	if (value[value.begin()] == '-') {
 		//标记为负数
@@ -689,7 +689,7 @@ High_Precision_Maths_Library::Operand_Standard::Operand_Standard(DDM<char>& valu
 	return;
 }
 
-std::string High_Precision_Maths_Library::Operand_Standard::to_string()
+std::string __fastcall High_Precision_Maths_Library::Operand_Standard::to_string()
 {
 	if (this->minus) {
 		return ('-' + this->data.to_string());
@@ -700,7 +700,7 @@ std::string High_Precision_Maths_Library::Operand_Standard::to_string()
 	}
 }
 
-bool High_Precision_Maths_Library::Operand_Standard::operator==(Operand_Standard& right)
+bool __fastcall High_Precision_Maths_Library::Operand_Standard::operator==(Operand_Standard& right)
 {
 	//符号不同，返回false
 	if (this->minus != right.minus) {
@@ -720,7 +720,7 @@ bool High_Precision_Maths_Library::Operand_Standard::operator==(Operand_Standard
 	}
 }
 
-bool High_Precision_Maths_Library::Operand_Standard::operator!=(Operand_Standard& right)
+bool __fastcall High_Precision_Maths_Library::Operand_Standard::operator!=(Operand_Standard& right)
 {
 	//符号不同，返回true
 	if (this->minus != right.minus) {
@@ -740,7 +740,7 @@ bool High_Precision_Maths_Library::Operand_Standard::operator!=(Operand_Standard
 	}
 }
 
-bool High_Precision_Maths_Library::Operand_Standard::operator>(Operand_Standard& right)
+bool __fastcall High_Precision_Maths_Library::Operand_Standard::operator>(Operand_Standard& right)
 {
 	//左正右负，返回true
 	if (!this->minus && right.minus) {
@@ -777,12 +777,12 @@ bool High_Precision_Maths_Library::Operand_Standard::operator>(Operand_Standard&
 	}
 }
 
-bool High_Precision_Maths_Library::Operand_Standard::operator<=(Operand_Standard& right)
+bool __fastcall High_Precision_Maths_Library::Operand_Standard::operator<=(Operand_Standard& right)
 {
 	return !(*this > right);
 }
 
-bool High_Precision_Maths_Library::Operand_Standard::operator<(Operand_Standard& right)
+bool __fastcall High_Precision_Maths_Library::Operand_Standard::operator<(Operand_Standard& right)
 {
 	//左正右负，返回false
 	if (!this->minus && right.minus) {
@@ -819,12 +819,12 @@ bool High_Precision_Maths_Library::Operand_Standard::operator<(Operand_Standard&
 	}
 }
 
-bool High_Precision_Maths_Library::Operand_Standard::operator>=(Operand_Standard& right)
+bool __fastcall High_Precision_Maths_Library::Operand_Standard::operator>=(Operand_Standard& right)
 {
 	return !(*this < right);
 }
 
-Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator+(Operand_Standard& right)
+Operand_Standard __fastcall High_Precision_Maths_Library::Operand_Standard::operator+(Operand_Standard& right)
 {
 	Operand_Standard result;
 	//均为负数
@@ -883,7 +883,7 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator+(Opera
 	return result;
 }
 
-Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator+=(Operand_Standard& right)
+Operand_Standard& __fastcall High_Precision_Maths_Library::Operand_Standard::operator+=(Operand_Standard& right)
 {
 	//均为负数
 	if (this->minus && right.minus) {
@@ -941,7 +941,7 @@ Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator+=(Ope
 	return *this;
 }
 
-Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator++()
+Operand_Standard& __fastcall High_Precision_Maths_Library::Operand_Standard::operator++()
 {
 	Operand_Standard right('1');
 	//若有一者为负数
@@ -993,7 +993,7 @@ Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator++()
 	return *this;
 }
 
-Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator++(int)
+Operand_Standard __fastcall High_Precision_Maths_Library::Operand_Standard::operator++(int)
 {
 	Operand_Standard right('1');
 	//若有一者为负数
@@ -1045,7 +1045,7 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator++(int)
 	return *this;
 }
 
-Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator-(Operand_Standard& right)
+Operand_Standard __fastcall High_Precision_Maths_Library::Operand_Standard::operator-(Operand_Standard& right)
 {
 	Operand_Standard result;
 	//均为负数
@@ -1094,7 +1094,7 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator-(Opera
 	return result;
 }
 
-Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator-=(Operand_Standard& right)
+Operand_Standard& __fastcall High_Precision_Maths_Library::Operand_Standard::operator-=(Operand_Standard& right)
 {
 	//均为负数
 	if (this->minus && right.minus) {
@@ -1142,7 +1142,7 @@ Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator-=(Ope
 	return *this;
 }
 
-Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator--()
+Operand_Standard& __fastcall High_Precision_Maths_Library::Operand_Standard::operator--()
 {
 	Operand_Standard right('1');
 	//若有一者为负数
@@ -1177,7 +1177,7 @@ Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator--()
 	return *this;
 }
 
-Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator--(int)
+Operand_Standard __fastcall High_Precision_Maths_Library::Operand_Standard::operator--(int)
 {
 	Operand_Standard right('1');
 	//若有一者为负数
@@ -1212,7 +1212,7 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator--(int)
 	return *this;
 }
 
-Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator<<(unsigned long long n)
+Operand_Standard __fastcall High_Precision_Maths_Library::Operand_Standard::operator<<(unsigned long long n)
 {
 	Operand_Standard result(*this);
 	result.data.data.push_back((char&)(const char&)'0');
@@ -1228,7 +1228,7 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator<<(unsi
 	return result;
 }
 
-Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator<<=(unsigned long long n)
+Operand_Standard& __fastcall High_Precision_Maths_Library::Operand_Standard::operator<<=(unsigned long long n)
 {
 	this->data.data.push_back((char&)(const char&)'0');
 	for (unsigned long long i = 0; i < n; i++) {
@@ -1243,7 +1243,7 @@ Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator<<=(un
 	return *this;
 }
 
-Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator>>(unsigned long long n)
+Operand_Standard __fastcall High_Precision_Maths_Library::Operand_Standard::operator>>(unsigned long long n)
 {
 	Operand_Standard result(*this);
 	result.data.data.insert(result.data.data.begin(), (char&)(const char&)'0');
@@ -1259,7 +1259,7 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator>>(unsi
 	return result;
 }
 
-Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator>>=(unsigned long long n)
+Operand_Standard& __fastcall High_Precision_Maths_Library::Operand_Standard::operator>>=(unsigned long long n)
 {
 	this->data.data.insert(this->data.data.begin(), (char&)(const char&)'0');
 	for (unsigned long long i = 0; i < n; i++) {
@@ -1274,7 +1274,7 @@ Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator>>=(un
 	return *this;
 }
 
-Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator*(Operand_Standard& right)
+Operand_Standard __fastcall High_Precision_Maths_Library::Operand_Standard::operator*(Operand_Standard& right)
 {
 	Operand_Standard result;
 	//符号相同结果为正
@@ -1291,7 +1291,7 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator*(Opera
 	return result;
 }
 
-Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator*=(Operand_Standard& right)
+Operand_Standard& __fastcall High_Precision_Maths_Library::Operand_Standard::operator*=(Operand_Standard& right)
 {
 	//符号相同结果为正
 	if (this->minus == right.minus) {
@@ -1307,7 +1307,7 @@ Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator*=(Ope
 	return *this;
 }
 
-Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator/(Operand_Standard& right)
+Operand_Standard __fastcall High_Precision_Maths_Library::Operand_Standard::operator/(Operand_Standard& right)
 {
 	Operand_Standard result;
 	//符号相同结果为正
@@ -1324,7 +1324,7 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator/(Opera
 	return result;
 }
 
-Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator/=(Operand_Standard& right)
+Operand_Standard& __fastcall High_Precision_Maths_Library::Operand_Standard::operator/=(Operand_Standard& right)
 {
 	//符号相同结果为正
 	if (this->minus == right.minus) {
@@ -1340,7 +1340,7 @@ Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator/=(Ope
 	return *this;
 }
 
-Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator&(unsigned long long n)
+Operand_Standard __fastcall High_Precision_Maths_Library::Operand_Standard::operator&(unsigned long long n)
 {
 	//偶次根式的被开方数不能是负数
 	if (n % 2 == 0 && this->minus) {
@@ -1359,7 +1359,7 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator&(unsig
 	return result;
 }
 
-Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator&=(unsigned long long n)
+Operand_Standard& __fastcall High_Precision_Maths_Library::Operand_Standard::operator&=(unsigned long long n)
 {
 	//偶次根式的被开方数不能是负数
 	if (n % 2 == 0 && this->minus) {
@@ -1371,7 +1371,7 @@ Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator&=(uns
 	return *this;
 }
 
-Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator^(unsigned long long n)
+Operand_Standard __fastcall High_Precision_Maths_Library::Operand_Standard::operator^(unsigned long long n)
 {
 	if (n == 0) {
 		if (*this == (Operand_Standard&)Operand_Standard('0')) {
@@ -1394,7 +1394,7 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator^(unsig
 	return result;
 }
 
-Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator^=(unsigned long long n)
+Operand_Standard& __fastcall High_Precision_Maths_Library::Operand_Standard::operator^=(unsigned long long n)
 {
 	if (n == 0) {
 		if (*this == (Operand_Standard&)Operand_Standard('0')) {
@@ -1418,7 +1418,7 @@ Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator^=(uns
 	return *this;
 }
 
-Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator^(Operand_Standard& right)
+Operand_Standard __fastcall High_Precision_Maths_Library::Operand_Standard::operator^(Operand_Standard& right)
 {
 	Operand_Standard result;
 	//符号相同结果为正
@@ -1435,7 +1435,7 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator^(Opera
 	return result;
 }
 
-Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator^=(Operand_Standard& right)
+Operand_Standard& __fastcall High_Precision_Maths_Library::Operand_Standard::operator^=(Operand_Standard& right)
 {
 	//符号相同结果为正
 	if (this->minus == right.minus) {
@@ -1451,14 +1451,14 @@ Operand_Standard& High_Precision_Maths_Library::Operand_Standard::operator^=(Ope
 	return *this;
 }
 
-void High_Precision_Maths_Library::Operand_Standard::copy(Operand_Standard& value)
+void __fastcall High_Precision_Maths_Library::Operand_Standard::copy(Operand_Standard& value)
 {
 	this->minus = value.minus;
 	this->data.data.copy(value.data.data);
 	return;
 }
 
-void High_Precision_Maths_Library::Operand_Standard::operator()(Operand_Standard& value)
+void __fastcall High_Precision_Maths_Library::Operand_Standard::operator()(Operand_Standard& value)
 {
 	this->minus = value.minus;
 	this->data.data.copy(value.data.data);

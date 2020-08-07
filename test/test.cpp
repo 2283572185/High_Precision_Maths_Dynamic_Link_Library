@@ -7,13 +7,17 @@ using namespace High_Precision_Maths_Library;
 int main()
 {
 	clock_t start, finish;
-	Operand_Standard o("3.1415926");
+	Operand_Standard o("-3.1415926");
 	Operand_Standard _o(o);
 	change_precision(division, 20);
 	change_precision(extraction_of_root_time, 7);
 	start = clock();
 	o = o ^ 3;
 	finish = clock();
+	string s;
+	OperandStream_Standard os;
+	os << 1;
+	os >> o;
 	cout << o.to_string() << "\n";
 	cout << finish - start;
 }

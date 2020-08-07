@@ -47,62 +47,62 @@ namespace High_Precision_Maths_Library {
 		OperandStream_Base();
 		OperandStream_Base(const OperandStream_Base& value);
 		//输入
-		virtual void operator<<(int value);
-		virtual void operator<<(short value);
-		virtual void operator<<(long value);
-		virtual void operator<<(long long value);
-		virtual void operator<<(unsigned int value);
-		virtual void operator<<(unsigned short value);
-		virtual void operator<<(unsigned long value);
-		virtual void operator<<(unsigned long long value);
-		virtual void operator<<(char value);
-		virtual void operator<<(std::string value);
-		virtual void operator<<(char* value);
-		virtual void operator<<(High_Precision_Maths_Library::Operand_Base& value);
-		virtual void operator<<(float value);
-		virtual void operator<<(double value);
-		virtual void operator<<(long double value);
+		void operator<<(int value);
+		void operator<<(short value);
+		void operator<<(long value);
+		void operator<<(long long value);
+		void operator<<(unsigned int value);
+		void operator<<(unsigned short value);
+		void operator<<(unsigned long value);
+		void operator<<(unsigned long long value);
+		void operator<<(char value);
+		void operator<<(std::string value);
+		void operator<<(char* value);
+		void operator<<(High_Precision_Maths_Library::Operand_Base& value);
+		void operator<<(float value);
+		void operator<<(double value);
+		void operator<<(long double value);
 		//输出，若流中待输出的元素的值超出了输出类型的取值范围，会导致不可预测的结果
 		//输出值会四舍五入
-		virtual int operator>>(int value);
-		virtual short operator>>(short value);
-		virtual long operator>>(long value);
-		virtual long long operator>>(long long value);
-		virtual unsigned int operator>>(unsigned int value);
-		virtual unsigned short operator>>(unsigned short value);
-		virtual unsigned long operator>>(unsigned long value);
-		virtual unsigned long long operator>>(unsigned long long value);
+		int operator>>(int value);
+		short operator>>(short value);
+		long operator>>(long value);
+		long long operator>>(long long value);
+		unsigned int operator>>(unsigned int value);
+		unsigned short operator>>(unsigned short value);
+		unsigned long operator>>(unsigned long value);
+		unsigned long long operator>>(unsigned long long value);
 		/// <summary>
 		/// 若流中待输出的元素转化成的字符串中有多个字符，可能导致输出未知结果
 		/// </summary>
-		virtual char operator>>(char value);
-		virtual std::string operator>>(std::string& value);
+		char operator>>(char value);
+		std::string operator>>(std::string& value);
 		/// <summary>
 		/// 会动态分配内存，当心内存泄漏
 		/// </summary>
-		virtual char* operator>>(char* value);
-		virtual High_Precision_Maths_Library::Operand_Base operator>>(High_Precision_Maths_Library::Operand_Base& value);
-		virtual float operator>>(float value);
-		virtual double operator>>(double value);
-		virtual long double operator>>(long double value);
+		char* operator>>(char* value);
+		High_Precision_Maths_Library::Operand_Base operator>>(High_Precision_Maths_Library::Operand_Base& value);
+		float operator>>(float value);
+		double operator>>(double value);
+		long double operator>>(long double value);
 		/// <summary>
 		/// 清空所以元素
 		/// </summary>
-		virtual void clear();
+		void clear();
 		/// <summary>
 		/// 让流变得可以输入，不释放流内元素
 		/// </summary>
-		virtual void free();
+		void free();
 		/// <summary>
 		/// 判断流是否是空的
 		/// </summary>
 		/// <returns>若流是空的，返回true，反正，返回false</returns>
-		virtual bool is_empty();
+		bool is_empty();
 		/// <summary>
 		/// 判断流是否是满的
 		/// </summary>
 		/// <returns>若流是满的，返回true，反正，返回false</returns>
-		virtual bool is_fill();
+		bool is_fill();
 		/// <summary>
 		/// 精度转换函数，这个函数不会向流中输入对象
 		/// </summary>

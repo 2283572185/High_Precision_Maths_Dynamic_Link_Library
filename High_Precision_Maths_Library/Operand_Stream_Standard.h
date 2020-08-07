@@ -17,6 +17,22 @@ namespace High_Precision_Maths_Library {
 #define empty false
 		OperandStream_Standard();
 		OperandStream_Standard(const OperandStream_Standard& value);
+		//输入
+		void operator<<(int value);
+		void operator<<(short value);
+		void operator<<(long value);
+		void operator<<(long long value);
+		void operator<<(unsigned int value);
+		void operator<<(unsigned short value);
+		void operator<<(unsigned long value);
+		void operator<<(unsigned long long value);
+		void operator<<(char value);
+		void operator<<(std::string value);
+		void operator<<(char* value);
+		void operator<<(High_Precision_Maths_Library::Operand_Base& value);
+		void operator<<(float value);
+		void operator<<(double value);
+		void operator<<(long double value);
 		void operator<<(High_Precision_Maths_Library::Operand_Standard& value);
 		//输出，若流中待输出的元素的值超出了输出类型的取值范围，会导致不可预测的结果
 		//输出值会四舍五入
