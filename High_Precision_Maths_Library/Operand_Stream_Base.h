@@ -18,14 +18,14 @@ namespace High_Precision_Maths_Library {
 		Precision_Base(unsigned long long precision, int type);
 		//以下是所有可以的转换类型，请在以下宏中做出选择
 		//四舍五入
-		#define round 1
-		//去尾法
-		#define round_down 2
-		//进一法
-		#define round_up 3
-		//严格模式，若小数位数不足，会用0不足，取舍策略与选择的转换类型有关，不能单独使用。
-		//使用该模式的情况下，必须再使用一种且只使用一种转换类型，两个宏之间使用按位或运算符(|)连接
-		#define strict 0xf000
+#define round 1
+//去尾法
+#define round_down 2
+//进一法
+#define round_up 3
+//严格模式，若小数位数不足，会用0不足，取舍策略与选择的转换类型有关，不能单独使用。
+//使用该模式的情况下，必须再使用一种且只使用一种转换类型，两个宏之间使用按位或运算符(|)连接
+#define strict 0xf000
 	};
 
 	/// <summary>
@@ -36,8 +36,8 @@ namespace High_Precision_Maths_Library {
 	/// </summary>
 	class DLL_API OperandStream_Base {
 	protected:
-	#define fill  true
-	#define empty false
+#define fill  true
+#define empty false
 		/// <summary>
 		/// 用于储存流内部的数据
 		/// </summary>

@@ -25,7 +25,6 @@
 using namespace High_Precision_Maths_Library;
 using Operand = Operand_Standard;
 //常数表，使用常数表来提高效率
-namespace High_Precision_Maths_Library {
 //π
 #define pai "3.14"
 //π(7位)
@@ -98,4 +97,3 @@ namespace High_Precision_Maths_Library {
 #define $10 "3.162"
 //√10(10位)
 #define $10_10 "3.1622776602"
-}

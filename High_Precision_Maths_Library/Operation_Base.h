@@ -89,9 +89,9 @@ namespace High_Precision_Maths_Library {
 	void DLL_API change_precision(int type, unsigned long long precision);
 	//可选用的运算符类型
 	//除法
-	#define division 1
-	//开方，开方的精度因小于等于除法精度，否则开方精度为除法精度
-	#define extraction_of_root 2
-	//开方迭代次数，此时precision表示新的迭代次数，迭代次数越大，精度越高
-	#define extraction_of_root_time 3
+#define division 1
+//开方，开方的精度因小于等于除法精度，否则开方精度为除法精度
+#define extraction_of_root 2
+//开方迭代次数，此时precision表示新的迭代次数，迭代次数越大，精度越高
+#define extraction_of_root_time 3
 }

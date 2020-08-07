@@ -1087,7 +1087,7 @@ Operand_Standard High_Precision_Maths_Library::Operand_Standard::operator-(Opera
 		//反之，右减左，结果为负
 		else
 		{
-			result.data = Subtraction(right.data,this->data);
+			result.data = Subtraction(right.data, this->data);
 			result.minus = true;
 		}
 	}
@@ -1464,4 +1464,3 @@ void High_Precision_Maths_Library::Operand_Standard::operator()(Operand_Standard
 	this->data.data.copy(value.data.data);
 	return;
 }
-

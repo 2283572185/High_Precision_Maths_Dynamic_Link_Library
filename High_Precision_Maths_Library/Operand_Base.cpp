@@ -574,7 +574,7 @@ High_Precision_Maths_Library::Operand_Base::Operand_Base(long double value)
 
 High_Precision_Maths_Library::Operand_Base::Operand_Base(const Operand_Base& value)
 {
-    this->point = value.point;
+	this->point = value.point;
 	this->data.copy((DDM<char>&)value.data);
 }
 
@@ -896,7 +896,7 @@ High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operan
 
 High_Precision_Maths_Library::Operand_Base High_Precision_Maths_Library::Operand_Base::operator%(Operand_Base right)
 {
-	return Remainder(*this,right);
+	return Remainder(*this, right);
 }
 
 High_Precision_Maths_Library::Operand_Base& High_Precision_Maths_Library::Operand_Base::operator%=(Operand_Base& right)

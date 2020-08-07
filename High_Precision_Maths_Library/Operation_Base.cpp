@@ -364,11 +364,11 @@ __forceinline void High_Precision_Maths_Library::high_precision_multiplication(c
 			break;
 		case'3':
 			_result.result += 8;
-			_result.change = '1'; 
+			_result.change = '1';
 			break;
 		case'4':
 			_result.result += 4;
-			_result.change = '2'; 
+			_result.change = '2';
 			break;
 		case'5':
 			_result.result += 0;

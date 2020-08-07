@@ -8,7 +8,7 @@ namespace Discontinuity_Dynamic_Memory {
 	/// <summary>
 	/// 异常基类
 	/// </summary>
-	class Error{
+	class Error {
 	protected:
 		std::string _description;
 	public:
@@ -21,7 +21,7 @@ namespace Discontinuity_Dynamic_Memory {
 	/// <summary>
 	/// 异常：上溢
 	/// </summary>
-	class Over_Flow : public Error{
+	class Over_Flow : public Error {
 	public:
 		/// <param name="description">对当前异常的描述</param>
 		Over_Flow(std::string description);
@@ -30,7 +30,7 @@ namespace Discontinuity_Dynamic_Memory {
 	/// <summary>
 	/// 异常：下溢
 	/// </summary>
-	class Under_Flow : public Error{
+	class Under_Flow : public Error {
 	public:
 		/// <param name="description">对当前异常的描述</param>
 		Under_Flow(std::string description);
@@ -39,12 +39,11 @@ namespace Discontinuity_Dynamic_Memory {
 	/// <summary>
 	/// 异常：非法的数据
 	/// </summary>
-	class Illegal_Data : public Error{
+	class Illegal_Data : public Error {
 	public:
 		/// <param name="description">对当前异常的描述</param>
 		Illegal_Data(std::string description);
 	};
-
 
 	/// <summary>
 	/// 用于储存数据的类
