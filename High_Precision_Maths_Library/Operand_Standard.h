@@ -62,6 +62,7 @@ namespace High_Precision_Maths_Library {
 		//是负数为true，反之为false
 		bool minus;
 	public:
+		friend class OperandStream_Standard;
 		Operand_Standard();
 		Operand_Standard(int value);
 		Operand_Standard(short value);

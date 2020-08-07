@@ -165,12 +165,14 @@
     <ClInclude Include="Operand_Base.h" />
     <ClInclude Include="Operand_Standard.h" />
     <ClInclude Include="Operand_Stream_Base.h" />
+    <ClInclude Include="Operand_Stream_Standard.h" />
     <ClInclude Include="Operation_Base.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Operand_Base.cpp" />
     <ClCompile Include="Operand_Standard.cpp" />
     <ClCompile Include="Operand_Stream_Base.cpp" />
+    <ClCompile Include="Operand_Stream_Standard.cpp" />
     <ClCompile Include="Operation_Base.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

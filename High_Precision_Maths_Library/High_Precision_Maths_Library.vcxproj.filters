@@ -33,6 +33,9 @@
     <ClInclude Include="Operand.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Operand_Stream_Standard.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Operand_Base.cpp">
@@ -45,6 +48,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Operand_Standard.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Operand_Stream_Standard.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

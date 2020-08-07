@@ -14,7 +14,7 @@ High_Precision_Maths_Library::OperandStream_Base::OperandStream_Base()
 
 High_Precision_Maths_Library::OperandStream_Base::OperandStream_Base(const OperandStream_Base& value)
 {
-	this->data.copy((DDM< Operand_Base>&)value.data);
+	this->data.copy((DDM<Operand_Base>&)value.data);
 	this->state = value.state;
 	return;
 }

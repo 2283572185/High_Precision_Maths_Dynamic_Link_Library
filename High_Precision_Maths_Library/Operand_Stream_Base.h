@@ -2,9 +2,6 @@
 #include "Operand_Base.h"
 using namespace High_Precision_Maths_Library;
 namespace High_Precision_Maths_Library {
-
-	class OperandStream_Base;
-
 	/// <summary>
 	/// 精度转换控制基类
 	/// </summary>
