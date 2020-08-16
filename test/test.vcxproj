@@ -94,7 +94,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>C:\Users\ASUS\source\repos\High_Precision_Maths_Library\Debug\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Debug\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>false</Profile>
       <OptimizeReferences>false</OptimizeReferences>
     </Link>
@@ -114,7 +114,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>C:\Users\ASUS\source\repos\High_Precision_Maths_Library\Release\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\Release\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>false</Profile>
       <OptimizeReferences>true</OptimizeReferences>
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
@@ -132,7 +132,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>C:\Users\ASUS\source\repos\High_Precision_Maths_Library\x64\Debug\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\x64\Debug\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>false</Profile>
       <OptimizeReferences>false</OptimizeReferences>
     </Link>
@@ -152,7 +152,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>C:\Users\ASUS\source\repos\High_Precision_Maths_Library\x64\Release\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\x64\Release\High_Precision_Maths_Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>false</Profile>
       <OptimizeReferences>true</OptimizeReferences>
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
