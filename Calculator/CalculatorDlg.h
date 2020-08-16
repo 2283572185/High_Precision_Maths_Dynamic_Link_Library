@@ -1,14 +1,11 @@
-﻿
-// CalculatorDlg.h: 头文件
-//
+﻿// CalculatorDlg.h: 头文件
 
 #pragma once
-
 
 // CCalculatorDlg 对话框
 class CCalculatorDlg : public CDialogEx
 {
-// 构造
+	// 构造
 public:
 	CCalculatorDlg(CWnd* pParent = nullptr);	// 标准构造函数
 
@@ -17,9 +14,8 @@ public:
 	enum { IDD = IDD_CALCULATOR_DIALOG };
 #endif
 
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 支持
-
 
 // 实现
 protected:
