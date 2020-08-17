@@ -181,7 +181,7 @@ void CCalculatorDlg::OnBnClickedButton8()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton9()
 {
-	this->Value += '(';
+	this->Value += ')';
 	UpdateData(false);
 	return;
 }
@@ -194,6 +194,8 @@ void CCalculatorDlg::OnBnClickedButton10()
 	if (this->remove_at_once) {
 		// 清空所有已输入的字符
 		this->Value = "";
+		// 重置状态
+		this->remove_at_once = false;
 		UpdateData(false);
 		return;
 	}
@@ -343,6 +345,18 @@ void CCalculatorDlg::OnBnClickedButton23()
 void CCalculatorDlg::OnBnClickedButton24()
 {
 	// 先判断Value中的表达式是否合法
+	if (!check_bracket(this->Value)) {
+		this->Value = "输入的表达式非法，请重新输入。";
+		this->remove_at_once = true;
+		UpdateData(false);
+		return;
+	}
+	if (!check_operator(this->Value)) {
+		this->Value = "输入的表达式非法，请重新输入。";
+		this->remove_at_once = true;
+		UpdateData(false);
+		return;
+	}
 	//再计算得到值
 	//写入输入栏，作为结果
 	//写入历史记录
