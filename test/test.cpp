@@ -2,22 +2,19 @@
 #include <iostream>
 #include <string>
 #include <time.h>
+#include <fstream>
 using namespace std;
 using namespace High_Precision_Maths_Library;
 int main()
 {
-	clock_t start, finish;
-	Operand_Standard o("-3.1415926");
-	Operand_Standard _o(o);
-	change_precision(division, 20);
-	change_precision(extraction_of_root_time, 7);
-	start = clock();
-	o = o ^ 3;
-	finish = clock();
+	// 读取数据
+	ifstream f;
+	f.open("History.log", ios::in | ios::_Noreplace);
 	string s;
-	OperandStream_Standard os;
-	os << 1;
-	os >> o;
-	cout << o.to_string() << "\n";
-	cout << finish - start;
+	while (!f.eof())
+	{
+		getline(f, s);
+		cout << s;
+	}
+	f.close();
 }
