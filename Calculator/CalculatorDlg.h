@@ -28,13 +28,13 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	// 用于储存输入的数据
-	CString Value = L"";
+	CString Value;
 	// 判断是否应该一次性清空数据
 	bool remove_at_once = false;
 	// 记录已成功进行的运算次数
 	unsigned long long number = 0;
 	// 用于储存历史记录
-	CString History = L"";
+	CString History;
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnBnClickedButton3();
@@ -59,4 +59,5 @@ public:
 	afx_msg void OnBnClickedButton23();
 	afx_msg void OnBnClickedButton24();
 	afx_msg void OnBnClickedButton25();
+	BOOL PreTranslateMessage(MSG* pMsg);
 };

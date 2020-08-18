@@ -111,8 +111,10 @@ HCURSOR CCalculatorDlg::OnQueryDragIcon()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton1()
 {
-	this->Value += '+';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '+';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -121,8 +123,10 @@ void CCalculatorDlg::OnBnClickedButton1()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton2()
 {
-	this->Value += '-';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '-';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -131,8 +135,10 @@ void CCalculatorDlg::OnBnClickedButton2()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton3()
 {
-	this->Value += '*';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '*';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -141,8 +147,10 @@ void CCalculatorDlg::OnBnClickedButton3()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton4()
 {
-	this->Value += '/';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '/';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -151,8 +159,10 @@ void CCalculatorDlg::OnBnClickedButton4()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton5()
 {
-	this->Value += "√";
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += "√";
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -161,8 +171,10 @@ void CCalculatorDlg::OnBnClickedButton5()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton7()
 {
-	this->Value += '^';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '^';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -171,8 +183,10 @@ void CCalculatorDlg::OnBnClickedButton7()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton8()
 {
-	this->Value += '(';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '(';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -181,8 +195,10 @@ void CCalculatorDlg::OnBnClickedButton8()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton9()
 {
-	this->Value += ')';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += ')';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -224,8 +240,10 @@ void CCalculatorDlg::OnBnClickedButton11()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton12()
 {
-	this->Value += '7';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '7';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -234,8 +252,10 @@ void CCalculatorDlg::OnBnClickedButton12()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton13()
 {
-	this->Value += '8';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '8';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -244,8 +264,10 @@ void CCalculatorDlg::OnBnClickedButton13()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton14()
 {
-	this->Value += '9';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '9';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -254,8 +276,10 @@ void CCalculatorDlg::OnBnClickedButton14()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton15()
 {
-	this->Value += '4';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '4';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -264,8 +288,10 @@ void CCalculatorDlg::OnBnClickedButton15()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton16()
 {
-	this->Value += '5';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '5';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -274,8 +300,10 @@ void CCalculatorDlg::OnBnClickedButton16()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton17()
 {
-	this->Value += '6';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '6';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -284,8 +312,10 @@ void CCalculatorDlg::OnBnClickedButton17()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton18()
 {
-	this->Value += '1';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '1';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -294,8 +324,10 @@ void CCalculatorDlg::OnBnClickedButton18()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton19()
 {
-	this->Value += '2';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '2';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -304,8 +336,10 @@ void CCalculatorDlg::OnBnClickedButton19()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton20()
 {
-	this->Value += '3';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '3';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -314,8 +348,10 @@ void CCalculatorDlg::OnBnClickedButton20()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton21()
 {
-	this->Value += '-';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '-';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -324,8 +360,10 @@ void CCalculatorDlg::OnBnClickedButton21()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton22()
 {
-	this->Value += '0';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '0';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -334,8 +372,10 @@ void CCalculatorDlg::OnBnClickedButton22()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton23()
 {
-	this->Value += '.';
-	UpdateData(false);
+	if (!this->remove_at_once) {
+		this->Value += '.';
+		UpdateData(false);
+	}
 	return;
 }
 
@@ -371,4 +411,115 @@ void CCalculatorDlg::OnBnClickedButton25()
 	this->History = "";
 	UpdateData(false);
 	return;
+}
+
+BOOL CCalculatorDlg::PreTranslateMessage(MSG* pMsg) {
+	if (pMsg->message == WM_KEYDOWN)
+	{
+		switch (pMsg->wParam)
+		{
+			// 小键盘输入0~9
+		case VK_NUMPAD0:
+			if (GetKeyState(VK_NUMPAD0) < 0)
+				this->OnBnClickedButton22();
+			break;
+		case VK_NUMPAD1:
+			if (GetKeyState(VK_NUMPAD1) < 0)
+				this->OnBnClickedButton18();
+			break;
+		case VK_NUMPAD2:
+			if (GetKeyState(VK_NUMPAD2) < 0)
+				this->OnBnClickedButton19();
+			break;
+		case VK_NUMPAD3:
+			if (GetKeyState(VK_NUMPAD3) < 0)
+				this->OnBnClickedButton20();
+			break;
+		case VK_NUMPAD4:
+			if (GetKeyState(VK_NUMPAD4) < 0)
+				this->OnBnClickedButton15();
+			break;
+		case VK_NUMPAD5:
+			if (GetKeyState(VK_NUMPAD5) < 0)
+				this->OnBnClickedButton16();
+			break;
+		case VK_NUMPAD6:
+			if (GetKeyState(VK_NUMPAD6) < 0)
+				this->OnBnClickedButton17();
+			break;
+		case VK_NUMPAD7:
+			if (GetKeyState(VK_NUMPAD7) < 0)
+				this->OnBnClickedButton12();
+			break;
+
+		case VK_NUMPAD8:
+			if (GetKeyState(VK_NUMPAD8) < 0)
+				this->OnBnClickedButton13();
+			break;
+
+		case VK_NUMPAD9:
+			if (GetKeyState(VK_NUMPAD9) < 0)
+				this->OnBnClickedButton14();
+			break;
+			// 小数点键
+		case VK_DECIMAL:
+			if (GetKeyState(VK_DECIMAL) < 0)
+				this->OnBnClickedButton23();
+			break;
+			// 等于键
+		case VK_OEM_PLUS:
+			if (GetKeyState(VK_SHIFT) == 0)
+				this->OnBnClickedButton24();
+			break;
+			// 数字键输入0~9
+		case 0x30:
+			if (GetKeyState(0x30) < 0)
+				this->OnBnClickedButton22();
+			break;
+		case 0x31:
+			if (GetKeyState(0x31) < 0)
+				this->OnBnClickedButton18();
+			break;
+		case 0x32:
+			if (GetKeyState(0x32) < 0)
+				this->OnBnClickedButton19();
+			break;
+		case 0x33:
+			if (GetKeyState(0x33) < 0)
+				this->OnBnClickedButton20();
+			break;
+		case 0x34:
+			if (GetKeyState(0x34) < 0)
+				this->OnBnClickedButton15();
+			break;
+		case 0x35:
+			if (GetKeyState(0x35) < 0)
+				this->OnBnClickedButton16();
+			break;
+		case 0x36:
+			if (GetKeyState(0x36) < 0)
+				this->OnBnClickedButton17();
+			break;
+		case 0x37:
+			if (GetKeyState(0x37) < 0)
+				this->OnBnClickedButton12();
+			break;
+
+		case 0x38:
+			if (GetKeyState(0x38) < 0)
+				this->OnBnClickedButton13();
+			break;
+
+		case 0x39:
+			if (GetKeyState(0x39) < 0)
+				this->OnBnClickedButton14();
+			break;
+			// 回车键
+		case VK_RETURN:
+			if (GetKeyState(VK_RETURN) < 0)
+				this->OnBnClickedButton24();
+			break;
+		}
+	}
+	return CDialog::PreTranslateMessage(pMsg);
 }

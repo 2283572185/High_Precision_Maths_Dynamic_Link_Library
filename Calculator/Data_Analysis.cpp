@@ -35,6 +35,10 @@ bool check_operator(CString& value)
 		除)外不能在结尾出现
 		.前后必须有数字
 		√前的数字不能是小数
+		一个数字里不能出现两个.
+		任何运算符后必须有数字
+		(左边不能有数字
+		)右边不能有数字
 	*/
 	// 以不合法的运算符开头，返回false
 	if (value[0] == '*' || value[0] == '/' || value[0] == '^' || value[0] == '.') {
@@ -59,6 +63,11 @@ bool check_operator(CString& value)
 	}
 	// 寻找.并判断.左右是否有数字
 	for (int i = 1; i < max - 1; i++) {
-
+		if (value[i] == '.') {
+			if ((value[i - 1] < '0' || value[i - 1]>'9') || (value[i + 1] < '0' || value[i + 1]>'9')) {
+				return false;
+			}
+		}
 	}
+	return true;
 }
