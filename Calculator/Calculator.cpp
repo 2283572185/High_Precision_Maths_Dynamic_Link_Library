@@ -57,6 +57,16 @@ BOOL CCalculatorApp::InitInstance()
 	SetRegistryKey(_T("由2283572185@qq.com开发"));
 
 	CCalculatorDlg dlg;
+	ifstream f;
+	string s;
+	f.open("History.log", ios::_Noreplace);
+	while (!f.eof())
+	{
+		getline(f, s);
+		dlg.History += s.c_str();
+		dlg.History += '\n';
+	}
+	dlg.History.Delete(dlg.History.GetLength() - 1);
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)

@@ -410,6 +410,10 @@ void CCalculatorDlg::OnBnClickedButton25()
 	//清空历史记录
 	this->History = "";
 	UpdateData(false);
+	remove("History.log");
+	ofstream os;
+	os.open("History.log");
+	os.close();
 	return;
 }
 
