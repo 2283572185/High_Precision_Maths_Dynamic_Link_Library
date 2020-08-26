@@ -29,20 +29,24 @@ protected:
 public:
 	// 用于储存输入的数据
 	CString Value;
-	// 判断是否应该一次性清空数据
-	bool remove_at_once = false;
-	// 记录已成功进行的运算次数
-	unsigned long long number = 0;
 	// 用于储存历史记录
 	CString History;
+	// 用于判断是否已输入过符号
+	bool operation = false;
+	// 用于判断是否需一次性清空数据
+	bool remove_at_once = false;
+	// 用于判断是否已输入过(
+	bool left_bracket = false;
+	// 用于判断是否已输入过)
+	bool right_bracket = false;
+	// 用于记录已输入的符号数
+	short number = 0;
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnBnClickedButton3();
 	afx_msg void OnBnClickedButton4();
 	afx_msg void OnBnClickedButton5();
 	afx_msg void OnBnClickedButton7();
-	afx_msg void OnBnClickedButton8();
-	afx_msg void OnBnClickedButton9();
 	afx_msg void OnBnClickedButton10();
 	afx_msg void OnBnClickedButton11();
 	afx_msg void OnBnClickedButton12();
@@ -60,4 +64,6 @@ public:
 	afx_msg void OnBnClickedButton24();
 	afx_msg void OnBnClickedButton25();
 	BOOL PreTranslateMessage(MSG* pMsg);
+	afx_msg void OnBnClickedButton27();
+	afx_msg void OnBnClickedButton26();
 };

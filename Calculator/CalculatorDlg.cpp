@@ -37,8 +37,6 @@ BEGIN_MESSAGE_MAP(CCalculatorDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON4, &CCalculatorDlg::OnBnClickedButton4)
 	ON_BN_CLICKED(IDC_BUTTON5, &CCalculatorDlg::OnBnClickedButton5)
 	ON_BN_CLICKED(IDC_BUTTON7, &CCalculatorDlg::OnBnClickedButton7)
-	ON_BN_CLICKED(IDC_BUTTON8, &CCalculatorDlg::OnBnClickedButton8)
-	ON_BN_CLICKED(IDC_BUTTON9, &CCalculatorDlg::OnBnClickedButton9)
 	ON_BN_CLICKED(IDC_BUTTON10, &CCalculatorDlg::OnBnClickedButton10)
 	ON_BN_CLICKED(IDC_BUTTON11, &CCalculatorDlg::OnBnClickedButton11)
 	ON_BN_CLICKED(IDC_BUTTON12, &CCalculatorDlg::OnBnClickedButton12)
@@ -55,6 +53,8 @@ BEGIN_MESSAGE_MAP(CCalculatorDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON23, &CCalculatorDlg::OnBnClickedButton23)
 	ON_BN_CLICKED(IDC_BUTTON24, &CCalculatorDlg::OnBnClickedButton24)
 	ON_BN_CLICKED(IDC_BUTTON25, &CCalculatorDlg::OnBnClickedButton25)
+	ON_BN_CLICKED(IDC_BUTTON27, &CCalculatorDlg::OnBnClickedButton27)
+	ON_BN_CLICKED(IDC_BUTTON26, &CCalculatorDlg::OnBnClickedButton26)
 END_MESSAGE_MAP()
 
 // CCalculatorDlg 消息处理程序
@@ -112,7 +112,22 @@ HCURSOR CCalculatorDlg::OnQueryDragIcon()
 void CCalculatorDlg::OnBnClickedButton1()
 {
 	if (!this->remove_at_once) {
-		this->Value += '+';
+		if (this->number == 2) {
+			MessageBox(L"抱歉，暂不支持如此多的数据一起运算，请拆分数据");
+			return;
+		}
+		if (!this->operation) {
+			this->Value += '+';
+			this->operation = true;
+			this->number++;
+		}
+		else
+		{
+			// 删除最后一个输入的字符
+			this->Value.Delete(this->Value.GetLength() - 1);
+			this->Value += '+';
+			this->number++;
+		}
 		UpdateData(false);
 	}
 	return;
@@ -124,7 +139,22 @@ void CCalculatorDlg::OnBnClickedButton1()
 void CCalculatorDlg::OnBnClickedButton2()
 {
 	if (!this->remove_at_once) {
-		this->Value += '-';
+		if (this->number == 2) {
+			MessageBox(L"抱歉，暂不支持如此多的数据一起运算，请拆分数据");
+			return;
+		}
+		if (!this->operation) {
+			this->Value += '-';
+			this->operation = true;
+			this->number++;
+		}
+		else
+		{
+			// 删除最后一个输入的字符
+			this->Value.Delete(this->Value.GetLength() - 1);
+			this->Value += '-';
+			this->number++;
+		}
 		UpdateData(false);
 	}
 	return;
@@ -136,7 +166,22 @@ void CCalculatorDlg::OnBnClickedButton2()
 void CCalculatorDlg::OnBnClickedButton3()
 {
 	if (!this->remove_at_once) {
-		this->Value += '*';
+		if (this->number == 2) {
+			MessageBox(L"抱歉，暂不支持如此多的数据一起运算，请拆分数据");
+			return;
+		}
+		if (!this->operation) {
+			this->Value += L'×';
+			this->operation = true;
+			this->number++;
+		}
+		else
+		{
+			// 删除最后一个输入的字符
+			this->Value.Delete(this->Value.GetLength() - 1);
+			this->Value += L'×';
+			this->number++;
+		}
 		UpdateData(false);
 	}
 	return;
@@ -148,7 +193,22 @@ void CCalculatorDlg::OnBnClickedButton3()
 void CCalculatorDlg::OnBnClickedButton4()
 {
 	if (!this->remove_at_once) {
-		this->Value += '/';
+		if (this->number == 2) {
+			MessageBox(L"抱歉，暂不支持如此多的数据一起运算，请拆分数据");
+			return;
+		}
+		if (!this->operation) {
+			this->Value += L'÷';
+			this->operation = true;
+			this->number++;
+		}
+		else
+		{
+			// 删除最后一个输入的字符
+			this->Value.Delete(this->Value.GetLength() - 1);
+			this->Value += L'÷';
+			this->number++;
+		}
 		UpdateData(false);
 	}
 	return;
@@ -160,7 +220,22 @@ void CCalculatorDlg::OnBnClickedButton4()
 void CCalculatorDlg::OnBnClickedButton5()
 {
 	if (!this->remove_at_once) {
-		this->Value += "√";
+		if (this->number == 2) {
+			MessageBox(L"抱歉，暂不支持如此多的数据一起运算，请拆分数据");
+			return;
+		}
+		if (!this->operation) {
+			this->Value += L'√';
+			this->operation = true;
+			this->number++;
+		}
+		else
+		{
+			// 删除最后一个输入的字符
+			this->Value.Delete(this->Value.GetLength() - 1);
+			this->Value += L'√';
+			this->number++;
+		}
 		UpdateData(false);
 	}
 	return;
@@ -172,31 +247,22 @@ void CCalculatorDlg::OnBnClickedButton5()
 void CCalculatorDlg::OnBnClickedButton7()
 {
 	if (!this->remove_at_once) {
-		this->Value += '^';
-		UpdateData(false);
-	}
-	return;
-}
-
-/// <summary>
-/// 单击(按钮
-/// </summary>
-void CCalculatorDlg::OnBnClickedButton8()
-{
-	if (!this->remove_at_once) {
-		this->Value += '(';
-		UpdateData(false);
-	}
-	return;
-}
-
-/// <summary>
-/// 单击)按钮
-/// </summary>
-void CCalculatorDlg::OnBnClickedButton9()
-{
-	if (!this->remove_at_once) {
-		this->Value += ')';
+		if (this->number == 1) {
+			MessageBox(L"抱歉，暂不支持如此多的数据一起运算，请拆分数据");
+			return;
+		}
+		if (!this->operation) {
+			this->Value += '^';
+			this->operation = true;
+			this->number++;
+		}
+		else
+		{
+			// 删除最后一个输入的字符
+			this->Value.Delete(this->Value.GetLength() - 1);
+			this->Value += '^';
+			this->number++;
+		}
 		UpdateData(false);
 	}
 	return;
@@ -208,20 +274,24 @@ void CCalculatorDlg::OnBnClickedButton9()
 void CCalculatorDlg::OnBnClickedButton10()
 {
 	if (this->remove_at_once) {
-		// 清空所有已输入的字符
-		this->Value = "";
-		// 重置状态
+		this->Value = "0";
 		this->remove_at_once = false;
-		UpdateData(false);
-		return;
+		this->operation = false;
+		this->number = 0;
 	}
-	else
-	{
-		// 删除最后一个输入的字符
-		this->Value.Delete(this->Value.GetLength() - 1);
-		UpdateData(false);
-		return;
+	// 如果最后一个字符是运算符，重置状态
+	if (this->Value[this->Value.GetLength() - 1] < '0' || this->Value[this->Value.GetLength() - 1]>'9') {
+		this->operation = false;
+		this->number--;
 	}
+	// 删除最后一个输入的字符
+	this->Value.Delete(this->Value.GetLength() - 1);
+	// 如果数据是空的，在最后插入0
+	if (this->Value.GetLength() == 0) {
+		this->Value = "0";
+	}
+	UpdateData(false);
+	return;
 }
 
 /// <summary>
@@ -230,7 +300,10 @@ void CCalculatorDlg::OnBnClickedButton10()
 void CCalculatorDlg::OnBnClickedButton11()
 {
 	// 清空所有已输入的字符
-	this->Value = "";
+	this->Value = "0";
+	this->operation = false;
+	this->remove_at_once = false;
+	this->number = 0;
 	UpdateData(false);
 	return;
 }
@@ -241,7 +314,14 @@ void CCalculatorDlg::OnBnClickedButton11()
 void CCalculatorDlg::OnBnClickedButton12()
 {
 	if (!this->remove_at_once) {
-		this->Value += '7';
+		// 如果数据中只有一个0，用此字符替代0
+		if (this->Value.GetLength() == 1 && this->Value[0] == '0') {
+			this->Value = L"7";
+		}
+		else
+		{
+			this->Value += '7';
+		}
 		UpdateData(false);
 	}
 	return;
@@ -253,8 +333,14 @@ void CCalculatorDlg::OnBnClickedButton12()
 void CCalculatorDlg::OnBnClickedButton13()
 {
 	if (!this->remove_at_once) {
-		this->Value += '8';
-		UpdateData(false);
+		// 如果数据中只有一个0，用此字符替代0
+		if (this->Value.GetLength() == 1 && this->Value[0] == '0') {
+			this->Value = L"8";
+		}
+		else
+		{
+			this->Value += '8';
+		}
 	}
 	return;
 }
@@ -265,8 +351,14 @@ void CCalculatorDlg::OnBnClickedButton13()
 void CCalculatorDlg::OnBnClickedButton14()
 {
 	if (!this->remove_at_once) {
-		this->Value += '9';
-		UpdateData(false);
+		// 如果数据中只有一个0，用此字符替代0
+		if (this->Value.GetLength() == 1 && this->Value[0] == '0') {
+			this->Value = L"9";
+		}
+		else
+		{
+			this->Value += '9';
+		}
 	}
 	return;
 }
@@ -277,8 +369,14 @@ void CCalculatorDlg::OnBnClickedButton14()
 void CCalculatorDlg::OnBnClickedButton15()
 {
 	if (!this->remove_at_once) {
-		this->Value += '4';
-		UpdateData(false);
+		// 如果数据中只有一个0，用此字符替代0
+		if (this->Value.GetLength() == 1 && this->Value[0] == '0') {
+			this->Value = L"4";
+		}
+		else
+		{
+			this->Value += '4';
+		}
 	}
 	return;
 }
@@ -289,8 +387,14 @@ void CCalculatorDlg::OnBnClickedButton15()
 void CCalculatorDlg::OnBnClickedButton16()
 {
 	if (!this->remove_at_once) {
-		this->Value += '5';
-		UpdateData(false);
+		// 如果数据中只有一个0，用此字符替代0
+		if (this->Value.GetLength() == 1 && this->Value[0] == '0') {
+			this->Value = L"5";
+		}
+		else
+		{
+			this->Value += '5';
+		}
 	}
 	return;
 }
@@ -301,8 +405,14 @@ void CCalculatorDlg::OnBnClickedButton16()
 void CCalculatorDlg::OnBnClickedButton17()
 {
 	if (!this->remove_at_once) {
-		this->Value += '6';
-		UpdateData(false);
+		// 如果数据中只有一个0，用此字符替代0
+		if (this->Value.GetLength() == 1 && this->Value[0] == '0') {
+			this->Value = L"6";
+		}
+		else
+		{
+			this->Value += '6';
+		}
 	}
 	return;
 }
@@ -313,8 +423,14 @@ void CCalculatorDlg::OnBnClickedButton17()
 void CCalculatorDlg::OnBnClickedButton18()
 {
 	if (!this->remove_at_once) {
-		this->Value += '1';
-		UpdateData(false);
+		// 如果数据中只有一个0，用此字符替代0
+		if (this->Value.GetLength() == 1 && this->Value[0] == '0') {
+			this->Value = L"1";
+		}
+		else
+		{
+			this->Value += '1';
+		}
 	}
 	return;
 }
@@ -325,8 +441,14 @@ void CCalculatorDlg::OnBnClickedButton18()
 void CCalculatorDlg::OnBnClickedButton19()
 {
 	if (!this->remove_at_once) {
-		this->Value += '2';
-		UpdateData(false);
+		// 如果数据中只有一个0，用此字符替代0
+		if (this->Value.GetLength() == 1 && this->Value[0] == '0') {
+			this->Value = L"2";
+		}
+		else
+		{
+			this->Value += '2';
+		}
 	}
 	return;
 }
@@ -337,8 +459,14 @@ void CCalculatorDlg::OnBnClickedButton19()
 void CCalculatorDlg::OnBnClickedButton20()
 {
 	if (!this->remove_at_once) {
-		this->Value += '3';
-		UpdateData(false);
+		// 如果数据中只有一个0，用此字符替代0
+		if (this->Value.GetLength() == 1 && this->Value[0] == '0') {
+			this->Value = L"3";
+		}
+		else
+		{
+			this->Value += '3';
+		}
 	}
 	return;
 }
@@ -349,7 +477,22 @@ void CCalculatorDlg::OnBnClickedButton20()
 void CCalculatorDlg::OnBnClickedButton21()
 {
 	if (!this->remove_at_once) {
-		this->Value += '-';
+		if (this->number == 2) {
+			MessageBox(L"抱歉，暂不支持如此多的数据一起运算，请拆分数据");
+			return;
+		}
+		if (!this->operation) {
+			this->Value += '+';
+			this->operation = true;
+			this->number++;
+		}
+		else
+		{
+			// 删除最后一个输入的字符
+			this->Value.Delete(this->Value.GetLength() - 1);
+			this->Value += '+';
+			this->number++;
+		}
 		UpdateData(false);
 	}
 	return;
@@ -361,8 +504,14 @@ void CCalculatorDlg::OnBnClickedButton21()
 void CCalculatorDlg::OnBnClickedButton22()
 {
 	if (!this->remove_at_once) {
-		this->Value += '0';
-		UpdateData(false);
+		// 如果数据中只有一个0，用此字符替代0
+		if (this->Value.GetLength() == 1 && this->Value[0] == '0') {
+			this->Value = L"0";
+		}
+		else
+		{
+			this->Value += '0';
+		}
 	}
 	return;
 }
@@ -384,22 +533,12 @@ void CCalculatorDlg::OnBnClickedButton23()
 /// </summary>
 void CCalculatorDlg::OnBnClickedButton24()
 {
-	// 先判断Value中的表达式是否合法
-	if (!check_bracket(this->Value)) {
-		this->Value = "输入的表达式非法，请重新输入。";
+	// 先判断合法性
+	if (this->left_bracket != this->right_bracket) {
+		this->Value = L"输入的表达式不合法，请重新输入";
 		this->remove_at_once = true;
-		UpdateData(false);
-		return;
 	}
-	if (!check_operator(this->Value)) {
-		this->Value = "输入的表达式非法，请重新输入。";
-		this->remove_at_once = true;
-		UpdateData(false);
-		return;
-	}
-	//再计算得到值
-	//写入输入栏，作为结果
-	//写入历史记录
+
 }
 
 /// <summary>
@@ -472,13 +611,21 @@ BOOL CCalculatorDlg::PreTranslateMessage(MSG* pMsg) {
 			break;
 			// 等于键
 		case VK_OEM_PLUS:
-			if (GetKeyState(VK_SHIFT) == 0)
+			// 未按shift输入=
+			if (GetKeyState(VK_SHIFT) >= 0)
 				this->OnBnClickedButton24();
+			// 按shift输入+
+			else
+				this->OnBnClickedButton1();
 			break;
 			// 数字键输入0~9
 		case 0x30:
-			if (GetKeyState(0x30) < 0)
+			// 未按shift输入0
+			if (GetKeyState(VK_SHIFT) >= 0)
 				this->OnBnClickedButton22();
+			// 按住输入)
+			else
+				this->OnBnClickedButton26();
 			break;
 		case 0x31:
 			if (GetKeyState(0x31) < 0)
@@ -501,29 +648,122 @@ BOOL CCalculatorDlg::PreTranslateMessage(MSG* pMsg) {
 				this->OnBnClickedButton16();
 			break;
 		case 0x36:
-			if (GetKeyState(0x36) < 0)
+			// 未按shift输入6
+			if (GetKeyState(VK_SHIFT) >= 0)
 				this->OnBnClickedButton17();
+			// 按shift输入^
+			else
+				this->OnBnClickedButton7();
 			break;
 		case 0x37:
-			if (GetKeyState(0x37) < 0)
+			// 未按shift输入7
+			if (GetKeyState(VK_SHIFT) >= 0)
 				this->OnBnClickedButton12();
+			// 按shift输入&
+			else
+				this->OnBnClickedButton5();
 			break;
-
 		case 0x38:
-			if (GetKeyState(0x38) < 0)
+			// 未按shift输入8
+			if (GetKeyState(VK_SHIFT) >= 0)
 				this->OnBnClickedButton13();
+			// 按shift输入*
+			else
+				this->OnBnClickedButton3();
 			break;
-
 		case 0x39:
-			if (GetKeyState(0x39) < 0)
+			// 未按shift输入9
+			if (GetKeyState(VK_SHIFT) >= 0)
 				this->OnBnClickedButton14();
+			// 按住输入(
+			else
+				this->OnBnClickedButton27();
 			break;
 			// 回车键
 		case VK_RETURN:
 			if (GetKeyState(VK_RETURN) < 0)
 				this->OnBnClickedButton24();
 			break;
+			// 加
+		case VK_ADD:
+			if (GetKeyState(VK_ADD) < 0)
+				this->OnBnClickedButton1();
+			break;
+			// 减
+		case VK_SUBTRACT:
+			if (GetKeyState(VK_SUBTRACT) < 0)
+				this->OnBnClickedButton2();
+			break;
+			// 乘
+		case VK_MULTIPLY:
+			if (GetKeyState(VK_MULTIPLY) < 0)
+				this->OnBnClickedButton3();
+			break;
+			// 除
+		case VK_DIVIDE:
+			if (GetKeyState(VK_DIVIDE) < 0)
+				this->OnBnClickedButton4();
+			break;
+			// 退格键
+		case VK_BACK:
+			if (GetKeyState(VK_BACK) < 0)
+				this->OnBnClickedButton10();
+			break;
+			// 清空输入
+		case VK_DELETE:
+			if (GetKeyState(VK_DELETE) < 0)
+				this->OnBnClickedButton11();
+			break;
+			// 主键盘上的-
+		case VK_OEM_MINUS:
+			if (GetKeyState(VK_SHIFT) < 0)
+				this->OnBnClickedButton2();
+			break;
+			// 主键盘上的/
+		case VK_OEM_2:
+			if (GetKeyState(VK_SHIFT) >= 0)
+				this->OnBnClickedButton4();
+			break;
+			// 按VK_ESCAPE退出程序
+		case VK_ESCAPE:
+			exit(0);
+			break;
+		case 'H':
+			MessageBox(L"特殊的热键：\n按esc以退出程序\n按Shift+&以输入√\n历史记录：\n所有的历史储存在History.log中",L"帮助", MB_ICONINFORMATION);
+			break;
 		}
 	}
 	return CDialog::PreTranslateMessage(pMsg);
+}
+
+/// <summary>
+/// 单击(按钮
+/// </summary>
+void CCalculatorDlg::OnBnClickedButton27()
+{
+	if (!this->left_bracket) {
+		this->Value += '(';
+		this->left_bracket = true;
+		this->operation = false;
+	}
+	else {
+		MessageBox(L"抱歉，只能出现一对括号");
+	}
+	UpdateData(false);
+}
+
+/// <summary>
+/// 单击)按钮
+/// </summary>
+void CCalculatorDlg::OnBnClickedButton26()
+{
+	if (!this->right_bracket) {
+		this->Value += ')';
+		this->right_bracket = true;
+		this->operation = false;
+	}
+	else {
+		MessageBox(L"抱歉，只能出现一对括号");
+	}
+	UpdateData(false);
 }

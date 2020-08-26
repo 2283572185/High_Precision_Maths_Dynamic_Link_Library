@@ -1,6 +1,7 @@
 #pragma once
 #include "Operand.h"
 #include "CalculatorDlg.h"
+#include <vector>
 // Win64
 #ifdef _WIN64
 // Debug
@@ -21,16 +22,8 @@
 #endif
 #endif
 
+using namespace std;
 /// <summary>
-/// 判断表达式中括号的匹配是否合法
+/// 判断小数点是否合法
 /// </summary>
-/// <param name ="value">要判断的字符串的引用</param>
-/// <returns>合法返回true，反之返回false</returns>
-bool check_bracket(CString& value);
-
-/// <summary>
-/// 判断表达式中运算符的使用是否合法
-/// </summary>
-/// <param name ="value">要判断的字符串的引用</param>
-/// <returns>合法返回true，反之返回false</returns>
-bool check_operator(CString& value);
+bool check_point(CString value);
